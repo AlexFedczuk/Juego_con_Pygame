@@ -3,7 +3,7 @@ import pygame
 from os import listdir
 from os.path import isfile, join
 from constants import WIDTH, HEIGHT, PLAYER_VEL
-from classes import Player
+from classes import Player, Object
 
 def get_background(name):
     image = pygame.image.load(join("assets", "Background", name))
@@ -19,9 +19,12 @@ def get_background(name):
 
     return tiles, image
 
-def draw(window:pygame.Surface, background, bg_image, player:Player):
+def draw(window:pygame.Surface, background, bg_image, player:Player, objects:list[Object]):
     for tile in background:
         window.blit(bg_image, tile)
+
+    for object in objects:
+        object.blit(window)
 
     player.draw(window)
 
@@ -40,7 +43,7 @@ def handle_move(player:Player):
 def flip(sprites:list[pygame.sprite.Sprite]):
     return [pygame.transform.flip(sprite, True, False) for sprite in sprites]
 
-def load_sprite_sheets(dir1, dir2, width, height, direction=False):
+def load_sprite_sheets(dir1, dir2, width, height, direction=False) -> dict:
         path = join("assets", dir1, dir2)
         images = [f for f in listdir(path) if isfile(join(path, f))]
 
@@ -63,3 +66,12 @@ def load_sprite_sheets(dir1, dir2, width, height, direction=False):
                 all_sprites[image.replace(".png", "")] = sprites
 
         return all_sprites
+
+def get_block(size) -> pygame.Surface:
+    path = join("assets", "Terrain", "Terrain.png")
+    image = pygame.image.load(path).convert_alpha()
+    surface = pygame.Surface((size, size), pygame.SRCALPHA, 32)
+    rect = pygame.Rect(96, 0, size, size)
+    surface.blit(image, (0, 0), rect)
+
+    return pygame.transform.scale2x(surface)
