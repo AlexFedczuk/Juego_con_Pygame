@@ -30,7 +30,7 @@ def draw(window:pygame.Surface, background, bg_image, player:Player, objects:lis
 
     pygame.display.update()
 
-def handle_move(player:Player):
+def handle_move(player:Player, objects:list[pygame.Surface]):
     keys = pygame.key.get_pressed()
 
     player.x_vel = 0
@@ -38,6 +38,26 @@ def handle_move(player:Player):
         player.move_left(PLAYER_VEL)
     if keys[pygame.K_RIGHT]:
         player.move_right(PLAYER_VEL)
+
+    handle_vertical_collision(player, objects, player.y_vel)
+
+def handle_vertical_collision(player:Player, objects:list[Object], dy:int) -> list[pygame.Surface]:
+    collided_objects = []
+
+    for object in objects:
+        if pygame.sprite.collide_mask(player, object):
+            if dy > 0:
+                player.rect.bottom = object.rect.top
+                player.landed()
+            elif dy < 0:
+                player.rect.top = object.rect.bottom
+                player.hit_head()
+
+        collided_objects.append(object)
+
+    return collided_objects
+
+        
 
 # Esto da vuelta en el eje X los Sprites que le mandes.
 def flip(sprites:list[pygame.sprite.Sprite]):
