@@ -38,6 +38,9 @@ def handle_move(player:Player, objects:list[pygame.Surface]):
         player.move_left(PLAYER_VEL)
     if keys[pygame.K_RIGHT]:
         player.move_right(PLAYER_VEL)
+    """if keys[pygame.K_SPACE] and player.jump_count < 2:
+        #if event.key == pygame.K_SPACE and player.jump_count < 2:
+        player.jump()"""
 
     handle_vertical_collision(player, objects, player.y_vel)
 

@@ -19,6 +19,7 @@ class Player(pygame.sprite.Sprite):
         self.fall_count = 0
         self.SPRITES = load_sprite_sheets
         self.ANIMATION_DELAY = ANIMATION_DELAY
+        self.jump_count = 0
 
     def move(self, dx, dy):
         self.rect.x += dx
@@ -35,6 +36,13 @@ class Player(pygame.sprite.Sprite):
         if self.direction != "right":
             self.direction = "right"
             self.animation_count = 0
+
+    def jump(self):
+        self.y_vel = -GRAVITY * 8 #Puede que esto no funcione...
+        self.animation_count = 0
+        self.jump_count += 1
+        if self.jump_count == 1:
+            self.fall_count = 0
 
     def loop(self, fps):
         self.y_vel += min(1, (self.fall_count / fps) * GRAVITY) # Esto es para simular una gravedad/aceleracion "realista".
@@ -53,7 +61,15 @@ class Player(pygame.sprite.Sprite):
 
     def update_sprite(self) -> None:
         sprite_sheet = "idle"
-        if self.x_vel != 0:
+
+        if self.y_vel < 0:
+            if self.jump_count == 1:
+                sprite_sheet = "jump"
+            elif self.jump_count == 2:
+                sprite_sheet = "double_jump"
+        elif self.y_vel > GRAVITY * 2:
+            sprite_sheet = "fall"
+        elif self.x_vel != 0:
             sprite_sheet = "run"
 
         sprite_sheet_name = sprite_sheet + "_" + self.direction

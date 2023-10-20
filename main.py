@@ -32,6 +32,9 @@ def main(window):
             if event.type == pygame.QUIT:
                 run = False
                 break
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE and player.jump_count < 2:
+                    player.jump()
         player.loop(FPS)
         handle_move(player, floor)
         draw(window, background, bg_image, player, floor)
