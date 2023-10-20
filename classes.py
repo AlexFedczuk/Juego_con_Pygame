@@ -6,7 +6,6 @@ from os.path import isfile, join
 
 from pygame.sprite import Group
 from constants import COLOR, GRAVITY, ANIMATION_DELAY
-from funtions import get_block
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, load_sprite_sheets) -> None:
@@ -78,7 +77,7 @@ class Object(pygame.sprite.Sprite):
         win.blit(self.image, (self.rect.x, self.rect.y))
 
 class Block(Object):
-    def __init__(self, x, y, size) -> None:
+    def __init__(self, x, y, size, get_block) -> None:
         super().__init__(x, y, size, size)
         block = get_block(size)
         self.image.blit(block, (0, 0))

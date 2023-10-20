@@ -5,7 +5,7 @@ import pygame
 
 from pygame.sprite import Group
 from constants import WIDTH, HEIGHT, FPS
-from funtions import get_background, handle_move, draw, load_sprite_sheets
+from funtions import get_background, handle_move, draw, load_sprite_sheets, get_block
 from classes import Player, Block
 
 pygame.init()
@@ -21,7 +21,7 @@ def main(window):
     block_size = 96
 
     player = Player(100, 100, 50, 50, load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True))
-    blocks = [Block(0, HEIGHT - block_size, block_size)]
+    blocks = [Block(0, HEIGHT - block_size, block_size, get_block)]
 
     run = True
     while run:

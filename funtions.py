@@ -19,7 +19,7 @@ def get_background(name):
 
     return tiles, image
 
-def draw(window:pygame.Surface, background, bg_image, player:Player, objects:list[Object]):
+def draw(window:pygame.Surface, background, bg_image, player:Player, objects:list[pygame.Surface]):
     for tile in background:
         window.blit(bg_image, tile)
 
