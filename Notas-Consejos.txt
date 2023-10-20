@@ -1,0 +1,13 @@
+1. Control + } -> Te deja comantar/descomentar varias lineas de codigo al mismo tiempo!
+
+2. Forma correcta de documentar una función.
+    def pasar_celsius_fahrenheit(grados_celsius:float) -> float:
+        """
+        Resumen de la funcion de la funcion.
+
+        Parametros:
+            nombre_de_el_parametro (tipo_de_dato): Que es?
+
+        Devuelve:
+            (Tipo_de_dato_que_devuelve): Que es?
+        """
