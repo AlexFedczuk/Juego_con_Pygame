@@ -82,3 +82,6 @@ class Block(Object):
         block = get_block(size)
         self.image.blit(block, (0, 0))
         self.mask = pygame.mask.from_surface(self.image)
+
+    def blit(self, surface:pygame.Surface):
+        surface.blit(self.image, self.rect)

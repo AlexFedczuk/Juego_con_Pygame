@@ -21,7 +21,8 @@ def main(window):
     block_size = 96
 
     player = Player(100, 100, 50, 50, load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True))
-    blocks = [Block(0, HEIGHT - block_size, block_size, get_block)]
+    # blocks = [Block(0, HEIGHT - block_size, block_size, get_block)]
+    floor = [Block(i * block_size, HEIGHT - block_size, block_size, get_block) for i in range(-WIDTH // block_size, WIDTH * 2 // block_size)]
 
     run = True
     while run:
@@ -33,7 +34,7 @@ def main(window):
                 break
         player.loop(FPS)
         handle_move(player)
-        draw(window, background, bg_image, player, blocks)
+        draw(window, background, bg_image, player, floor)
     
     pygame.quit()
     quit()
