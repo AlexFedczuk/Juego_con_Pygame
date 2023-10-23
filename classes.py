@@ -83,11 +83,11 @@ class Player(pygame.sprite.Sprite):
         self.rect =  self.sprite.get_rect(topleft=(self.rect.x, self.rect.y))
         self.mask = pygame.mask.from_surface(self.sprite)
 
-    def draw(self, win:pygame.Surface):
+    def draw(self, win:pygame.Surface, offset_x:int):
         # pygame.draw.rect(win, COLOR, self.rect)
         # self.sprite = self.SPRITES["idle_" + self.direction][0]        
         # self.sprite = pygame.image.load(r"05 - Pygame\Juego\assets\MainCharacters\MaskDude\fall.png")
-        win.blit(self.sprite, (self.rect.x, self.rect.y))
+        win.blit(self.sprite, (self.rect.x - offset_x, self.rect.y))
 
 class Object(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, name=None) -> None:
@@ -98,8 +98,8 @@ class Object(pygame.sprite.Sprite):
         self.height = height
         self.name = name
 
-    def draw(self, win:pygame.Surface):
-        win.blit(self.image, (self.rect.x, self.rect.y))
+    def draw(self, win:pygame.Surface, offset_x:int):
+        win.blit(self.image, (self.rect.x - offset_x, self.rect.y))
 
 class Block(Object):
     def __init__(self, x, y, size, get_block) -> None:
