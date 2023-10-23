@@ -30,13 +30,33 @@ def draw(window:pygame.Surface, background, bg_image, player:Player, objects:lis
 
     pygame.display.update()
 
+def collide(player:Player, objects:list[Object], dx:int) -> Object:
+    player.move(dx, 0)
+    player.update()
+
+    collided_objects = None
+
+    for object in objects:
+        if pygame.sprite.collide_mask(player, object):
+            collided_objects = object
+            break
+
+    player.move(-dx, 0)
+    player.update
+
+    return collided_objects
+
+
 def handle_move(player:Player, objects:list[pygame.Surface]):
     keys = pygame.key.get_pressed()
 
     player.x_vel = 0
-    if keys[pygame.K_LEFT]:
+    collide_left = collide(player, objects, -PLAYER_VEL * 2)
+    collide_right = collide(player, objects, PLAYER_VEL * 2)
+
+    if keys[pygame.K_LEFT] and not collide_left:
         player.move_left(PLAYER_VEL)
-    if keys[pygame.K_RIGHT]:
+    if keys[pygame.K_RIGHT] and not collide_right:
         player.move_right(PLAYER_VEL)
     """if keys[pygame.K_SPACE] and player.jump_count < 2:
         #if event.key == pygame.K_SPACE and player.jump_count < 2:
