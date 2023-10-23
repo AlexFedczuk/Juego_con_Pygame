@@ -42,7 +42,7 @@ def main(window):
         handle_move(player, floor)
         draw(window, background, bg_image, player, floor, offset_x)
 
-        if ((player.rect.x - offset_x >= WIDTH - scroll_area_width) and player.x_vel > 0) or (
+        if ((player.rect.right - offset_x >= WIDTH - scroll_area_width) and player.x_vel > 0) or (
             (player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
             offset_x += player.x_vel
     
