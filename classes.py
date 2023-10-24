@@ -21,6 +21,8 @@ class Player(pygame.sprite.Sprite):
         self.SPRITES = load_sprite_sheets
         self.ANIMATION_DELAY = ANIMATION_DELAY
         self.jump_count = 0
+        self.hit = False
+        self.hit_count = 0
 
     def move(self, dx, dy):
         self.rect.x += dx
@@ -45,9 +47,20 @@ class Player(pygame.sprite.Sprite):
         if self.jump_count == 1:
             self.fall_count = 0
 
+    def make_hit(self):
+        self.hit = True
+        self.hit_count = 0
+
     def loop(self, fps):
         self.y_vel += min(1, (self.fall_count / fps) * GRAVITY) # Esto es para simular una gravedad/aceleracion "realista".
         self.move(self.x_vel, self.y_vel)
+
+        if self.hit:
+            self.hit_count += 1
+        if self.hit_count > fps * 2:
+            self.hit = False
+            self.hit_count = 0
+
         self.fall_count += 1
         self.update_sprite() 
 
@@ -63,7 +76,9 @@ class Player(pygame.sprite.Sprite):
     def update_sprite(self) -> None:
         sprite_sheet = "idle"
 
-        if self.y_vel < 0:
+        if self.hit:
+            sprite_sheet = "hit"
+        elif self.y_vel < 0:
             if self.jump_count == 1:
                 sprite_sheet = "jump"
             elif self.jump_count == 2:
@@ -134,8 +149,8 @@ class Fire(Object):
         self.animation_count += 1
 
         # Update
-        self.rect = self.sprite.get_rect(topleft=(self.rect.x, self.rect.y))
-        self.mask = pygame.mask.from_surface(self.sprite)
+        self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
+        self.mask = pygame.mask.from_surface(self.image)
 
         if self.animation_count // ANIMATION_DELAY > len(sprites):
             self.animation_count = 0

@@ -62,7 +62,14 @@ def handle_move(player:Player, objects:list[pygame.Surface]):
         #if event.key == pygame.K_SPACE and player.jump_count < 2:
         player.jump()"""
 
-    handle_vertical_collision(player, objects, player.y_vel)
+    vertical_collide = handle_vertical_collision(player, objects, player.y_vel)
+
+    to_check = [collide_left, collide_right, *vertical_collide]
+
+    for object in to_check:
+        if object and object.name == "fire":
+            player.make_hit()
+        
 
 def handle_vertical_collision(player:Player, objects:list[Object], dy:int) -> list[pygame.Surface]:
     collided_objects = []
@@ -76,7 +83,7 @@ def handle_vertical_collision(player:Player, objects:list[Object], dy:int) -> li
                 player.rect.top = object.rect.bottom
                 player.hit_head()
 
-        collided_objects.append(object)
+            collided_objects.append(object)
 
     return collided_objects
 
