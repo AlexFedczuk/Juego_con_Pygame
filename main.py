@@ -6,7 +6,7 @@ import pygame
 from pygame.sprite import Group
 from constants import WIDTH, HEIGHT, FPS
 from funtions import get_background, handle_move, draw, load_sprite_sheets, get_block
-from classes import Player, Block
+from classes import Player, Block, Fire
 
 pygame.init()
 
@@ -23,11 +23,15 @@ def main(window):
     player = Player(100, 100, 50, 50, load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True))
     # blocks = [Block(0, HEIGHT - block_size, block_size, get_block)]
     floor = [Block(i * block_size, HEIGHT - block_size, block_size, get_block) for i in range(-WIDTH // block_size, WIDTH * 2 // block_size)]
+    fire = Fire(100, HEIGHT - block_size - 64, 16, 32, load_sprite_sheets)
+    fire.on()
     objects = [*floor,
                Block(0, HEIGHT - block_size * 2, block_size, get_block),
                Block(block_size * 3, HEIGHT - block_size * 4, block_size, get_block),
                Block(block_size * 4, HEIGHT - block_size * 4, block_size, get_block),
-               Block(block_size * 6, HEIGHT - block_size * 5, block_size, get_block)]
+               Block(block_size * 6, HEIGHT - block_size * 5, block_size, get_block),
+               fire]
+    
 
     offset_x = 0
     scroll_area_width = 200
