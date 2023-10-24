@@ -140,4 +140,7 @@ class Fire(Object):
         if self.animation_count // ANIMATION_DELAY > len(sprites):
             self.animation_count = 0
 
+    def blit(self, surface:pygame.Surface, offset):
+        surface.blit(self.image, self.rect)
+
     
