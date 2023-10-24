@@ -115,7 +115,7 @@ class Block(Object):
 class Fire(Object):
     def __init__(self, x, y, width, height, load_sprite_sheets) -> None:
         super().__init__(x, y, width, height, "fire")
-        self.fire = load_sprite_sheets
+        self.fire = load_sprite_sheets("Traps", "Fire", 16, 32)
         self.image = self.fire["off"][0]
         self.mask = pygame.mask.from_surface(self.image)
         self.animation_count = 0
@@ -140,7 +140,7 @@ class Fire(Object):
         if self.animation_count // ANIMATION_DELAY > len(sprites):
             self.animation_count = 0
 
-    def blit(self, surface:pygame.Surface, offset):
-        surface.blit(self.image, self.rect)
+    def blit(self, surface:pygame.Surface, offset_x):
+        surface.blit(self.image, (self.rect.x - offset_x, self.rect.y))
 
     
