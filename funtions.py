@@ -7,7 +7,6 @@ from classes import Player, Object, Proyectile
 
 def get_background(name):
     image = pygame.image.load(join("assets", "Background", name))
-    print(f"image {image}")
     # image = pygame.image.load(r"05 - Pygame\Juego\assets\Background\Blue.png")
     _, _, width, height = image.get_rect()
     tiles = []
