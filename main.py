@@ -55,9 +55,8 @@ while run:
 
         if ((player.rect.right - offset_x >= WIDTH - scroll_area_width) and player.x_vel > 0) or (
             (player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
-            offset_x += player.x_vel
-    
-    pygame.quit()
-    quit()
+            offset_x += player.x_vel    
+pygame.quit()
+quit()
 # autopep8 --in-place --aggressive --aggressive main.py
 # python -m tabnanny main.py
