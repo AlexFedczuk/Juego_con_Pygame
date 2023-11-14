@@ -5,7 +5,7 @@ from os import listdir
 from os.path import isfile, join
 
 from pygame.sprite import Group
-from constants import COLOR, GRAVITY, ANIMATION_DELAY, WIDTH
+from constants import COLOR, GRAVITY, ANIMATION_DELAY
 #from funtions import load_sprite_sheets
 
 class Player(pygame.sprite.Sprite):
@@ -157,24 +157,5 @@ class Fire(Object):
 
     def blit(self, surface:pygame.Surface, offset_x):
         surface.blit(self.image, (self.rect.x - offset_x, self.rect.y))
-
-class Proyectile(object):
-    def __init__(self, x:int, y:int, radius:tuple, color:tuple, facing:str) -> None:
-        self.x = x
-        self.y = y
-        self.radius = radius
-        self.color = color
-        self.facing = facing
-        self.vel = 8 #* facing;  Tengo ue cambiar esto!
-
-    def draw(self, win:pygame.Surface, offset_x:int):
-        pygame.draw.circle(win, self.color, (offset_x, self.y), self.radius)
-
-    def loop(proyectiles_list):
-        for proyectile in proyectiles_list:
-            if proyectile.x < WIDTH and proyectile.x > 0:
-                proyectile.x += proyectile.vel
-            else:
-                proyectiles_list.pop(proyectiles_list.index(proyectile))
 
     

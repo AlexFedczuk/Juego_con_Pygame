@@ -3,10 +3,11 @@ import pygame
 from os import listdir
 from os.path import isfile, join
 from constants import WIDTH, HEIGHT, PLAYER_VEL
-from classes import Player, Object, Proyectile
+from classes import Player, Object
 
 def get_background(name):
     image = pygame.image.load(join("assets", "Background", name))
+    print(f"image {image}")
     # image = pygame.image.load(r"05 - Pygame\Juego\assets\Background\Blue.png")
     _, _, width, height = image.get_rect()
     tiles = []
@@ -18,7 +19,7 @@ def get_background(name):
 
     return tiles, image
 
-def draw(window:pygame.Surface, background, bg_image, player:Player, objects:list[pygame.Surface], offset_x:int, bullets:list[Proyectile]):
+def draw(window:pygame.Surface, background, bg_image, player:Player, objects:list[pygame.Surface], offset_x:int):
     for tile in background:
         window.blit(bg_image, tile)
 
@@ -26,9 +27,6 @@ def draw(window:pygame.Surface, background, bg_image, player:Player, objects:lis
         object.blit(window, offset_x)
 
     player.draw(window, offset_x)
-
-    for bullet in bullets:
-        bullet.draw(window, offset_x)
 
     pygame.display.update()
 
@@ -70,7 +68,8 @@ def handle_move(player:Player, objects:list[pygame.Surface]):
 
     for object in to_check:
         if object and object.name == "fire":
-            player.make_hit()        
+            player.make_hit()
+        
 
 def handle_vertical_collision(player:Player, objects:list[Object], dy:int) -> list[pygame.Surface]:
     collided_objects = []
@@ -86,7 +85,9 @@ def handle_vertical_collision(player:Player, objects:list[Object], dy:int) -> li
 
             collided_objects.append(object)
 
-    return collided_objects        
+    return collided_objects
+
+        
 
 # Esto da vuelta en el eje X los Sprites que le mandes.
 def flip(sprites:list[pygame.sprite.Sprite]):
