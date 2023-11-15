@@ -18,7 +18,6 @@ class Player(pygame.sprite.Sprite):
         self.jump_count = 0
         self.hit = False
         self.hit_count = 0
-        self.proyectile_group = pygame.sprite.Group()
 
     def move(self, dx, dy):
         self.rect.x += dx

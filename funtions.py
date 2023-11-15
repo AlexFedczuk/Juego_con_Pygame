@@ -5,6 +5,7 @@ from os.path import isfile, join
 from constants import WIDTH, HEIGHT, PLAYER_VEL
 from class_object import Object
 from class_player import Player
+from class_proyectile import Proyectile
 
 def get_background(name):
     image = pygame.image.load(join("assets", "Background", name))
@@ -20,7 +21,7 @@ def get_background(name):
 
     return tiles, image
 
-def draw(window:pygame.Surface, background, bg_image, player:Player, objects:list[pygame.Surface], offset_x:int):
+def draw(window:pygame.Surface, background, bg_image, player:Player, objects:list[pygame.Surface], offset_x:int, proyectile:Proyectile):
     for tile in background:
         window.blit(bg_image, tile)
 
@@ -28,10 +29,10 @@ def draw(window:pygame.Surface, background, bg_image, player:Player, objects:lis
         object.blit(window, offset_x)
 
     player.draw(window, offset_x)
-    player.proyectile_group.draw(window)
-    player.proyectile_group.update()
 
-    pygame.display.update()
+    if proyectile != None:
+        window.blit(proyectile.image, (proyectile.rect.x, proyectile.rect.y))
+        proyectile.update()
 
 def collide(player:Player, objects:list[Object], dx:int) -> Object:
     player.move(dx, 0)
@@ -61,8 +62,6 @@ def handle_move(player:Player, objects:list[pygame.Surface]):
         player.move_left(PLAYER_VEL)
     if keys[pygame.K_RIGHT] and not collide_right:
         player.move_right(PLAYER_VEL)
-    if keys[pygame.MOUSEBUTTONDOWN]:
-        player.proyectile_group.add(player.create_proyectile())
 
     vertical_collide = handle_vertical_collision(player, objects, player.y_vel)
 
@@ -87,9 +86,7 @@ def handle_vertical_collision(player:Player, objects:list[Object], dy:int) -> li
 
             collided_objects.append(object)
 
-    return collided_objects
-
-        
+    return collided_objects      
 
 # Esto da vuelta en el eje X los Sprites que le mandes.
 def flip(sprites:list[pygame.sprite.Sprite]):
@@ -127,3 +124,16 @@ def get_block(size) -> pygame.Surface:
     surface.blit(image, (0, 0), rect)
 
     return pygame.transform.scale2x(surface)
+
+def scroll_screen(player:Player, offset_x:int, scroll_area_width:int) -> int:
+    if ((player.rect.right - offset_x >= WIDTH - scroll_area_width) and player.x_vel > 0) or (
+        (player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
+        offset_x += player.x_vel
+    return offset_x
+    
+
+def draw_rectangle(window:pygame.Surface, player:Player, object_list:list[Object], offset_x:int):
+    pygame.draw.rect(window, (255, 0, 0), (player.rect.x - offset_x, player.rect.y, player.rect.width, player.rect.height), 2) # 100, 200, 50, 100
+    for object in object_list:
+        pygame.draw.rect(window, (0, 255, 0), (object.rect.x - offset_x, object.rect.y, object.rect.width, object.rect.height), 2)
+    

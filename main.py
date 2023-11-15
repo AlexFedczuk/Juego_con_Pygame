@@ -1,7 +1,7 @@
 import pygame
 
 from constants import WIDTH, HEIGHT, FPS
-from funtions import get_background, handle_move, draw, load_sprite_sheets, get_block
+from funtions import get_background, handle_move, draw, load_sprite_sheets, get_block, draw_rectangle, scroll_screen
 from class_player import Player
 from classe_block import Block
 from class_fire import Fire
@@ -32,7 +32,8 @@ objects = [
     Block(block_size * 4, HEIGHT - block_size * 4, block_size, get_block),
     Block(block_size * 6, HEIGHT - block_size * 5, block_size, get_block),
     fire
-]    
+]
+proyectile = None
 
 run = True
 while run:
@@ -45,12 +46,15 @@ while run:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE and player.jump_count < 2:
                 player.jump()
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            proyectile = player.create_proyectile()
     player.loop(FPS)
     fire.loop()
     handle_move(player, objects)
-    draw(window, background, bg_image, player, objects, offset_x)
+    draw(window, background, bg_image, player, objects, offset_x, proyectile) 
 
-    if ((player.rect.right - offset_x >= WIDTH - scroll_area_width) and player.x_vel > 0) or (
-        (player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
-        offset_x += player.x_vel    
+    offset_x = scroll_screen(player, offset_x, scroll_area_width)
+
+    draw_rectangle(window, player, objects, offset_x)
+    pygame.display.update()
 pygame.quit()

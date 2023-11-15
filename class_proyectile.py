@@ -1,6 +1,4 @@
-from typing import Any
 import pygame
-from pygame.sprite import _Group
 
 class Proyectile(pygame.sprite.Sprite):
     def __init__(self, x, y) -> None:
