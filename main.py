@@ -1,9 +1,10 @@
 import pygame
 
-from Classes.constants import WIDTH, HEIGHT, FPS
+from constants import WIDTH, HEIGHT, FPS
 from funtions import get_background, handle_move, draw, load_sprite_sheets, get_block
-from Classes.classes import Block, Fire
-from Classes.player import Player
+from class_player import Player
+from classe_block import Block
+from class_fire import Fire
 
 pygame.init()
 
