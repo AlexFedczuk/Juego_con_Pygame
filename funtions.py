@@ -2,7 +2,7 @@ import pygame
 
 from os import listdir
 from os.path import isfile, join
-from constants import WIDTH, HEIGHT, PLAYER_VEL
+from Classes.constants import WIDTH, HEIGHT, PLAYER_VEL
 from Classes.classes import Object
 from Classes.player import Player
 

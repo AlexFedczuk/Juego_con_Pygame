@@ -1,6 +1,6 @@
 import pygame
 
-from ..constants import ANIMATION_DELAY, GRAVITY
+from constants import ANIMATION_DELAY, GRAVITY
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, load_sprite_sheets) -> None:
