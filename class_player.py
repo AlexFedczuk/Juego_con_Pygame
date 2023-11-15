@@ -1,6 +1,7 @@
 import pygame
 
 from constants import ANIMATION_DELAY, GRAVITY
+from class_proyectile import Proyectile
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, load_sprite_sheets) -> None:
@@ -17,6 +18,7 @@ class Player(pygame.sprite.Sprite):
         self.jump_count = 0
         self.hit = False
         self.hit_count = 0
+        self.proyectile_group = pygame.sprite.Group()
 
     def move(self, dx, dy):
         self.rect.x += dx
@@ -94,7 +96,7 @@ class Player(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.sprite)
 
     def draw(self, win:pygame.Surface, offset_x:int):
-        # pygame.draw.rect(win, COLOR, self.rect)
-        # self.sprite = self.SPRITES["idle_" + self.direction][0]        
-        # self.sprite = pygame.image.load(r"05 - Pygame\Juego\assets\MainCharacters\MaskDude\fall.png")
         win.blit(self.sprite, (self.rect.x - offset_x, self.rect.y))
+
+    def create_proyectile(self):
+        return Proyectile(self.rect.x, self.rect.y)

@@ -28,6 +28,8 @@ def draw(window:pygame.Surface, background, bg_image, player:Player, objects:lis
         object.blit(window, offset_x)
 
     player.draw(window, offset_x)
+    player.proyectile_group.draw(window)
+    player.proyectile_group.update()
 
     pygame.display.update()
 
@@ -59,9 +61,8 @@ def handle_move(player:Player, objects:list[pygame.Surface]):
         player.move_left(PLAYER_VEL)
     if keys[pygame.K_RIGHT] and not collide_right:
         player.move_right(PLAYER_VEL)
-    """if keys[pygame.K_SPACE] and player.jump_count < 2:
-        #if event.key == pygame.K_SPACE and player.jump_count < 2:
-        player.jump()"""
+    if keys[pygame.MOUSEBUTTONDOWN]:
+        player.proyectile_group.add(player.create_proyectile())
 
     vertical_collide = handle_vertical_collision(player, objects, player.y_vel)
 
