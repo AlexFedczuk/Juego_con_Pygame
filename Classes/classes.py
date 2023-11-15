@@ -1,12 +1,6 @@
-from typing import Any
 import pygame
 
-from os import listdir
-from os.path import isfile, join
-
-from pygame.sprite import Group
-from constants import COLOR, GRAVITY, ANIMATION_DELAY
-#from funtions import load_sprite_sheets
+from constants import ANIMATION_DELAY
 
 class Object(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, name=None) -> None:
