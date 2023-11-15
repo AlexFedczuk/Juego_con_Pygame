@@ -3,7 +3,8 @@ import pygame
 from os import listdir
 from os.path import isfile, join
 from constants import WIDTH, HEIGHT, PLAYER_VEL
-from classes import Player, Object
+from Classes.classes import Object
+from Classes.player import Player
 
 def get_background(name):
     image = pygame.image.load(join("assets", "Background", name))
