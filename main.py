@@ -19,7 +19,7 @@ offset_x = 0
 scroll_area_width = 200
 
 # Objetos
-player = Player(100, 100, 50, 50, load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True), r"assets\Traps\Sand Mud Ice\Ice Particle.png")
+player = Player(0, 0, 50, 50, load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True), r"assets\Traps\Sand Mud Ice\Ice Particle.png")
 # blocks = [Block(0, HEIGHT - block_size, block_size, get_block)]
 block_size = 96
 floor = [Block(i * block_size, HEIGHT - block_size, block_size, get_block) for i in range(-WIDTH // block_size, WIDTH * 2 // block_size)]
