@@ -46,12 +46,13 @@ while run:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE and player.jump_count < 2:
                 player.jump()
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            proyectile = player.create_proyectile()
+        if (event.type == pygame.MOUSEBUTTONDOWN and event.button == 1) and (len(player.proyectiles_shooted) < 3):
+            player.proyectiles_shooted.append(player.create_proyectile(r"assets\Traps\Sand Mud Ice\Ice Particle.png"))
+
     player.loop(FPS)
     fire.loop()
     handle_move(player, objects)
-    draw(window, background, bg_image, player, objects, offset_x, proyectile) 
+    draw(window, background, bg_image, player, objects, offset_x, proyectile)
 
     offset_x = scroll_screen(player, offset_x, scroll_area_width)
 

@@ -30,9 +30,7 @@ def draw(window:pygame.Surface, background, bg_image, player:Player, objects:lis
 
     player.draw(window, offset_x)
 
-    if proyectile != None:
-        window.blit(proyectile.image, (proyectile.rect.x, proyectile.rect.y))
-        proyectile.update()
+    draw_player_proyectiles(window, offset_x, player)
 
 def collide(player:Player, objects:list[Object], dx:int) -> Object:
     player.move(dx, 0)
@@ -136,4 +134,13 @@ def draw_rectangle(window:pygame.Surface, player:Player, object_list:list[Object
     pygame.draw.rect(window, (255, 0, 0), (player.rect.x - offset_x, player.rect.y, player.rect.width, player.rect.height), 2) # 100, 200, 50, 100
     for object in object_list:
         pygame.draw.rect(window, (0, 255, 0), (object.rect.x - offset_x, object.rect.y, object.rect.width, object.rect.height), 2)
-    
+
+def draw_player_proyectiles(window:pygame.Surface, offset_x:int, player:Player):
+    if player.proyectiles_shooted != []:
+        for proyectile in player.proyectiles_shooted:
+            if proyectile.rect.x > WIDTH or proyectile.rect.x < 0:
+                player.proyectiles_shooted.remove(proyectile)
+                proyectile.delete()
+            else:
+                window.blit(proyectile.image, (proyectile.rect.x - offset_x, proyectile.rect.y))
+                proyectile.update()

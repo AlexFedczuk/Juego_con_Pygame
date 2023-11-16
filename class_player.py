@@ -18,6 +18,7 @@ class Player(pygame.sprite.Sprite):
         self.jump_count = 0
         self.hit = False
         self.hit_count = 0
+        self.proyectiles_shooted = []
 
     def move(self, dx, dy):
         self.rect.x += dx
@@ -97,5 +98,5 @@ class Player(pygame.sprite.Sprite):
     def draw(self, win:pygame.Surface, offset_x:int):
         win.blit(self.sprite, (self.rect.x - offset_x, self.rect.y))
 
-    def create_proyectile(self):
-        return Proyectile(self.rect.x, self.rect.y)
+    def create_proyectile(self, image_path:str):
+        return Proyectile(self.rect.x, self.rect.y, image_path)
