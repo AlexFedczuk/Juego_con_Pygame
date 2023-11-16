@@ -99,4 +99,4 @@ class Player(pygame.sprite.Sprite):
         win.blit(self.sprite, (self.rect.x - offset_x, self.rect.y))
 
     def create_proyectile(self, image_path:str):
-        return Proyectile(self.rect.x, self.rect.y, image_path)
+        return Proyectile(self.rect.x + 50, self.rect.y + 30, image_path)
