@@ -48,6 +48,26 @@ def collide(player:Player, objects:list[Object], dx:int) -> Object:
 
     return collided_objects
 
+def collide_proyectile(player:Player, objects:list[Object]) -> Proyectile:
+    collided_proyectile = None
+
+    if player.proyectiles_shooted != []:
+        for proyectile in player.proyectiles_shooted:
+            if pygame.sprite.collide_mask(player, proyectile):
+                print("El proyectil colisiono con el Jugador!")
+                collided_proyectile = proyectile
+                break
+            for object in objects:
+                if pygame.sprite.collide_mask(object, proyectile):
+                    print("El proyectil colisiono un objeto!")
+                    player.proyectiles_shooted.remove(proyectile)
+                    break
+            if proyectile.rect.x > WIDTH or proyectile.rect.x < 0:
+                    print("El proyectil colisiono con un limite de la Pantalla!")
+                    player.proyectiles_shooted.remove(proyectile)
+                    break
+    
+    return collided_proyectile
 
 def handle_move(player:Player, objects:list[pygame.Surface]):
     keys = pygame.key.get_pressed()
@@ -68,6 +88,8 @@ def handle_move(player:Player, objects:list[pygame.Surface]):
     for object in to_check:
         if object and object.name == "fire":
             player.make_hit()
+
+    collide_proyectile(player, objects)
         
 
 def handle_vertical_collision(player:Player, objects:list[Object], dy:int) -> list[pygame.Surface]:
@@ -134,13 +156,11 @@ def draw_rectangle(window:pygame.Surface, player:Player, object_list:list[Object
     pygame.draw.rect(window, (255, 0, 0), (player.rect.x - offset_x, player.rect.y, player.rect.width, player.rect.height), 2) # 100, 200, 50, 100
     for object in object_list:
         pygame.draw.rect(window, (0, 255, 0), (object.rect.x - offset_x, object.rect.y, object.rect.width, object.rect.height), 2)
+    for proyectile in player.proyectiles_shooted:
+        pygame.draw.rect(window, (0, 0, 255), (proyectile.rect.x - offset_x, proyectile.rect.y, proyectile.rect.width, proyectile.rect.height), 2)
 
 def draw_player_proyectiles(window:pygame.Surface, offset_x:int, player:Player):
     if player.proyectiles_shooted != []:
         for proyectile in player.proyectiles_shooted:
-            if proyectile.rect.x > WIDTH or proyectile.rect.x < 0:
-                player.proyectiles_shooted.remove(proyectile)
-                proyectile.delete()
-            else:
                 window.blit(proyectile.image, (proyectile.rect.x - offset_x, proyectile.rect.y))
                 proyectile.update()

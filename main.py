@@ -28,6 +28,7 @@ fire.on()
 objects = [
 *floor,
     Block(0, HEIGHT - block_size * 2, block_size, get_block),
+    Block(block_size * 6, HEIGHT - block_size * 2, block_size, get_block),
     Block(block_size * 3, HEIGHT - block_size * 4, block_size, get_block),
     Block(block_size * 4, HEIGHT - block_size * 4, block_size, get_block),
     Block(block_size * 6, HEIGHT - block_size * 5, block_size, get_block),
