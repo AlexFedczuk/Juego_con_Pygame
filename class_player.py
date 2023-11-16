@@ -4,7 +4,7 @@ from constants import ANIMATION_DELAY, GRAVITY
 from class_proyectile import Proyectile
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y, width, height, load_sprite_sheets) -> None:
+    def __init__(self, x, y, width, height, load_sprite_sheets, proyectile_image_path:str) -> None:
         super().__init__()
         self.rect = pygame.Rect(x, y, width, height)
         self.x_vel = 0
@@ -19,6 +19,7 @@ class Player(pygame.sprite.Sprite):
         self.hit = False
         self.hit_count = 0
         self.proyectiles_shooted = []
+        self.proyectile_image_path = proyectile_image_path
 
     def move(self, dx, dy):
         self.rect.x += dx

@@ -19,7 +19,7 @@ offset_x = 0
 scroll_area_width = 200
 
 # Objetos
-player = Player(100, 100, 50, 50, load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True))
+player = Player(100, 100, 50, 50, load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True), r"assets\Traps\Sand Mud Ice\Ice Particle.png")
 # blocks = [Block(0, HEIGHT - block_size, block_size, get_block)]
 block_size = 96
 floor = [Block(i * block_size, HEIGHT - block_size, block_size, get_block) for i in range(-WIDTH // block_size, WIDTH * 2 // block_size)]
@@ -48,7 +48,7 @@ while run:
             if event.key == pygame.K_SPACE and player.jump_count < 2:
                 player.jump()
         if (event.type == pygame.MOUSEBUTTONDOWN and event.button == 1) and (len(player.proyectiles_shooted) < 3):
-            player.proyectiles_shooted.append(player.create_proyectile(r"assets\Traps\Sand Mud Ice\Ice Particle.png"))
+            player.proyectiles_shooted.append(player.create_proyectile(player.proyectile_image_path))
 
     player.loop(FPS)
     fire.loop()
