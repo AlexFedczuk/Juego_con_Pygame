@@ -4,11 +4,10 @@ from constants import WINDOW, FONT_PATH
 from colors import WHITE, BLACK
 from funtions import get_font
 from class_button import Button
-from controller_main_menu import controller_main_menu
 
 def controller_options_menu():
     while True:
-            options_mouse_position = pygame.mouse.get_pos() # OPTIONS_MOUSE_POS
+            options_mouse_position = pygame.mouse.get_pos()
 
             WINDOW.fill(WHITE)
 

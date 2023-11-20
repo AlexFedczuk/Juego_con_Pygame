@@ -15,6 +15,6 @@ LEFT_EDGE_SCREEN = -1055
 WIDTH = 1000
 HEIGHT = 800
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
-BACK_GROUND = r"assets\Background\Gray.png"
+BACK_GROUND_IMAGE = pygame.image.load(r"assets\Background.png")
 # Fuentes
 FONT_PATH = r"assets\font.ttf"

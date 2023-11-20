@@ -1,6 +1,6 @@
 import pygame, sys
 
-from constants import WINDOW, BACK_GROUND, FONT_PATH
+from constants import WINDOW, BACK_GROUND_IMAGE, FONT_PATH
 from colors import LIGHT_BROWN, SUPER_LIGHT_GREEN, WHITE
 from funtions import get_font
 from class_button import Button
@@ -9,7 +9,7 @@ from controller_option import controller_options_menu
 
 def controller_main_menu():
     while True:
-        WINDOW.blit(BACK_GROUND, (0, 0))
+        WINDOW.blit(BACK_GROUND_IMAGE, (0, 0))
 
         mouse_position_main_menu = pygame.mouse.get_pos()
 
