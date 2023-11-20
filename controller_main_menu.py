@@ -38,5 +38,4 @@ def controller_main_menu():
                 if QUIT_BUTTON.checkForInput(mouse_position_main_menu):
                     pygame.quit()
                     sys.exit()
-
         pygame.display.update()

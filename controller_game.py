@@ -59,4 +59,3 @@ def controller_play_game():
         draw_rectangle(window, player, objects, offset_x)
         #print(f"Posicion x del jugador: {player.rect.x}") # Izq. maximo deberia ser -1055. Der. maximo deberia ser 1855.
         pygame.display.update()
-    pygame.quit()
