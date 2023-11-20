@@ -164,3 +164,6 @@ def draw_player_proyectiles(window:pygame.Surface, offset_x:int, player:Player):
         for proyectile in player.proyectiles_shooted:
                 window.blit(proyectile.image, (proyectile.rect.x - offset_x, proyectile.rect.y))
                 proyectile.update()
+
+def get_font(font:str, size:int) -> pygame.font.Font: # Returns Press-Start-2P in the desired size
+    return pygame.font.Font(font, size)
