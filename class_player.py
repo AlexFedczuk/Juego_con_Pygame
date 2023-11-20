@@ -99,5 +99,5 @@ class Player(pygame.sprite.Sprite):
     def draw(self, win:pygame.Surface, offset_x:int):
         win.blit(self.sprite, (self.rect.x - offset_x, self.rect.y))
 
-    def create_proyectile(self, image_path:str):
-        return Proyectile(self.rect.x + 50, self.rect.y + 30, image_path)
+    def create_proyectile(self, image_path:str, direction:str):
+        return Proyectile(self.rect.x + 50, self.rect.y + 30, image_path, direction)

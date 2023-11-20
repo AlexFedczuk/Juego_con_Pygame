@@ -48,7 +48,7 @@ while run:
             if event.key == pygame.K_SPACE and player.jump_count < 2:
                 player.jump()
         if (event.type == pygame.MOUSEBUTTONDOWN and event.button == 1) and (len(player.proyectiles_shooted) < 3):
-            player.proyectiles_shooted.append(player.create_proyectile(player.proyectile_image_path))
+            player.proyectiles_shooted.append(player.create_proyectile(player.proyectile_image_path, player.direction))
 
     player.loop(FPS)
     fire.loop()
