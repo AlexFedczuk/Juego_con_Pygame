@@ -58,5 +58,6 @@ while run:
     offset_x = scroll_screen(player, offset_x, scroll_area_width)
 
     draw_rectangle(window, player, objects, offset_x)
+    print(f"Posicion x del jugador: {player.rect.x}") # Izq. maximo deberia ser -1055. Der. maximo deberia ser 1855.
     pygame.display.update()
 pygame.quit()

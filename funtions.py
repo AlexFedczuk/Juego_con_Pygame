@@ -2,7 +2,7 @@ import pygame
 
 from os import listdir
 from os.path import isfile, join
-from constants import WIDTH, HEIGHT, PLAYER_VEL
+from constants import WIDTH, HEIGHT, PLAYER_VEL, RIGHT_EDGE_SCREEN, LEFT_EDGE_SCREEN
 from class_object import Object
 from class_player import Player
 from class_proyectile import Proyectile
@@ -62,7 +62,7 @@ def collide_proyectile(player:Player, objects:list[Object]) -> Proyectile:
                     print("El proyectil colisiono un objeto!")
                     player.proyectiles_shooted.remove(proyectile)
                     break
-            if proyectile.rect.x > WIDTH or proyectile.rect.x < 0:
+            if proyectile.rect.x > RIGHT_EDGE_SCREEN or proyectile.rect.x < LEFT_EDGE_SCREEN:
                     print("El proyectil colisiono con un limite de la Pantalla!")
                     player.proyectiles_shooted.remove(proyectile)
                     break
