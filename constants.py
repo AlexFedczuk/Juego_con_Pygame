@@ -5,6 +5,8 @@ FPS = 60
 PLAYER_VEL = 5
 GRAVITY = 1
 ANIMATION_DELAY = 4
+# Velocidad del proyectile
 PROYECTILE_VELOCITY = 5
-RIGHT_EDGE_SCREEN = 1915# Izq. maximo deberia ser -1055. Der. maximo deberia ser 1855.
+# Izq. maximo deberia ser -1055. Der. maximo deberia ser 1855.
+RIGHT_EDGE_SCREEN = 1915
 LEFT_EDGE_SCREEN = -1055
