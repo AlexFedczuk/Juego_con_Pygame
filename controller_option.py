@@ -6,7 +6,8 @@ from funtions import get_font
 from class_button import Button
 
 def controller_options_menu():
-    while True:
+    running = True
+    while running:
             options_mouse_position = pygame.mouse.get_pos()
 
             WINDOW.fill(WHITE)
@@ -26,5 +27,5 @@ def controller_options_menu():
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if OPTIONS_BACK_BUTTON.checkForInput(options_mouse_position):
-                        controller_main_menu()
+                        running = False
             pygame.display.update()

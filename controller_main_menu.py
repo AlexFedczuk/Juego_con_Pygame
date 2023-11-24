@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame
 
 from constants import WINDOW, BACK_GROUND_IMAGE, FONT_PATH
 from colors import LIGHT_BROWN, SUPER_LIGHT_GREEN, WHITE
@@ -8,7 +8,8 @@ from controller_game import controller_play_game
 from controller_option import controller_options_menu
 
 def controller_main_menu():
-    while True:
+    running = True
+    while running:
         WINDOW.blit(BACK_GROUND_IMAGE, (0, 0))
 
         mouse_position_main_menu = pygame.mouse.get_pos()
@@ -28,14 +29,12 @@ def controller_main_menu():
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+                running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BUTTON.checkForInput(mouse_position_main_menu):
                     controller_play_game()
                 if OPTIONS_BUTTON.checkForInput(mouse_position_main_menu):
                     controller_options_menu()
                 if QUIT_BUTTON.checkForInput(mouse_position_main_menu):
-                    pygame.quit()
-                    sys.exit()
+                    running = False
         pygame.display.update()
