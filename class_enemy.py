@@ -1,9 +1,9 @@
 import pygame
 
-from constants import ANIMATION_DELAY, GRAVITY
+from constants import ANIMATION_DELAY, GRAVITY, ENEMY_VEL
 from class_proyectile import Proyectile
 
-class Enemie(pygame.sprite.Sprite):
+class Enemy(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, load_sprite_sheets, proyectile_image_path:str) -> None:
         super().__init__()
         self.rect = pygame.Rect(x, y, width, height)
@@ -19,6 +19,7 @@ class Enemie(pygame.sprite.Sprite):
         self.hit_count = 0
         self.proyectiles_shooted = []
         self.proyectile_image_path = proyectile_image_path
+        self.vel = ENEMY_VEL
 
     def move(self, dx, dy):
         self.rect.x += dx
