@@ -4,6 +4,7 @@ BG_COLOR = (255, 255, 255)
 COLOR = (255, 0, 0)
 FPS = 60
 PLAYER_VEL = 5
+ENEMIE_VEL = 1
 GRAVITY = 1
 ANIMATION_DELAY = 4
 # Velocidad del proyectile
@@ -15,6 +16,6 @@ LEFT_EDGE_SCREEN = -1055
 WIDTH = 1000
 HEIGHT = 800
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
-BACK_GROUND_IMAGE = pygame.image.load(r"assets\Background.png")
+BACK_GROUND_IMAGE = pygame.transform.scale(pygame.image.load(r"assets\Background.png"), (WIDTH, HEIGHT))
 # Fuentes
 FONT_PATH = r"assets\font.ttf"

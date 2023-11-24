@@ -2,10 +2,12 @@ import pygame
 
 from os import listdir
 from os.path import isfile, join
-from constants import WIDTH, HEIGHT, PLAYER_VEL, RIGHT_EDGE_SCREEN, LEFT_EDGE_SCREEN
+from constants import WIDTH, HEIGHT, PLAYER_VEL, RIGHT_EDGE_SCREEN, LEFT_EDGE_SCREEN, ENEMIE_VEL
 from class_object import Object
 from class_player import Player
 from class_proyectile import Proyectile
+from class_enemie import Enemie
+from colors import RED, BLUE, YELLOW, GREEN
 
 def get_background(name):
     image = pygame.image.load(join("assets", "Background", name))
@@ -21,7 +23,7 @@ def get_background(name):
 
     return tiles, image
 
-def draw(window:pygame.Surface, background, bg_image, player:Player, objects:list[pygame.Surface], offset_x:int, proyectile:Proyectile):
+def draw(window:pygame.Surface, background, bg_image, player:Player, objects:list[pygame.Surface], offset_x:int, enemies:list[Enemie]):
     for tile in background:
         window.blit(bg_image, tile)
 
@@ -29,22 +31,24 @@ def draw(window:pygame.Surface, background, bg_image, player:Player, objects:lis
         object.blit(window, offset_x)
 
     player.draw(window, offset_x)
+    for enemie in enemies:
+        enemie.draw(window, offset_x)
 
     draw_player_proyectiles(window, offset_x, player)
 
-def collide(player:Player, objects:list[Object], dx:int) -> Object:
-    player.move(dx, 0)
-    player.update()
+def collide(entity:Player or Enemie, objects:list[Object], dx:int) -> Object:
+    entity.move(dx, 0)
+    entity.update()
 
     collided_objects = None
 
     for object in objects:
-        if pygame.sprite.collide_mask(player, object):
+        if pygame.sprite.collide_mask(entity, object):
             collided_objects = object
             break
 
-    player.move(-dx, 0)
-    player.update
+    entity.move(-dx, 0)
+    entity.update
 
     return collided_objects
 
@@ -69,21 +73,35 @@ def collide_proyectile(player:Player, objects:list[Object]) -> Proyectile:
     
     return collided_proyectile
 
-def handle_move(player:Player, objects:list[pygame.Surface]):
+def handle_move(player:Player, objects:list[pygame.Surface], enemies:list[Enemie]):
     keys = pygame.key.get_pressed()
 
     player.x_vel = 0
-    collide_left = collide(player, objects, -PLAYER_VEL * 2)
-    collide_right = collide(player, objects, PLAYER_VEL * 2)
 
-    if keys[pygame.K_a] and not collide_left:
+    player_collide_left = collide(player, objects, -PLAYER_VEL * 2)
+    player_collide_right = collide(player, objects, PLAYER_VEL * 2)
+
+    if keys[pygame.K_a] and not player_collide_left:
         player.move_left(PLAYER_VEL)
-    if keys[pygame.K_d] and not collide_right:
+    if keys[pygame.K_d] and not player_collide_right:
         player.move_right(PLAYER_VEL)
 
     vertical_collide = handle_vertical_collision(player, objects, player.y_vel)
 
-    to_check = [collide_left, collide_right, *vertical_collide]
+    for enemie in enemies:
+        enemie.x_vel = 0
+
+        enemie_collide_left = collide(enemie, objects, -ENEMIE_VEL * 2)
+        enemie_collide_right = collide(enemie, objects, ENEMIE_VEL * 2)
+
+        if enemie_collide_right:
+            enemie.move_left(ENEMIE_VEL)
+        elif enemie_collide_left:
+            enemie.move_right(ENEMIE_VEL)
+
+        handle_vertical_collision(enemie, objects, enemie.y_vel)
+
+    to_check = [player_collide_left, player_collide_right, *vertical_collide]
 
     for object in to_check:
         if object and object.name == "fire":
@@ -92,17 +110,17 @@ def handle_move(player:Player, objects:list[pygame.Surface]):
     collide_proyectile(player, objects)
         
 
-def handle_vertical_collision(player:Player, objects:list[Object], dy:int) -> list[pygame.Surface]:
+def handle_vertical_collision(entity:Player or Enemie, objects:list[Object], dy:int) -> list[pygame.Surface]:
     collided_objects = []
 
     for object in objects:
-        if pygame.sprite.collide_mask(player, object):
+        if pygame.sprite.collide_mask(entity, object):
             if dy > 0:
-                player.rect.bottom = object.rect.top
-                player.landed()
+                entity.rect.bottom = object.rect.top
+                entity.landed()
             elif dy < 0:
-                player.rect.top = object.rect.bottom
-                player.hit_head()
+                entity.rect.top = object.rect.bottom
+                entity.hit_head()
 
             collided_objects.append(object)
 
@@ -152,12 +170,14 @@ def scroll_screen(player:Player, offset_x:int, scroll_area_width:int) -> int:
     return offset_x
     
 
-def draw_rectangle(window:pygame.Surface, player:Player, object_list:list[Object], offset_x:int):
-    pygame.draw.rect(window, (255, 0, 0), (player.rect.x - offset_x, player.rect.y, player.rect.width, player.rect.height), 2) # 100, 200, 50, 100
+def draw_rectangle(window:pygame.Surface, player:Player, object_list:list[Object], enemies:list[Enemie], offset_x:int):
+    pygame.draw.rect(window, BLUE, (player.rect.x - offset_x, player.rect.y, player.rect.width, player.rect.height), 2) # 100, 200, 50, 100
     for object in object_list:
-        pygame.draw.rect(window, (0, 255, 0), (object.rect.x - offset_x, object.rect.y, object.rect.width, object.rect.height), 2)
+        pygame.draw.rect(window, GREEN, (object.rect.x - offset_x, object.rect.y, object.rect.width, object.rect.height), 2)
     for proyectile in player.proyectiles_shooted:
-        pygame.draw.rect(window, (0, 0, 255), (proyectile.rect.x - offset_x, proyectile.rect.y, proyectile.rect.width, proyectile.rect.height), 2)
+        pygame.draw.rect(window, RED, (proyectile.rect.x - offset_x, proyectile.rect.y, proyectile.rect.width, proyectile.rect.height), 2)
+    for enemie in enemies:
+        pygame.draw.rect(window, YELLOW, (enemie.rect.x - offset_x, enemie.rect.y, enemie.rect.width, enemie.rect.height), 2)
 
 def draw_player_proyectiles(window:pygame.Surface, offset_x:int, player:Player):
     if player.proyectiles_shooted != []:
