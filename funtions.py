@@ -2,12 +2,15 @@ import pygame
 
 from os import listdir
 from os.path import isfile, join
-from constants import WIDTH, HEIGHT, PLAYER_VEL, RIGHT_EDGE_SCREEN, LEFT_EDGE_SCREEN, ENEMY_VEL, WINDOW
+from constants import WIDTH, HEIGHT, PLAYER_VEL, RIGHT_EDGE_SCREEN, LEFT_EDGE_SCREEN, ENEMY_VEL, WINDOW, BLOCK_SIZE, X_EARTH_PLATFORM, FPS
+from colors import RED, BLUE, YELLOW, GREEN, PURPLE
+
 from class_object import Object
+from classe_block import Block
+from class_fire import Fire
 from class_player import Player
 from class_proyectile import Proyectile
 from class_enemy import Enemy
-from colors import RED, BLUE, YELLOW, GREEN, PURPLE
 
 def get_background(name):
     image = pygame.image.load(join("assets", "Background", name))
@@ -163,11 +166,11 @@ def load_sprite_sheets(dir1, dir2, width, height, direction=False) -> dict:
 
         return all_sprites
 
-def get_block(size) -> pygame.Surface:
+def get_block(size:int, x_terrain_img:int) -> pygame.Surface:
     path = join("assets", "Terrain", "Terrain.png")
     image = pygame.image.load(path).convert_alpha()
     surface = pygame.Surface((size, size), pygame.SRCALPHA, 32)
-    rect = pygame.Rect(96, 0, size, size)
+    rect = pygame.Rect(x_terrain_img, 0, size, size)
     surface.blit(image, (0, 0), rect)
 
     return pygame.transform.scale2x(surface)
@@ -200,4 +203,41 @@ def draw_player_proyectiles(window:pygame.Surface, offset_x:int, player:Player):
 
 def get_font(font:str, size:int) -> pygame.font.Font: # Returns Press-Start-2P in the desired size
     return pygame.font.Font(font, size)
+
+def create_map():
+    objects = []
+
+    floor = [
+        Block(BLOCK_SIZE * i, HEIGHT - BLOCK_SIZE, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor") for i in range(-WIDTH // BLOCK_SIZE, WIDTH * 2 // BLOCK_SIZE)
+    ]
+    floating_platforms = [
+        Block(BLOCK_SIZE * i, HEIGHT - BLOCK_SIZE * 6, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform") for i in range(2, 5)
+    ]   
+    blocks = [
+        Block(BLOCK_SIZE * 0, HEIGHT - BLOCK_SIZE * 2, get_block, BLOCK_SIZE, X_EARTH_PLATFORM,"block"),
+        Block(BLOCK_SIZE * 6, HEIGHT - BLOCK_SIZE * 2, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "block"),
+        Block(BLOCK_SIZE * 3, HEIGHT - BLOCK_SIZE * 4, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "block"),
+        Block(BLOCK_SIZE * 4, HEIGHT - BLOCK_SIZE * 4, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "block"),
+        Block(BLOCK_SIZE * 7, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "block"),
+    ]
+    traps = [
+        Fire(100, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets)
+    ]
+
+    objects.extend(floor)
+    objects.extend(floating_platforms)
+    objects.extend(blocks)
+    objects.extend(traps)
+
+    return objects
+
+def controller_loop(player:Player, enemies:list[Enemy], objects:list):
+    player.loop(FPS)
+
+    for enemy in enemies:
+        enemy.loop(FPS)
+
+    for object in objects:
+        if isinstance(object, Fire):
+            object.loop()
 

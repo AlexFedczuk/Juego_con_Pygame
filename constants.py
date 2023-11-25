@@ -22,6 +22,7 @@ FONT_PATH = r"assets\font.ttf"
 # Colision tolerante
 COLLISION_TOLERANCE = 1
 # Bloque
+X_EARTH_PLATFORM = 96
 BLOCK_SIZE = 96
 BLOCK_X = BLOCK_SIZE
 BLOCK_Y = HEIGHT - BLOCK_SIZE
