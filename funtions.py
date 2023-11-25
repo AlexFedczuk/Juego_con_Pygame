@@ -74,8 +74,13 @@ def collide_proyectile(player:Player, objects:list[Object]) -> Proyectile:
     return collided_proyectile
 
 def handle_move(player:Player, objects:list[Object], enemies:list[Enemy], offset_x:int):
+    handle_player_movement(player, objects)
+    handle_enemies_movement(enemies, objects)
+    collide_proyectile(player, objects)
+
+def handle_player_movement(player:Player, objects:list[Object]):
     keys = pygame.key.get_pressed()
-    # El jugador
+
     player.x_vel = 0
 
     player_collide_left = collide(player, objects, -PLAYER_VEL * 2)
@@ -94,7 +99,7 @@ def handle_move(player:Player, objects:list[Object], enemies:list[Enemy], offset
         if object and object.name == "fire":
             player.make_hit()
 
-    # Los enemigos
+def handle_enemies_movement(enemies:list[Enemy], objects:list[Object]):
     for enemy in enemies:
         enemy.x_vel = 0
 
@@ -108,11 +113,11 @@ def handle_move(player:Player, objects:list[Object], enemies:list[Enemy], offset
         for object in to_check:
             if object and object.name == "block":
                 enemy.vel = enemy.vel * -1
-        
-        enemy.move_right(enemy.vel)
 
-    collide_proyectile(player, objects)
-        
+        if enemy.vel < 0:
+            enemy.move_left(-enemy.vel)
+        else:
+            enemy.move_right(enemy.vel)        
 
 def handle_vertical_collision(entity:Player or Enemy, objects:list[Object], dy:int) -> list[pygame.Surface]:
     collided_objects = []

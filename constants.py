@@ -21,3 +21,7 @@ BACK_GROUND_IMAGE = pygame.transform.scale(pygame.image.load(r"assets\Background
 FONT_PATH = r"assets\font.ttf"
 # Colision tolerante
 COLLISION_TOLERANCE = 1
+# Bloque
+BLOCK_SIZE = 96
+BLOCK_X = BLOCK_SIZE
+BLOCK_Y = HEIGHT - BLOCK_SIZE
