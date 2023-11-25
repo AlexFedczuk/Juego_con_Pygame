@@ -2,10 +2,12 @@ import pygame
 
 from constants import WINDOW, BACK_GROUND_IMAGE, FONT_PATH, WIDTH
 from colors import LIGHT_BROWN, SUPER_LIGHT_GREEN, WHITE
+
 from funtions import get_font
-from class_button import Button
 from controller_game import controller_play_game
 from controller_option import controller_options_menu
+
+from class_button import Button
 
 def controller_main_menu():
     running = True

@@ -1,10 +1,10 @@
 import pygame
 
 from constants import WIDTH, HEIGHT, FPS
-from funtions import get_background, handle_move, draw, load_sprite_sheets, get_block, draw_rectangle, scroll_screen, create_map, controller_loop
+
+from funtions import get_background, handle_move, draw, load_sprite_sheets, draw_rectangle, scroll_screen, create_map, controller_loop
+
 from class_player import Player
-from classe_block import Block
-from class_fire import Fire
 from class_enemy import Enemy
 
 def controller_play_game():
