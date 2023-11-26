@@ -14,7 +14,6 @@ from class_enemy import Enemy
 
 def get_background(name):
     image = pygame.image.load(join("assets", "Background", name))
-    print(f"image {image}")
     # image = pygame.image.load(r"05 - Pygame\Juego\assets\Background\Blue.png")
     _, _, width, height = image.get_rect()
     tiles = []
@@ -61,16 +60,13 @@ def collide_proyectile(player:Player, objects:list[Object]) -> Proyectile:
     if player.proyectiles_shooted != []:
         for proyectile in player.proyectiles_shooted:
             if pygame.sprite.collide_mask(player, proyectile):
-                print("El proyectil colisiono con el Jugador!")
                 collided_proyectile = proyectile
                 break
             for object in objects:
                 if pygame.sprite.collide_mask(object, proyectile):
-                    print("El proyectil colisiono un objeto!")
                     player.proyectiles_shooted.remove(proyectile)
                     break
             if proyectile.rect.x > RIGHT_EDGE_SCREEN or proyectile.rect.x < LEFT_EDGE_SCREEN:
-                    print("El proyectil colisiono con un limite de la Pantalla!")
                     player.proyectiles_shooted.remove(proyectile)
                     break
     
@@ -99,7 +95,7 @@ def handle_player_movement(player:Player, objects:list[Object]):
     to_check = [player_collide_left, player_collide_right, *vertical_collide]
 
     for object in to_check:
-        if object and object.name == "fire":
+        if object and (object.name == "fire" and object.collidable == True):
             player.make_hit()
 
 def handle_enemies_movement(enemies:list[Enemy], objects:list[Object]):
@@ -114,7 +110,7 @@ def handle_enemies_movement(enemies:list[Enemy], objects:list[Object]):
         to_check = [enemy_collide_left, enemy_collide_right]
 
         for object in to_check:
-            if object and object.name == "block":
+            if object and object.collidable == True:
                 enemy.vel = enemy.vel * -1
 
         if enemy.vel < 0:
@@ -182,18 +178,19 @@ def scroll_screen(player:Player, offset_x:int, scroll_area_width:int) -> int:
     return offset_x
     
 
-def draw_rectangle(window:pygame.Surface, player:Player, object_list:list[Object], enemies:list[Enemy], offset_x:int):
-    pygame.draw.rect(window, BLUE, (player.rect.x - offset_x, player.rect.y, player.rect.width, player.rect.height), 2) # 100, 200, 50, 100
-    for object in object_list:
-        pygame.draw.rect(window, GREEN, (object.rect.x - offset_x, object.rect.y, object.rect.width, object.rect.height), 2)
-    for proyectile in player.proyectiles_shooted:
-        pygame.draw.rect(window, RED, (proyectile.rect.x - offset_x, proyectile.rect.y, proyectile.rect.width, proyectile.rect.height), 2)
-    for enemy in enemies:
-        pygame.draw.rect(window, YELLOW, (enemy.rect.x - offset_x, enemy.rect.y, enemy.rect.width, enemy.rect.height), 2)
+def draw_rectangle(tecla_f1:bool, window:pygame.Surface, player:Player, object_list:list[Object], enemies:list[Enemy], offset_x:int):
+    if tecla_f1:
+        pygame.draw.rect(window, BLUE, (player.rect.x - offset_x, player.rect.y, player.rect.width, player.rect.height), 2) # 100, 200, 50, 100
+        for object in object_list:
+            pygame.draw.rect(window, GREEN, (object.rect.x - offset_x, object.rect.y, object.rect.width, object.rect.height), 2)
+        for proyectile in player.proyectiles_shooted:
+            pygame.draw.rect(window, RED, (proyectile.rect.x - offset_x, proyectile.rect.y, proyectile.rect.width, proyectile.rect.height), 2)
+        for enemy in enemies:
+            pygame.draw.rect(window, YELLOW, (enemy.rect.x - offset_x, enemy.rect.y, enemy.rect.width, enemy.rect.height), 2)
 
-    for object in object_list:
-        if object.rect.colliderect(enemies[0]):
-            pygame.draw.rect(WINDOW, PURPLE, (object.rect.x - offset_x, object.rect.y, object.rect.width, object.rect.height), 2)
+        for object in object_list:
+            if object.rect.colliderect(enemies[0]):
+                pygame.draw.rect(WINDOW, PURPLE, (object.rect.x - offset_x, object.rect.y, object.rect.width, object.rect.height), 2)
 
 def draw_player_proyectiles(window:pygame.Surface, offset_x:int, player:Player):
     if player.proyectiles_shooted != []:
@@ -208,20 +205,55 @@ def create_map():
     objects = []
 
     floor = [
-        Block(BLOCK_SIZE * i, HEIGHT - BLOCK_SIZE, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor") for i in range(-WIDTH // BLOCK_SIZE, WIDTH * 2 // BLOCK_SIZE)
+        Block(BLOCK_SIZE * -5, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * -4, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * -3, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * -2, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * -1, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * 0, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * 1, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * 2, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * 3, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * 4, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * 5, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * 6, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * 7, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * 8, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * 9, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * 10, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * 11, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False)    
     ]
     floating_platforms = [
-        Block(BLOCK_SIZE * i, HEIGHT - BLOCK_SIZE * 6, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform") for i in range(2, 5)
+        # Plataforma del medio-arriba.
+        Block(BLOCK_SIZE * 2, HEIGHT - BLOCK_SIZE * 6, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * 3, HEIGHT - BLOCK_SIZE * 6, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * 4, HEIGHT - BLOCK_SIZE * 6, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        # Plataforma del medio-abajo.
+        Block(BLOCK_SIZE * 3, HEIGHT - BLOCK_SIZE * 4, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * 4, HEIGHT - BLOCK_SIZE * 4, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        # Plataforma de la derecha.
+        Block(BLOCK_SIZE * 7, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * 8, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * 9, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * 10, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        # Plataforma de la izquierda.
+        Block(BLOCK_SIZE * 0, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * -1, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * -2, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * -3, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
     ]   
     blocks = [
-        Block(BLOCK_SIZE * 0, HEIGHT - BLOCK_SIZE * 2, get_block, BLOCK_SIZE, X_EARTH_PLATFORM,"block"),
-        Block(BLOCK_SIZE * 6, HEIGHT - BLOCK_SIZE * 2, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "block"),
-        Block(BLOCK_SIZE * 3, HEIGHT - BLOCK_SIZE * 4, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "block"),
-        Block(BLOCK_SIZE * 4, HEIGHT - BLOCK_SIZE * 4, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "block"),
-        Block(BLOCK_SIZE * 7, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "block"),
+        # Obstaculo de la izquierda.
+        Block(BLOCK_SIZE * 0, HEIGHT - BLOCK_SIZE * 2, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "obstacle", True),
+        # Obstaculo de la derecha.
+        Block(BLOCK_SIZE * 6, HEIGHT - BLOCK_SIZE * 2, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "obstacle", True),
     ]
     traps = [
-        Fire(100, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets)
+        Fire(-355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, False),
+        Fire(355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, False),
+        Fire(1000, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, False),
+        Fire(845, 256, 16, 32, load_sprite_sheets, False),
+        Fire(-125, 256, 16, 32, load_sprite_sheets, False)
     ]
 
     objects.extend(floor)

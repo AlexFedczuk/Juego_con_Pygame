@@ -1,16 +1,18 @@
 import pygame
+from typing import Callable
 
 from class_object import Object
 from constants import ANIMATION_DELAY
 
 class Fire(Object):
-    def __init__(self, x, y, width, height, load_sprite_sheets) -> None:
+    def __init__(self, x:int, y:int, width:int, height:int, load_sprite_sheets:Callable, collidable:bool) -> None:
         super().__init__(x, y, width, height, "fire")
         self.fire = load_sprite_sheets("Traps", "Fire", 16, 32)
         self.image = self.fire["off"][0]
         self.mask = pygame.mask.from_surface(self.image)
         self.animation_count = 0
         self.animation_name = "on"
+        self.collidable = collidable
 
     def on(self):
         self.animation_name = "on"

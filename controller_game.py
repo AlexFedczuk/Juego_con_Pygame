@@ -15,7 +15,7 @@ def controller_play_game():
     clock = pygame.time.Clock()
     background, bg_image = get_background("Blue.png")    
 
-    offset_x = 0
+    offset_x = -200
     scroll_area_width = 200
 
     player = Player(0, 0, 50, 50, load_sprite_sheets("Player", "VirtualGuy", 32, 32, True), r"assets\Traps\Sand Mud Ice\Ice Particle.png")
@@ -27,6 +27,7 @@ def controller_play_game():
     # Plataformas, suelo y trampas.
     objects = create_map()
 
+    tecla_f1 = True
     run = True
     while run:
         clock.tick(FPS)
@@ -38,6 +39,8 @@ def controller_play_game():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and player.jump_count < 2:
                     player.jump()
+                if event.key == pygame.K_F1:
+                    tecla_f1 = not tecla_f1
             if (event.type == pygame.MOUSEBUTTONDOWN and event.button == 1) and (len(player.proyectiles_shooted) < 3):
                 player.proyectiles_shooted.append(player.create_proyectile(player.proyectile_image_path, player.direction))
 
@@ -47,5 +50,5 @@ def controller_play_game():
 
         offset_x = scroll_screen(player, offset_x, scroll_area_width)
 
-        draw_rectangle(window, player, objects, enemies, offset_x)
+        draw_rectangle(tecla_f1, window, player, objects, enemies, offset_x)
         pygame.display.update()
