@@ -6,6 +6,7 @@ from funtions import get_background, handle_move, draw, load_sprite_sheets, draw
 
 from class_player import Player
 from class_enemy import Enemy
+from class_coin import Coin
 
 def controller_play_game():
     pygame.display.set_caption("Juego en desarrollo... - Juego")

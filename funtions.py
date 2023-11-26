@@ -11,6 +11,7 @@ from class_fire import Fire
 from class_player import Player
 from class_proyectile import Proyectile
 from class_enemy import Enemy
+from class_coin import Coin
 
 def get_background(name):
     image = pygame.image.load(join("assets", "Background", name))
@@ -255,11 +256,15 @@ def create_map():
         Fire(845, 256, 16, 32, load_sprite_sheets, False),
         Fire(-125, 256, 16, 32, load_sprite_sheets, False)
     ]
+    coins = [
+        Coin(-355, 256, 16, 16, load_sprite_sheets, True)
+    ]
 
     objects.extend(floor)
     objects.extend(floating_platforms)
     objects.extend(blocks)
     objects.extend(traps)
+    objects.extend(coins)
 
     return objects
 
@@ -271,5 +276,7 @@ def controller_loop(player:Player, enemies:list[Enemy], objects:list):
 
     for object in objects:
         if isinstance(object, Fire):
+            object.loop()
+        elif isinstance(object, Coin):
             object.loop()
 
