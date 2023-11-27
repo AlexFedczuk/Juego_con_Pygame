@@ -73,10 +73,18 @@ def collide_proyectile(player:Player, objects:list[Object]) -> Proyectile:
     
     return collided_proyectile
 
+def collect_coin(player:Player, objects:list[Object]) -> None:
+    for object in objects:
+        if isinstance(object, Coin):
+            if object.rect.colliderect(player.rect):# pygame.sprite.collide_mask(player, object)
+                objects.remove(object)
+                break
+
 def handle_move(player:Player, objects:list[Object], enemies:list[Enemy], offset_x:int):
     handle_player_movement(player, objects)
     handle_enemies_movement(enemies, objects)
     collide_proyectile(player, objects)
+    collect_coin(player, objects)
 
 def handle_player_movement(player:Player, objects:list[Object]):
     keys = pygame.key.get_pressed()
