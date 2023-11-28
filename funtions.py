@@ -288,3 +288,19 @@ def controller_loop(player:Player, enemies:list[Enemy], objects:list):
         elif isinstance(object, Coin):
             object.loop()
 
+def pause_game():
+    pause = True
+    while pause:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_c:
+                    pause = False
+                elif event.key  == pygame.K_q:
+                    return False
+        print("Press 'c' to continue or press 'q' to quit.")    
+    return True
+        
+

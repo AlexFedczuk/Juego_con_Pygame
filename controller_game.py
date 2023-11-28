@@ -2,7 +2,7 @@ import pygame
 
 from constants import WIDTH, HEIGHT, FPS
 
-from funtions import get_background, handle_move, draw, load_sprite_sheets, draw_rectangle, scroll_screen, create_map, controller_loop
+from funtions import get_background, handle_move, draw, load_sprite_sheets, draw_rectangle, scroll_screen, create_map, controller_loop, pause_game
 
 from class_player import Player
 from class_enemy import Enemy
@@ -32,7 +32,7 @@ def controller_play_game():
     run = True
     while run:
         clock.tick(FPS)
-
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -42,6 +42,8 @@ def controller_play_game():
                     player.jump()
                 if event.key == pygame.K_F1:
                     tecla_f1 = not tecla_f1
+                if event.key == pygame.K_ESCAPE:
+                    run = pause_game()
             if (event.type == pygame.MOUSEBUTTONDOWN and event.button == 1) and (len(player.proyectiles_shooted) < 3):
                 player.proyectiles_shooted.append(player.create_proyectile(player.proyectile_image_path, player.direction))
 
