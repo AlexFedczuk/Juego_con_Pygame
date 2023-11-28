@@ -1,17 +1,14 @@
 import pygame
 
-from constants import WIDTH, HEIGHT, FPS
+from constants import WINDOW, FPS
 
 from funtions import get_background, handle_move, draw, load_sprite_sheets, draw_rectangle, scroll_screen, create_map, controller_loop, pause_game
 
 from class_player import Player
 from class_enemy import Enemy
-from class_coin import Coin
 
 def controller_play_game():
     pygame.display.set_caption("Juego en desarrollo... - Juego")
-
-    window = pygame.display.set_mode((WIDTH, HEIGHT))
 
     clock = pygame.time.Clock()
     background, bg_image = get_background("Blue.png")    
@@ -49,9 +46,9 @@ def controller_play_game():
 
         controller_loop(player, enemies, objects)      
         handle_move(player, objects, enemies, offset_x)
-        draw(window, background, bg_image, player, objects, offset_x, enemies)
+        draw(WINDOW, background, bg_image, player, objects, offset_x, enemies)
 
         offset_x = scroll_screen(player, offset_x, scroll_area_width)
 
-        draw_rectangle(tecla_f1, window, player, objects, enemies, offset_x)
+        draw_rectangle(tecla_f1, WINDOW, player, objects, enemies, offset_x)
         pygame.display.update()

@@ -2,7 +2,7 @@ import pygame
 
 from os import listdir
 from os.path import isfile, join
-from constants import WIDTH, HEIGHT, PLAYER_VEL, RIGHT_EDGE_SCREEN, LEFT_EDGE_SCREEN, ENEMY_VEL, WINDOW, BLOCK_SIZE, X_EARTH_PLATFORM, FPS
+from constants import WIDTH, HEIGHT, PLAYER_VEL, RIGHT_EDGE_SCREEN, LEFT_EDGE_SCREEN, ENEMY_VEL, BLOCK_SIZE, X_EARTH_PLATFORM, FPS
 from colors import RED, BLUE, YELLOW, GREEN, PURPLE
 
 from class_object import Object
@@ -199,7 +199,7 @@ def draw_rectangle(tecla_f1:bool, window:pygame.Surface, player:Player, object_l
 
         for object in object_list:
             if object.rect.colliderect(enemies[0]):
-                pygame.draw.rect(WINDOW, PURPLE, (object.rect.x - offset_x, object.rect.y, object.rect.width, object.rect.height), 2)
+                pygame.draw.rect(window, PURPLE, (object.rect.x - offset_x, object.rect.y, object.rect.width, object.rect.height), 2)
 
 def draw_player_proyectiles(window:pygame.Surface, offset_x:int, player:Player):
     if player.proyectiles_shooted != []:
