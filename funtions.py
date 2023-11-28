@@ -12,6 +12,7 @@ from class_player import Player
 from class_proyectile import Proyectile
 from class_enemy import Enemy
 from class_coin import Coin
+from class_button import Button
 
 def get_background(name):
     image = pygame.image.load(join("assets", "Background", name))
@@ -26,7 +27,7 @@ def get_background(name):
 
     return tiles, image
 
-def draw(window:pygame.Surface, background, bg_image, player:Player, objects:list[pygame.Surface], offset_x:int, enemies:list[Enemy]):
+def draw(window:pygame.Surface, background, bg_image, player:Player, objects:list[pygame.Surface], offset_x:int, enemies:list[Enemy], exit_button:Button):
     for tile in background:
         window.blit(bg_image, tile)
 
@@ -38,6 +39,8 @@ def draw(window:pygame.Surface, background, bg_image, player:Player, objects:lis
         enemy.draw(window, offset_x)
 
     draw_player_proyectiles(window, offset_x, player)
+
+    exit_button.update(window)
 
 def collide(entity:Player or Enemy, objects:list[Object], dx:int) -> Object:
     entity.move(dx, 0)
@@ -187,8 +190,8 @@ def scroll_screen(player:Player, offset_x:int, scroll_area_width:int) -> int:
     return offset_x
     
 
-def draw_rectangle(tecla_f1:bool, window:pygame.Surface, player:Player, object_list:list[Object], enemies:list[Enemy], offset_x:int):
-    if tecla_f1:
+def draw_rectangle(tecla:bool, window:pygame.Surface, player:Player, object_list:list[Object], enemies:list[Enemy], offset_x:int):
+    if tecla:
         pygame.draw.rect(window, BLUE, (player.rect.x - offset_x, player.rect.y, player.rect.width, player.rect.height), 2) # 100, 200, 50, 100
         for object in object_list:
             pygame.draw.rect(window, GREEN, (object.rect.x - offset_x, object.rect.y, object.rect.width, object.rect.height), 2)
@@ -258,11 +261,11 @@ def create_map():
         Block(BLOCK_SIZE * 6, HEIGHT - BLOCK_SIZE * 2, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "obstacle", True),
     ]
     traps = [
-        Fire(-355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, False),
-        Fire(355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, False),
-        Fire(1000, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, False),
-        Fire(845, 256, 16, 32, load_sprite_sheets, False),
-        Fire(-125, 256, 16, 32, load_sprite_sheets, False)
+        Fire(-355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True),
+        Fire(355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True),
+        Fire(1000, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True),
+        Fire(845, 256, 16, 32, load_sprite_sheets, True),
+        Fire(-125, 256, 16, 32, load_sprite_sheets, True)
     ]
     coins = [
         Coin(-355, 256, 16, 16, load_sprite_sheets, True)
