@@ -22,7 +22,7 @@ def controller_levels_menu():
         LEVEL_ONE = Button(pygame.image.load(r"assets\Play Rect.png"), WIDTH/2, 225, "LEVEL 1", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
         LEVEL_TWO = Button(pygame.image.load(r"assets\Play Rect.png"), WIDTH/2, 375, "LEVEL 2", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
         LEVEL_THREE = Button(pygame.image.load(r"assets\Play Rect.png"), WIDTH/2, 525, "LEVEL 3", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
-        GO_BACK_BUTTON = Button(pygame.transform.scale(pygame.image.load(r"assets\Play Rect.png"), (125, 100)), WIDTH/2, 650, "GO BACK", get_font(FONT_PATH, 15), SUPER_LIGHT_GREEN, WHITE)
+        GO_BACK_BUTTON = Button(pygame.transform.scale(pygame.image.load(r"assets\Play Rect.png"), (125, 70)), WIDTH/2, 650, "GO BACK", get_font(FONT_PATH, 15), SUPER_LIGHT_GREEN, WHITE)
         
         WINDOW.blit(MAIN_MENU_TEXT, MENU_RECT)
 
@@ -35,7 +35,7 @@ def controller_levels_menu():
                 print("Cerrando juego.")
                 pygame.quit()
                 quit()
-            elif event.type == pygame.MOUSEBUTTONDOWN:
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if LEVEL_ONE.checkForInput(mouse_position_main_menu):
                     controller_play_game()
                 elif LEVEL_TWO.checkForInput(mouse_position_main_menu):

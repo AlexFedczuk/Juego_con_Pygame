@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame
 
 from constants import WINDOW, FONT_PATH, WIDTH
 from colors import WHITE, BLACK, GREEN
@@ -26,9 +26,10 @@ def controller_options_menu():
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    print("Cerrando juego.")
                     pygame.quit()
-                    sys.exit()
-                if event.type == pygame.MOUSEBUTTONDOWN:
+                    quit()
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if OPTIONS_BACK_BUTTON.checkForInput(options_mouse_position):
                         running = False
             pygame.display.update()
