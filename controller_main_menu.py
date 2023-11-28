@@ -21,7 +21,8 @@ def controller_main_menu():
         MAIN_MENU_TEXT = get_font(FONT_PATH, 50).render("MAIN MENU", True, LIGHT_BROWN)
         MENU_RECT = MAIN_MENU_TEXT.get_rect(center=(WIDTH/2, 100))
 
-        PLAY_BUTTON = Button(pygame.image.load(r"assets\Play Rect.png"), WIDTH/2, 250, "PLAY", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
+        PALABRA = "PLAY"
+        PLAY_BUTTON = Button(pygame.image.load(r"assets\Play Rect.png"), WIDTH/2, 250, f"{PALABRA}", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
         OPTIONS_BUTTON = Button(pygame.image.load(r"assets\Options Rect.png"), WIDTH/2, 400, "OPTIONS", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
         QUIT_BUTTON = Button(pygame.image.load(r"assets\Quit Rect.png"), WIDTH/2, 550, "QUIT", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
 
