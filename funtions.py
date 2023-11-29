@@ -1,4 +1,5 @@
 import pygame
+import types
 
 from os import listdir
 from os.path import isfile, join
@@ -51,8 +52,7 @@ def collide(entity:Player or Enemy, objects:list[Object], dx:int) -> Object:
     for object in objects:
         if pygame.sprite.collide_mask(entity, object):
             collided_objects = object
-            break
-
+            break         
     entity.move(-dx, 0)
     entity.update
 
@@ -69,7 +69,8 @@ def collide_proyectile(player:Player, objects:list[Object]) -> Proyectile:
             for object in objects:
                 if pygame.sprite.collide_mask(object, proyectile):
                     player.proyectiles_shooted.remove(proyectile)
-                    break
+                    if isinstance(object, Fire):
+                        object.off()
             if proyectile.rect.x > RIGHT_EDGE_SCREEN or proyectile.rect.x < LEFT_EDGE_SCREEN:
                     player.proyectiles_shooted.remove(proyectile)
                     break
@@ -107,10 +108,11 @@ def handle_player_movement(player:Player, objects:list[Object]):
     to_check = [player_collide_left, player_collide_right, *vertical_collide]
 
     for object in to_check:
-        if object and (object.name == "fire" and object.collidable == True):
-            player.make_hit()
+        if isinstance(object, Fire):
+            if object.animation_name == "on":
+                player.make_hit()
 
-def handle_enemies_movement(enemies:list[Enemy], objects:list[Object]):
+def handle_enemies_movement(enemies:list[Enemy], objects:list):
     for enemy in enemies:
         enemy.x_vel = 0
 
@@ -122,8 +124,9 @@ def handle_enemies_movement(enemies:list[Enemy], objects:list[Object]):
         to_check = [enemy_collide_left, enemy_collide_right]
 
         for object in to_check:
-            if object and object.collidable == True:
-                enemy.vel = enemy.vel * -1
+            if isinstance(object, Block):
+                if object.collidable == True:
+                    enemy.vel = enemy.vel * -1
 
         if enemy.vel < 0:
             enemy.move_left(-enemy.vel)
@@ -134,15 +137,15 @@ def handle_vertical_collision(entity:Player or Enemy, objects:list[Object], dy:i
     collided_objects = []
 
     for object in objects:
-        if pygame.sprite.collide_mask(entity, object):
-            if dy > 0:
-                entity.rect.bottom = object.rect.top
-                entity.landed()
-            elif dy < 0:
-                entity.rect.top = object.rect.bottom
-                entity.hit_head()
-
-            collided_objects.append(object)
+        if not isinstance(object, Coin) and (not isinstance(object, Enemy) and not isinstance(object, Fire)):
+            if pygame.sprite.collide_mask(entity, object):
+                if dy > 0:
+                    entity.rect.bottom = object.rect.top
+                    entity.landed()
+                elif dy < 0:
+                    entity.rect.top = object.rect.bottom
+                    entity.hit_head()
+                collided_objects.append(object)
 
     return collided_objects      
 
@@ -268,7 +271,14 @@ def create_map():
         Fire(-125, 256, 16, 32, load_sprite_sheets, True)
     ]
     coins = [
-        Coin(-355, 256, 16, 16, load_sprite_sheets, True)
+        Coin(-275, 256, 16, 16, load_sprite_sheets, True),
+        Coin(-465, 640, 16, 16, load_sprite_sheets, True),
+        Coin(-175, 640, 16, 16, load_sprite_sheets, True),
+        Coin(210, 640, 16, 16, load_sprite_sheets, True),
+        Coin(1065, 640, 16, 16, load_sprite_sheets, True),
+        Coin(970, 256, 16, 16, load_sprite_sheets, True),
+        Coin(305, 160, 16, 16, load_sprite_sheets, True),
+        Coin(355, 352, 16, 16, load_sprite_sheets, True)
     ]
 
     objects.extend(floor)

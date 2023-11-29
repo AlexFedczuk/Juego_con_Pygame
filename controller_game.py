@@ -52,11 +52,12 @@ def controller_play_game():
                     runing = False
             
 
-        controller_loop(player, enemies, objects)      
+        controller_loop(player, enemies, objects)
         handle_move(player, objects, enemies, offset_x)
         draw(WINDOW, background, bg_image, player, objects, offset_x, enemies, EXIT_BUTTON)
 
         offset_x = scroll_screen(player, offset_x, scroll_area_width)
 
         draw_rectangle(tecla_f1, WINDOW, player, objects, enemies, offset_x)
+        #print(f"X: {player.rect.x} - Y: {player.rect.y}")
         pygame.display.update()
