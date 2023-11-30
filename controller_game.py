@@ -6,6 +6,7 @@ from funtions import get_background, handle_move, draw, load_sprite_sheets, draw
 from class_player import Player
 from class_enemy import Enemy
 from class_button import Button
+from controller_pause_screen import controller_pause_menu
 # assets\Menu\Buttons\Close.png
 
 def controller_play_game():
@@ -44,7 +45,7 @@ def controller_play_game():
                 elif event.key == pygame.K_F1:
                     tecla_f1 = not tecla_f1
                 elif event.key == pygame.K_ESCAPE:
-                    runing = pause_game()
+                    runing = controller_pause_menu()
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if len(player.proyectiles_shooted) < 3:
                     player.proyectiles_shooted.append(player.create_proyectile(player.proyectile_image_path, player.direction))

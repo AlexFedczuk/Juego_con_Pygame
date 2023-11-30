@@ -17,6 +17,7 @@ WIDTH = 1000
 HEIGHT = 800
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 BACK_GROUND_IMAGE = pygame.transform.scale(pygame.image.load(r"assets\Background.png"), (WIDTH, HEIGHT))
+PAUSE_BACK_GROUND_IMAGE = pygame.transform.scale(BACK_GROUND_IMAGE, (600, HEIGHT))
 # Fuentes
 FONT_PATH = r"assets\font.ttf"
 # Colision tolerante
