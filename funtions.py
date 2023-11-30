@@ -84,7 +84,7 @@ def collect_coin(player:Player, objects:list[Object]) -> None:
                 objects.remove(object)
                 break
 
-def handle_move(player:Player, objects:list[Object], enemies:list[Enemy], offset_x:int):
+def handle_movement(player:Player, objects:list[Object], enemies:list[Enemy], offset_x:int):
     handle_player_movement(player, objects)
     handle_enemies_movement(enemies, objects)
     collide_proyectile(player, objects)

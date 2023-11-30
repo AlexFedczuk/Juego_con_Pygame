@@ -1,7 +1,7 @@
 import pygame
 
 from constants import WINDOW, FPS
-from funtions import get_background, handle_move, draw, load_sprite_sheets, draw_rectangle, scroll_screen, create_map, controller_loop, pause_game
+from funtions import get_background, handle_movement, draw, load_sprite_sheets, draw_rectangle, scroll_screen, create_map, controller_loop
 
 from class_player import Player
 from class_enemy import Enemy
@@ -54,7 +54,7 @@ def controller_play_game():
             
 
         controller_loop(player, enemies, objects)
-        handle_move(player, objects, enemies, offset_x)
+        handle_movement(player, objects, enemies, offset_x)
         draw(WINDOW, background, bg_image, player, objects, offset_x, enemies, EXIT_BUTTON)
 
         offset_x = scroll_screen(player, offset_x, scroll_area_width)
