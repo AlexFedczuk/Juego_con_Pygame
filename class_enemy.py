@@ -20,6 +20,8 @@ class Enemy(pygame.sprite.Sprite):
         self.proyectiles_shooted = []
         self.proyectile_image_path = proyectile_image_path
         self.vel = ENEMY_VEL
+        self.health = 60
+        self.dead = False
 
     def move(self, dx, dy):
         self.rect.x += dx
@@ -47,6 +49,7 @@ class Enemy(pygame.sprite.Sprite):
     def make_hit(self):
         self.hit = True
         self.hit_count = 0
+        self.health -= 20
 
     def loop(self, fps):
         self.y_vel += min(1, (self.fall_count / fps) * GRAVITY) # Esto es para simular una gravedad/aceleracion "realista".
@@ -59,7 +62,8 @@ class Enemy(pygame.sprite.Sprite):
             self.hit_count = 0
 
         self.fall_count += 1
-        self.update_sprite() 
+        self.update_sprite()
+        self.check_health()
 
     def landed(self):
         self.fall_count = 0
@@ -99,3 +103,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def create_proyectile(self, image_path:str, direction:str):
         return Proyectile(self.rect.x + 50, self.rect.y + 30, image_path, direction)
+    
+    def check_health(self):
+        if self.health < 1:
+            self.dead = True

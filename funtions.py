@@ -58,7 +58,7 @@ def collide(entity:Player or Enemy, objects:list[Object], dx:int) -> Object:
 
     return collided_objects
 
-def collide_proyectile(player:Player, objects:list[Object]) -> Proyectile:
+def collide_proyectile(player:Player, enemies:list[Enemy], objects:list[Object]) -> Proyectile:
     collided_proyectile = None
 
     if player.proyectiles_shooted != []:
@@ -67,10 +67,15 @@ def collide_proyectile(player:Player, objects:list[Object]) -> Proyectile:
                 collided_proyectile = proyectile
                 break
             for object in objects:
-                if pygame.sprite.collide_mask(object, proyectile):
+                if not isinstance(object, Coin):
+                    if pygame.sprite.collide_mask(object, proyectile):
+                        player.proyectiles_shooted.remove(proyectile)
+                        if isinstance(object, Fire):
+                            object.off()
+            for enemy in enemies:
+                if pygame.sprite.collide_mask(enemy, proyectile):
                     player.proyectiles_shooted.remove(proyectile)
-                    if isinstance(object, Fire):
-                        object.off()
+                    enemy.make_hit()
             if proyectile.rect.x > RIGHT_EDGE_SCREEN or proyectile.rect.x < LEFT_EDGE_SCREEN:
                     player.proyectiles_shooted.remove(proyectile)
                     break
@@ -84,10 +89,17 @@ def collect_coin(player:Player, objects:list[Object]) -> None:
                 objects.remove(object)
                 break
 
+def collide_entities(player:Player, enemies:list[Enemy]):
+    for enemy in enemies:
+        if pygame.sprite.collide_mask(player, enemy):
+            player.make_hit()
+            break
+
 def handle_movement(player:Player, objects:list[Object], enemies:list[Enemy], offset_x:int):
     handle_player_movement(player, objects)
     handle_enemies_movement(enemies, objects)
-    collide_proyectile(player, objects)
+    collide_entities(player, enemies)
+    collide_proyectile(player, enemies, objects)
     collect_coin(player, objects)
 
 def handle_player_movement(player:Player, objects:list[Object]):
@@ -200,12 +212,13 @@ def draw_rectangle(tecla:bool, window:pygame.Surface, player:Player, object_list
             pygame.draw.rect(window, GREEN, (object.rect.x - offset_x, object.rect.y, object.rect.width, object.rect.height), 2)
         for proyectile in player.proyectiles_shooted:
             pygame.draw.rect(window, RED, (proyectile.rect.x - offset_x, proyectile.rect.y, proyectile.rect.width, proyectile.rect.height), 2)
-        for enemy in enemies:
-            pygame.draw.rect(window, YELLOW, (enemy.rect.x - offset_x, enemy.rect.y, enemy.rect.width, enemy.rect.height), 2)
+        if len(enemies) > 0:
+            for enemy in enemies:
+                pygame.draw.rect(window, YELLOW, (enemy.rect.x - offset_x, enemy.rect.y, enemy.rect.width, enemy.rect.height), 2)
 
-        for object in object_list:
-            if object.rect.colliderect(enemies[0]):
-                pygame.draw.rect(window, PURPLE, (object.rect.x - offset_x, object.rect.y, object.rect.width, object.rect.height), 2)
+            for object in object_list:
+                if object.rect.colliderect(enemies[0]):
+                    pygame.draw.rect(window, PURPLE, (object.rect.x - offset_x, object.rect.y, object.rect.width, object.rect.height), 2)
 
 def draw_player_proyectiles(window:pygame.Surface, offset_x:int, player:Player):
     if player.proyectiles_shooted != []:
@@ -290,10 +303,14 @@ def create_map():
     return objects
 
 def controller_loop(player:Player, enemies:list[Enemy], objects:list):
-    player.loop(FPS)
+    if player != None:
+        player.loop(FPS)
 
-    for enemy in enemies:
-        enemy.loop(FPS)
+    if len(enemies) > 0:
+        for enemy in enemies:
+            enemy.loop(FPS)
+            if enemy.dead:
+                enemies.remove(enemy)
 
     for object in objects:
         if isinstance(object, Fire):
