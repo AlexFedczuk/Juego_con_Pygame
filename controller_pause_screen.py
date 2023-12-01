@@ -22,7 +22,7 @@ def controller_pause_menu():
         WINDOW.blit(MAIN_MENU_TEXT, MENU_RECT)
 
         for button in [CONTINUE_BUTTON, EXIT_BUTTON]:
-            button.changeColor(mouse_position)
+            button.change_color(mouse_position)
             button.update(WINDOW)
             
         for event in pygame.event.get():
@@ -31,8 +31,8 @@ def controller_pause_menu():
                 pygame.quit()
                 quit()
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                if CONTINUE_BUTTON.checkForInput(mouse_position):
+                if CONTINUE_BUTTON.check_input(mouse_position):
                     return True
-                elif EXIT_BUTTON.checkForInput(mouse_position):
+                elif EXIT_BUTTON.check_input(mouse_position):
                     return False
         pygame.display.update()

@@ -1,9 +1,9 @@
 import pygame
-import types
+from typing import Callable
 
 from os import listdir
 from os.path import isfile, join
-from constants import WIDTH, HEIGHT, PLAYER_VEL, RIGHT_EDGE_SCREEN, LEFT_EDGE_SCREEN, ENEMY_VEL, BLOCK_SIZE, X_EARTH_PLATFORM, FPS
+from constants import *
 from colors import RED, BLUE, YELLOW, GREEN, PURPLE
 
 from class_object import Object
@@ -85,8 +85,9 @@ def collide_proyectile(player:Player, enemies:list[Enemy], objects:list[Object])
 def collect_coin(player:Player, objects:list[Object]) -> None:
     for object in objects:
         if isinstance(object, Coin):
-            if object.rect.colliderect(player.rect):# pygame.sprite.collide_mask(player, object)
+            if object.rect.colliderect(player.rect):
                 objects.remove(object)
+                player.increase_score(COINS_VALUE)
                 break
 
 def collide_entities(player:Player, enemies:list[Enemy]):
@@ -233,6 +234,7 @@ def create_map():
     objects = []
 
     floor = [
+        Block(BLOCK_SIZE * -6, HEIGHT - BLOCK_SIZE * 0, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * -5, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * -4, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * -3, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
@@ -332,5 +334,26 @@ def pause_game():
                     return False
         print("Press 'c' to continue or press 'q' to quit.")    
     return True
+
+def check_events(events_list:list[pygame.event.Event], mouse_position:tuple, player:Player, controller_pause_menu:Callable, exit_button:Button, tecla_f1:bool) -> bool:
+    for event in events_list:
+        if event.type == pygame.QUIT:
+            print("Cerrando juego.")
+            pygame.quit()
+            quit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE and player.jump_count < 2:
+                player.jump()
+            elif event.key == pygame.K_F1:
+                tecla_f1 = not tecla_f1
+            elif event.key == pygame.K_ESCAPE:
+                return controller_pause_menu()
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if len(player.proyectiles_shooted) < 3:
+                player.proyectiles_shooted.append(player.create_proyectile(player.proyectile_image_path, player.direction))
+            if exit_button.check_input(mouse_position):
+                return False
+            
+    return True, tecla_f1
         
 

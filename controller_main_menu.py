@@ -4,7 +4,6 @@ from constants import WINDOW, BACK_GROUND_IMAGE, FONT_PATH, WIDTH
 from colors import LIGHT_BROWN, SUPER_LIGHT_GREEN, WHITE
 
 from funtions import get_font
-from controller_game import controller_play_game
 from controller_option import controller_options_menu
 from controller_niveles import controller_levels_menu
 
@@ -29,7 +28,7 @@ def controller_main_menu():
         WINDOW.blit(MAIN_MENU_TEXT, MENU_RECT)
 
         for button in [PLAY_BUTTON, OPTIONS_BUTTON, QUIT_BUTTON]:
-            button.changeColor(mouse_position)
+            button.change_color(mouse_position)
             button.update(WINDOW)
         
         for event in pygame.event.get():
@@ -38,11 +37,11 @@ def controller_main_menu():
                 pygame.quit()
                 quit()
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                if PLAY_BUTTON.checkForInput(mouse_position):
+                if PLAY_BUTTON.check_input(mouse_position):
                     controller_levels_menu()
-                if OPTIONS_BUTTON.checkForInput(mouse_position):
+                if OPTIONS_BUTTON.check_input(mouse_position):
                     controller_options_menu()
-                if QUIT_BUTTON.checkForInput(mouse_position):
+                if QUIT_BUTTON.check_input(mouse_position):
                     print("Cerrando juego.")
                     pygame.quit()
                     quit()

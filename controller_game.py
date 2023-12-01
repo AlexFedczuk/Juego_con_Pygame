@@ -1,13 +1,13 @@
 import pygame
 
 from constants import WINDOW, FPS
-from funtions import get_background, handle_movement, draw, load_sprite_sheets, draw_rectangle, scroll_screen, create_map, controller_loop
+from funtions import *
 
 from class_player import Player
 from class_enemy import Enemy
 from class_button import Button
 from controller_pause_screen import controller_pause_menu
-# assets\Menu\Buttons\Close.png
+from controller_ending_menu import controller_ending_menu
 
 def controller_play_game():
     pygame.display.set_caption("Juego en desarrollo... - Juego")
@@ -25,40 +25,26 @@ def controller_play_game():
     ]
     
     EXIT_BUTTON = Button(pygame.image.load(r"assets\Menu\Buttons\Close.png"), 10, 10)
-    # Plataformas, suelo y trampas.
     objects = create_map()
 
     tecla_f1 = True
     runing = True
     while runing:
         clock.tick(FPS)
-        mouse_position = pygame.mouse.get_pos()
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                print("Cerrando juego.")
-                pygame.quit()
-                quit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE and player.jump_count < 2:
-                    player.jump()
-                elif event.key == pygame.K_F1:
-                    tecla_f1 = not tecla_f1
-                elif event.key == pygame.K_ESCAPE:
-                    runing = controller_pause_menu()
-            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                if len(player.proyectiles_shooted) < 3:
-                    player.proyectiles_shooted.append(player.create_proyectile(player.proyectile_image_path, player.direction))
-                if EXIT_BUTTON.checkForInput(mouse_position):
-                    runing = False
+        runing, tecla_f1 = check_events(pygame.event.get(), pygame.mouse.get_pos(), player, controller_pause_menu, EXIT_BUTTON, tecla_f1)
             
-
-        controller_loop(player, enemies, objects)
+        controller_loop(player, enemies, objects, )
         handle_movement(player, objects, enemies, offset_x)
         draw(WINDOW, background, bg_image, player, objects, offset_x, enemies, EXIT_BUTTON)
 
         offset_x = scroll_screen(player, offset_x, scroll_area_width)
 
         draw_rectangle(tecla_f1, WINDOW, player, objects, enemies, offset_x)
-        #print(f"X: {player.rect.x} - Y: {player.rect.y}")
+
+        coins = []
+        for object in objects:
+            if isinstance(object, Coin):
+                coins.append(object)
+        runing = controller_ending_menu(player.live_status(), enemies, coins)
+        #print(f"X: {player.rect.x} - Y: {player.rect.y} - Is he dead? {player.dead}")
         pygame.display.update()

@@ -26,7 +26,7 @@ def controller_levels_menu():
         WINDOW.blit(MAIN_MENU_TEXT, MENU_RECT)
 
         for button in [LEVEL_ONE, LEVEL_TWO, LEVEL_THREE, GO_BACK_BUTTON]:
-            button.changeColor(mouse_position)
+            button.change_color(mouse_position)
             button.update(WINDOW)
             
         for event in pygame.event.get():
@@ -35,14 +35,14 @@ def controller_levels_menu():
                 pygame.quit()
                 quit()
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                if LEVEL_ONE.checkForInput(mouse_position):
+                if LEVEL_ONE.check_input(mouse_position):
                     controller_play_game()
-                elif LEVEL_TWO.checkForInput(mouse_position):
+                elif LEVEL_TWO.check_input(mouse_position):
                     controller_play_game()
-                elif LEVEL_THREE.checkForInput(mouse_position):
+                elif LEVEL_THREE.check_input(mouse_position):
                     controller_play_game()
-                elif LEVEL_THREE.checkForInput(mouse_position):
+                elif LEVEL_THREE.check_input(mouse_position):
                     controller_play_game()
-                elif GO_BACK_BUTTON.checkForInput(mouse_position):
+                elif GO_BACK_BUTTON.check_input(mouse_position):
                     running = False
         pygame.display.update()

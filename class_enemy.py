@@ -1,6 +1,6 @@
 import pygame
 
-from constants import ANIMATION_DELAY, GRAVITY, ENEMY_VEL
+from constants import *
 from class_proyectile import Proyectile
 
 class Enemy(pygame.sprite.Sprite):
@@ -20,7 +20,7 @@ class Enemy(pygame.sprite.Sprite):
         self.proyectiles_shooted = []
         self.proyectile_image_path = proyectile_image_path
         self.vel = ENEMY_VEL
-        self.health = 60
+        self.health = ENEMY_HEALTH
         self.dead = False
 
     def move(self, dx, dy):

@@ -1,6 +1,6 @@
 import pygame
 
-from constants import ANIMATION_DELAY, GRAVITY
+from constants import *
 from class_proyectile import Proyectile
 
 class Player(pygame.sprite.Sprite):
@@ -20,8 +20,9 @@ class Player(pygame.sprite.Sprite):
         self.hit_count = 0
         self.proyectiles_shooted = []
         self.proyectile_image_path = proyectile_image_path
-        self.health = 100
+        self.health = PLAYER_HEALTH
         self.dead = False
+        self.score = 0
 
     def move(self, dx, dy):
         self.rect.x += dx
@@ -64,6 +65,7 @@ class Player(pygame.sprite.Sprite):
         self.fall_count += 1
         self.update_sprite()
         self.check_health()
+        self.check_altitude()
 
     def landed(self):
         self.fall_count = 0
@@ -108,4 +110,17 @@ class Player(pygame.sprite.Sprite):
     
     def check_health(self):
         if self.health < 1:
-            self.dead = True
+            self.die()
+
+    def increase_score(self, points:int):
+        self.score += points
+
+    def check_altitude(self):
+        if self.rect.y >= CRITICAL_ALTITUDE:
+            self.die()
+    
+    def die(self):
+        self.dead = True
+
+    def live_status(self) -> bool:
+        return self.dead

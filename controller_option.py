@@ -21,7 +21,7 @@ def controller_options_menu():
 
             OPTIONS_BACK_BUTTON = Button_Text(None, WIDTH/2, 460, "BACK", get_font(FONT_PATH, 30), BLACK, GREEN)
 
-            OPTIONS_BACK_BUTTON.changeColor(options_mouse_position)
+            OPTIONS_BACK_BUTTON.change_color(options_mouse_position)
             OPTIONS_BACK_BUTTON.update(WINDOW)
 
             for event in pygame.event.get():
@@ -30,6 +30,6 @@ def controller_options_menu():
                     pygame.quit()
                     quit()
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                    if OPTIONS_BACK_BUTTON.checkForInput(options_mouse_position):
+                    if OPTIONS_BACK_BUTTON.check_input(options_mouse_position):
                         running = False
             pygame.display.update()
