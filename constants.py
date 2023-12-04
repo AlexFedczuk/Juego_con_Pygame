@@ -24,12 +24,17 @@ LEFT_EDGE_SCREEN = -1055
 WIDTH = 1000
 HEIGHT = 800
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
-BACK_GROUND_IMAGE = pygame.transform.scale(pygame.image.load(r"assets\Background.png"), (WIDTH, HEIGHT))
+BACK_GROUND_IMAGE = pygame.transform.scale(pygame.image.load(r"assets\Background\Background.png"), (WIDTH, HEIGHT))
 PAUSE_BACK_GROUND_IMAGE = pygame.transform.scale(BACK_GROUND_IMAGE, (600, HEIGHT))
 CRITICAL_ALTITUDE = 736
 
+# Rectangulos
+OPTIONS_RECT_PATH = r'assets\Rects\Options Rect.png'
+PLAY_RECT_PATH = r'assets\Rects\Play Rect.png'
+QUIT_RECT_PATH = r'assets\Rects\Quit Rect.png'
+
 # Fuentes
-FONT_PATH = r"assets\font.ttf"
+FONT_PATH = r"assets\Other\font.ttf"
 
 # Colision tolerante
 COLLISION_TOLERANCE = 1
@@ -40,5 +45,12 @@ BLOCK_SIZE = 96
 BLOCK_X = BLOCK_SIZE
 BLOCK_Y = HEIGHT - BLOCK_SIZE
 
+# Proyectiles
+ICE_PARTICLE_IMG_PATH = r"assets\Traps\Sand Mud Ice\Ice Particle.png"
+MUD_PARTICLE_IMG_PATH = r"assets\Traps\Sand Mud Ice\Mud Particle.png"
+
 # Coins
 COINS_VALUE = 10
+
+# Botones
+CLOSE_BUTTON_IMG_PATH = r"assets\Menu\Buttons\Close.png"

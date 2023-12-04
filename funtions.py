@@ -307,7 +307,7 @@ def create_map():
 
     return objects
 
-def controller_loop(player:Player, enemies:list[Enemy], objects:list):
+def controller_loop(player:Player, enemies:list[Enemy], objects:list, timer:Button):
     if player != None:
         player.loop(FPS)
 
@@ -338,7 +338,7 @@ def pause_game():
         print("Press 'c' to continue or press 'q' to quit.")    
     return True
 
-def check_events(events_list:list[pygame.event.Event], mouse_position:tuple, player:Player, controller_pause_menu:Callable, exit_button:Button, tecla_f1:bool) -> bool:
+def check_events(events_list:list[pygame.event.Event], mouse_position:tuple, player:Player, controller_pause_menu:Callable, exit_button:Button) -> bool:
     for event in events_list:
         if event.type == pygame.QUIT:
             print("Cerrando juego.")
@@ -347,8 +347,6 @@ def check_events(events_list:list[pygame.event.Event], mouse_position:tuple, pla
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE and player.jump_count < 2:
                 player.jump()
-            elif event.key == pygame.K_F1:
-                tecla_f1 = not tecla_f1
             elif event.key == pygame.K_ESCAPE:
                 return controller_pause_menu()
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -357,6 +355,14 @@ def check_events(events_list:list[pygame.event.Event], mouse_position:tuple, pla
             if exit_button.check_input(mouse_position):
                 return False
             
-    return True, tecla_f1
-        
+    return True
 
+def format_time(total_seconds:int, elapsed_seconds:int):
+    remaining_seconds = total_seconds - elapsed_seconds
+
+    hours = remaining_seconds // 3600
+    remaining_seconds = remaining_seconds % 3600
+    minutes = remaining_seconds // 60
+    remaining_seconds = remaining_seconds % 60
+
+    return f"{hours}:{minutes}:{remaining_seconds}"

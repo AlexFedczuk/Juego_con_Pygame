@@ -1,6 +1,6 @@
 import pygame
 
-from constants import WINDOW, BACK_GROUND_IMAGE, FONT_PATH, WIDTH
+from constants import WINDOW, BACK_GROUND_IMAGE, FONT_PATH, WIDTH, PLAY_RECT_PATH, OPTIONS_RECT_PATH, QUIT_RECT_PATH
 from colors import LIGHT_BROWN, SUPER_LIGHT_GREEN, WHITE
 
 from funtions import get_font
@@ -21,9 +21,9 @@ def controller_main_menu():
         MENU_RECT = MAIN_MENU_TEXT.get_rect(center=(WIDTH/2, 100))
 
         PALABRA = "PLAY"
-        PLAY_BUTTON = Button_Text(pygame.image.load(r"assets\Play Rect.png"), WIDTH/2, 250, f"{PALABRA}", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
-        OPTIONS_BUTTON = Button_Text(pygame.image.load(r"assets\Options Rect.png"), WIDTH/2, 400, "OPTIONS", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
-        QUIT_BUTTON = Button_Text(pygame.image.load(r"assets\Quit Rect.png"), WIDTH/2, 550, "QUIT", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
+        PLAY_BUTTON = Button_Text(pygame.image.load(PLAY_RECT_PATH), WIDTH/2, 250, f"{PALABRA}", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
+        OPTIONS_BUTTON = Button_Text(pygame.image.load(OPTIONS_RECT_PATH), WIDTH/2, 400, "OPTIONS", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
+        QUIT_BUTTON = Button_Text(pygame.image.load(QUIT_RECT_PATH), WIDTH/2, 550, "QUIT", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
 
         WINDOW.blit(MAIN_MENU_TEXT, MENU_RECT)
 

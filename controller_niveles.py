@@ -1,6 +1,6 @@
 import pygame, sys
 
-from constants import WINDOW, FONT_PATH, WIDTH, BACK_GROUND_IMAGE
+from constants import WINDOW, FONT_PATH, WIDTH, BACK_GROUND_IMAGE, PLAY_RECT_PATH
 from colors import WHITE, LIGHT_BROWN, SUPER_LIGHT_GREEN
 from funtions import get_font
 
@@ -19,10 +19,10 @@ def controller_levels_menu():
         MAIN_MENU_TEXT = get_font(FONT_PATH, 50).render("LEVELS", True, LIGHT_BROWN)
         MENU_RECT = MAIN_MENU_TEXT.get_rect(center=(WIDTH/2, 100))
 
-        LEVEL_ONE = Button_Text(pygame.image.load(r"assets\Play Rect.png"), WIDTH/2, 225, "LEVEL 1", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
-        LEVEL_TWO = Button_Text(pygame.image.load(r"assets\Play Rect.png"), WIDTH/2, 375, "LEVEL 2", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
-        LEVEL_THREE = Button_Text(pygame.image.load(r"assets\Play Rect.png"), WIDTH/2, 525, "LEVEL 3", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
-        GO_BACK_BUTTON = Button_Text(pygame.transform.scale(pygame.image.load(r"assets\Play Rect.png"), (125, 70)), WIDTH/2, 650, "GO BACK", get_font(FONT_PATH, 15), SUPER_LIGHT_GREEN, WHITE)
+        LEVEL_ONE = Button_Text(pygame.image.load(PLAY_RECT_PATH), WIDTH/2, 225, "LEVEL 1", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
+        LEVEL_TWO = Button_Text(pygame.image.load(PLAY_RECT_PATH), WIDTH/2, 375, "LEVEL 2", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
+        LEVEL_THREE = Button_Text(pygame.image.load(PLAY_RECT_PATH), WIDTH/2, 525, "LEVEL 3", get_font(FONT_PATH, 25), SUPER_LIGHT_GREEN, WHITE)
+        GO_BACK_BUTTON = Button_Text(pygame.transform.scale(pygame.image.load(PLAY_RECT_PATH), (125, 70)), WIDTH/2, 650, "GO BACK", get_font(FONT_PATH, 15), SUPER_LIGHT_GREEN, WHITE)
         WINDOW.blit(MAIN_MENU_TEXT, MENU_RECT)
 
         for button in [LEVEL_ONE, LEVEL_TWO, LEVEL_THREE, GO_BACK_BUTTON]:
