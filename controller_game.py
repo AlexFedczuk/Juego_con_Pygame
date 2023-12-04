@@ -32,7 +32,7 @@ def controller_play_game():
     time = 10
     TIMER = Button_Dynamic_Text(pygame.transform.scale(pygame.image.load(PLAY_RECT_PATH), (321, 90)), 180, 100, "", get_font(FONT_PATH, 15), BLACK, BLACK)
 
-    tecla_f1 = False
+    f1_key = False
     runing = True
     while runing:
         clock.tick(FPS)
@@ -43,21 +43,10 @@ def controller_play_game():
         coins = [obj for obj in objects if isinstance(obj, Coin)]
         runing = controller_ending_menu(player.live_status(), enemies, coins, (time - (elapsed_time // 1000)))
 
-        for event in events_list:
-            if event.type == pygame.QUIT:
-                print("Cerrando juego.")
-                pygame.quit()
-                quit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE and player.jump_count < 2:
-                    player.jump()
-                elif event.key == pygame.K_ESCAPE:
-                    runing = controller_pause_menu()
-            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                if len(player.proyectiles_shooted) < 3:
-                    player.proyectiles_shooted.append(player.create_proyectile(player.proyectile_image_path, player.direction))
-                if EXIT_BUTTON.check_input(mouse_position):
-                    runing = False            
+        result = check_events(runing, f1_key, events_list, mouse_position, player, controller_pause_menu, EXIT_BUTTON)
+        runing = result[0]
+        f1_key = result[1]
+
         controller_loop(player, enemies, objects, TIMER)
         handle_movement(player, objects, enemies, offset_x)        
         draw(WINDOW, background, bg_image, player, objects, offset_x, enemies, EXIT_BUTTON)
@@ -65,5 +54,5 @@ def controller_play_game():
 
         offset_x = scroll_screen(player, offset_x, scroll_area_width)
 
-        draw_rectangle(tecla_f1, WINDOW, player, objects, enemies, offset_x)
+        draw_rectangle(f1_key, WINDOW, player, objects, enemies, offset_x)
         pygame.display.update()

@@ -337,24 +337,28 @@ def pause_game():
         print("Press 'c' to continue or press 'q' to quit.")    
     return True
 
-def check_events(events_list:list[pygame.event.Event], mouse_position:tuple, player:Player, controller_pause_menu:Callable, exit_button:Button) -> bool:
+def check_events(runing:bool, f1_key:bool, events_list:list[pygame.event.Event], mouse_position:tuple, player:Player, controller_pause_menu:Callable, exit_button:Button) -> tuple:
+    result_runing = runing
+    result_f1_key = f1_key
+
     for event in events_list:
-        if event.type == pygame.QUIT:
-            print("Cerrando juego.")
-            pygame.quit()
-            quit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE and player.jump_count < 2:
-                player.jump()
-            elif event.key == pygame.K_ESCAPE:
-                return controller_pause_menu()
-        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            if len(player.proyectiles_shooted) < 3:
-                player.proyectiles_shooted.append(player.create_proyectile(player.proyectile_image_path, player.direction))
-            if exit_button.check_input(mouse_position):
-                return False
-            
-    return True
+            if event.type == pygame.QUIT:
+                print("Cerrando juego.")
+                pygame.quit()
+                quit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE and player.jump_count < 2:
+                    player.jump()
+                elif event.key == pygame.K_ESCAPE:
+                    result_runing = controller_pause_menu()
+                elif event.key == pygame.K_F1:
+                    result_f1_key = not result_f1_key
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if len(player.proyectiles_shooted) < 3:
+                    player.proyectiles_shooted.append(player.create_proyectile(player.proyectile_image_path, player.direction))
+                if exit_button.check_input(mouse_position):
+                    result_runing = False            
+    return (result_runing, result_f1_key)
 
 def format_time(total_seconds:int, elapsed_seconds:int):
     remaining_seconds = total_seconds - elapsed_seconds

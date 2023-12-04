@@ -7,7 +7,6 @@ from funtions import get_font
 from class_button import Button_Text
 
 def controller_ending_menu(player_status:bool, enemies_list:list, coins_list:list, remaining_seconds:int) -> bool:
-    # print(f"player is dead? {player_status} - lista de enemigos: {len(enemies_list)} - lista de monedas: {len(coins_list)}")
     if len(enemies_list) == 0 and len(coins_list) == 0:
         window_title = NAME_GAME + " - You win!"
         menu_title = "YOU WIN!"
