@@ -59,7 +59,7 @@ COINS_VALUE = 10
 CLOSE_BUTTON_IMG_PATH = r"assets\Menu\Buttons\Close.png"
 
 # Temporizador
-TIME = 10
+TIME = 200
 
 # Otros
 BG_COLOR = (255, 255, 255)

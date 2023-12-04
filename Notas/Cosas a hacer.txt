@@ -1,0 +1,9 @@
+Dentro del gameplay mostrar: Puntuacion, vida 
+
+Pantalla de rankings
+
+Desarrollar niveles
+
+Agregar efecto de sonidos, musica
+
+Agregar funciones de settings.
