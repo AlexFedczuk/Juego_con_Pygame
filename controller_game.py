@@ -29,7 +29,7 @@ def controller_play_game():
 
     # Timer
     start_time = pygame.time.get_ticks()
-    time = 30
+    time = 10
     TIMER = Button_Dynamic_Text(pygame.transform.scale(pygame.image.load(PLAY_RECT_PATH), (321, 90)), 180, 100, "", get_font(FONT_PATH, 15), BLACK, BLACK)
 
     tecla_f1 = True
@@ -71,12 +71,12 @@ def controller_play_game():
         offset_x = scroll_screen(player, offset_x, scroll_area_width)
 
         draw_rectangle(tecla_f1, WINDOW, player, objects, enemies, offset_x)
-        TIMER.update(WINDOW, "Time remaning " + format_time(90, (elapsed_time // 1000)))
+        TIMER.update(WINDOW, "Time remaning " + format_time(time, (elapsed_time // 1000)))
 
         coins = []
         for object in objects:
             if isinstance(object, Coin):
                 coins.append(object)
-        runing = controller_ending_menu(player.live_status(), enemies, coins)
+        runing = controller_ending_menu(player.live_status(), enemies, coins, (time - (elapsed_time // 1000)))
         #print(f"X: {player.rect.x} - Y: {player.rect.y} - Is he dead? {player.dead}"
         pygame.display.update()

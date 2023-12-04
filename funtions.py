@@ -359,6 +359,7 @@ def check_events(events_list:list[pygame.event.Event], mouse_position:tuple, pla
 
 def format_time(total_seconds:int, elapsed_seconds:int):
     remaining_seconds = total_seconds - elapsed_seconds
+    #print(f"remaining_seconds: {remaining_seconds}")
 
     hours = remaining_seconds // 3600
     remaining_seconds = remaining_seconds % 3600
