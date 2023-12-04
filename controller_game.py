@@ -41,7 +41,7 @@ def controller_play_game():
         mouse_position = pygame.mouse.get_pos()
 
         coins = [obj for obj in objects if isinstance(obj, Coin)]
-        runing = controller_ending_menu(player.live_status(), enemies, coins, (time - (elapsed_time // 1000)))
+        runing = controller_ending_menu(player, enemies, coins, (time - (elapsed_time // 1000)))
 
         result = check_events(runing, f1_key, events_list, mouse_position, player, controller_pause_menu, EXIT_BUTTON)
         runing = result[0]

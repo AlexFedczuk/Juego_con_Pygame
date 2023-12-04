@@ -124,3 +124,6 @@ class Player(pygame.sprite.Sprite):
 
     def live_status(self) -> bool:
         return self.dead
+    
+    def get_score(self) -> int:
+        return self.score

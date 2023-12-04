@@ -8,22 +8,25 @@ from controller_option import controller_options_menu
 from controller_niveles import controller_levels_menu
 
 from class_button import Button_Text
+from Configurations.constants import CONTANTS
 
 def controller_main_menu():
-    while True:
-        pygame.display.set_caption(NAME_GAME + " - Menu principal")
+    #CONTANTS = load_constants_from_json(r'Configurations\constants.json')
 
-        WINDOW.blit(BACK_GROUND_IMAGE, ORIGIN_POINT)
+    while True:
+        pygame.display.set_caption(CONTANTS['Screen']['NAME_GAME'] + " - Menu principal")
+
+        WINDOW.blit(BACK_GROUND_IMAGE, (CONTANTS['Screen']['ORIGIN_POINT'][0], CONTANTS['Screen']['ORIGIN_POINT'][1]))
 
         mouse_position = pygame.mouse.get_pos()
 
-        MAIN_MENU_TEXT = get_font(FONT_PATH, BIG_SIZE_FONT).render("MAIN MENU", True, LIGHT_BROWN)
+        MAIN_MENU_TEXT = get_font(CONTANTS['Fonts']['FONT_PATH'], CONTANTS['Fonts']['BIG_SIZE_FONT']).render("MAIN MENU", True, LIGHT_BROWN)
         MENU_RECT = MAIN_MENU_TEXT.get_rect(center=(WIDTH/2, 100))
 
         PALABRA = "PLAY"
-        PLAY_BUTTON = Button_Text(pygame.image.load(PLAY_RECT_PATH), WIDTH/2, HEIGHT/3.2, f"{PALABRA}", get_font(FONT_PATH, NORMAL_SIZE_FONT), SUPER_LIGHT_GREEN, WHITE)
-        OPTIONS_BUTTON = Button_Text(pygame.image.load(OPTIONS_RECT_PATH), WIDTH/2, HEIGHT/2, "OPTIONS", get_font(FONT_PATH, NORMAL_SIZE_FONT), SUPER_LIGHT_GREEN, WHITE)
-        QUIT_BUTTON = Button_Text(pygame.image.load(QUIT_RECT_PATH), WIDTH/2, HEIGHT/1.45, "QUIT", get_font(FONT_PATH, NORMAL_SIZE_FONT), SUPER_LIGHT_GREEN, WHITE)
+        PLAY_BUTTON = Button_Text(pygame.image.load(PLAY_RECT_PATH), WIDTH/2, HEIGHT/3.2, f"{PALABRA}", get_font(CONTANTS['Fonts']['FONT_PATH'], CONTANTS['Fonts']['NORMAL_SIZE_FONT']), SUPER_LIGHT_GREEN, WHITE)
+        OPTIONS_BUTTON = Button_Text(pygame.image.load(OPTIONS_RECT_PATH), WIDTH/2, HEIGHT/2, "OPTIONS", get_font(CONTANTS['Fonts']['FONT_PATH'], CONTANTS['Fonts']['NORMAL_SIZE_FONT']), SUPER_LIGHT_GREEN, WHITE)
+        QUIT_BUTTON = Button_Text(pygame.image.load(QUIT_RECT_PATH), WIDTH/2, HEIGHT/1.45, "QUIT", get_font(CONTANTS['Fonts']['FONT_PATH'], CONTANTS['Fonts']['NORMAL_SIZE_FONT']), SUPER_LIGHT_GREEN, WHITE)
 
         WINDOW.blit(MAIN_MENU_TEXT, MENU_RECT)
 

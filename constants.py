@@ -9,6 +9,7 @@ ANIMATION_DELAY = 4
 # Enemy
 ENEMY_HEALTH = 60
 ENEMY_VEL = 1
+ENEMY_VALUE = 10
 
 # Velocidad del proyectile
 PROYECTILE_VELOCITY = 5
@@ -17,7 +18,7 @@ RIGHT_EDGE_SCREEN = 1915
 LEFT_EDGE_SCREEN = -1055
 
 # Pantalla
-NAME_GAME = "Juego en desarrollo..."
+NAME_GAME = "Galactic Astronaut: Turtle Hunt"
 ORIGIN_POINT = (0, 0)
 WIDTH = 1000
 HEIGHT = 800

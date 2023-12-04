@@ -1,4 +1,5 @@
 import pygame
+import json
 from typing import Callable
 
 from os import listdir
@@ -315,6 +316,7 @@ def controller_loop(player:Player, enemies:list[Enemy], objects:list, timer:Butt
             enemy.loop(FPS)
             if enemy.dead:
                 enemies.remove(enemy)
+                player.increase_score(ENEMY_VALUE)
 
     for object in objects:
         if isinstance(object, Fire):
@@ -370,3 +372,15 @@ def format_time(total_seconds:int, elapsed_seconds:int):
     remaining_seconds = remaining_seconds % 60
 
     return f"{hours}:{minutes}:{remaining_seconds}"
+
+def load_constants_from_json(file_path:str):
+    try:
+        with open(file_path, 'r') as file:
+            constants = json.load(file)
+        return constants
+    except FileNotFoundError:
+        print(f'Error: El archivo {file_path} no se encontró.')
+        return None
+    except json.JSONDecodeError:
+        print(f'Error: No se pudo decodificar el archivo {file_path} como JSON.')
+        return None
