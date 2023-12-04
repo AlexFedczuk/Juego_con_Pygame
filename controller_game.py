@@ -32,7 +32,7 @@ def controller_play_game():
     time = 10
     TIMER = Button_Dynamic_Text(pygame.transform.scale(pygame.image.load(PLAY_RECT_PATH), (321, 90)), 180, 100, "", get_font(FONT_PATH, 15), BLACK, BLACK)
 
-    tecla_f1 = True
+    tecla_f1 = False
     runing = True
     while runing:
         clock.tick(FPS)
