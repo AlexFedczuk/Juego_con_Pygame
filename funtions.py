@@ -68,10 +68,13 @@ def collide_proyectile(player:Player, enemies:list[Enemy], objects:list[Object])
                 break
             for object in objects:
                 if not isinstance(object, Coin):
-                    if pygame.sprite.collide_mask(object, proyectile):
-                        player.proyectiles_shooted.remove(proyectile)
-                        if isinstance(object, Fire):
-                            object.off()
+                    if isinstance(object, Fire) and object.animation_name == "off":
+                        pass
+                    else:
+                        if pygame.sprite.collide_mask(object, proyectile):
+                            player.proyectiles_shooted.remove(proyectile)
+                            if isinstance(object, Fire):
+                                object.off()
             for enemy in enemies:
                 if pygame.sprite.collide_mask(enemy, proyectile):
                     player.proyectiles_shooted.remove(proyectile)
