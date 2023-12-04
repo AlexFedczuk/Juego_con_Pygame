@@ -1,9 +1,5 @@
 import pygame
 
-BG_COLOR = (255, 255, 255)
-COLOR = (255, 0, 0)
-FPS = 60
-
 # Player
 PLAYER_VEL = 5
 PLAYER_HEALTH = 100
@@ -26,6 +22,7 @@ ORIGIN_POINT = (0, 0)
 WIDTH = 1000
 HEIGHT = 800
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
+FPS = 60
 BACK_GROUND_IMAGE = pygame.transform.scale(pygame.image.load(r"assets\Background\Background.png"), (WIDTH, HEIGHT))
 PAUSE_BACK_GROUND_IMAGE = pygame.transform.scale(BACK_GROUND_IMAGE, (WIDTH/1.6, HEIGHT))
 CRITICAL_ALTITUDE = 736
@@ -62,3 +59,7 @@ CLOSE_BUTTON_IMG_PATH = r"assets\Menu\Buttons\Close.png"
 
 # Temporizador
 TIME = 10
+
+# Otros
+BG_COLOR = (255, 255, 255)
+COLOR = (255, 0, 0)

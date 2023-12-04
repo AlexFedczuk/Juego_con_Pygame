@@ -11,8 +11,6 @@ from controller_ending_menu import controller_ending_menu
 from colors import BLACK
 
 def controller_play_game():
-    pygame.display.set_caption(NAME_GAME + " - Pause Menu")
-
     clock = pygame.time.Clock()
     background, bg_image = get_background("Blue.png")    
 
@@ -35,6 +33,8 @@ def controller_play_game():
     f1_key = False
     runing = True
     while runing:
+        pygame.display.set_caption(NAME_GAME + " - Level 1")
+        
         clock.tick(FPS)
         elapsed_time = pygame.time.get_ticks() - start_time
         events_list = pygame.event.get()

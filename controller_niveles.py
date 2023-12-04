@@ -8,7 +8,7 @@ from class_button import Button_Text
 from controller_game import controller_play_game
 
 def controller_levels_menu():
-    pygame.display.set_caption(NAME_GAME + " - Pause Menu")
+    pygame.display.set_caption(NAME_GAME + " - Levels Menu")
 
     running = True
     while running:
