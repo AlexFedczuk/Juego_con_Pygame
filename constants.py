@@ -21,11 +21,13 @@ RIGHT_EDGE_SCREEN = 1915
 LEFT_EDGE_SCREEN = -1055
 
 # Pantalla
+NAME_GAME = "Juego en desarrollo..."
+ORIGIN_POINT = (0, 0)
 WIDTH = 1000
 HEIGHT = 800
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 BACK_GROUND_IMAGE = pygame.transform.scale(pygame.image.load(r"assets\Background\Background.png"), (WIDTH, HEIGHT))
-PAUSE_BACK_GROUND_IMAGE = pygame.transform.scale(BACK_GROUND_IMAGE, (600, HEIGHT))
+PAUSE_BACK_GROUND_IMAGE = pygame.transform.scale(BACK_GROUND_IMAGE, (WIDTH/1.6, HEIGHT))
 CRITICAL_ALTITUDE = 736
 
 # Rectangulos
@@ -35,6 +37,9 @@ QUIT_RECT_PATH = r'assets\Rects\Quit Rect.png'
 
 # Fuentes
 FONT_PATH = r"assets\Other\font.ttf"
+BIG_SIZE_FONT = 50
+NORMAL_SIZE_FONT = 25
+SMALL_SIZE_FONT = 15
 
 # Colision tolerante
 COLLISION_TOLERANCE = 1

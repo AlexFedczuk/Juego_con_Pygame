@@ -11,7 +11,7 @@ from controller_ending_menu import controller_ending_menu
 from colors import BLACK
 
 def controller_play_game():
-    pygame.display.set_caption("Juego en desarrollo... - Juego")
+    pygame.display.set_caption(NAME_GAME + " - Pause Menu")
 
     clock = pygame.time.Clock()
     background, bg_image = get_background("Blue.png")    
@@ -42,6 +42,8 @@ def controller_play_game():
         runing = check_events(events_list, pygame.mouse.get_pos(), player, controller_pause_menu, EXIT_BUTTON, tecla_f1)"""
         events_list = pygame.event.get()
         mouse_position = pygame.mouse.get_pos()
+        coins = [obj for obj in objects if isinstance(obj, Coin)]
+        runing = controller_ending_menu(player.live_status(), enemies, coins, (time - (elapsed_time // 1000)))
         for event in events_list:
             if event.type == pygame.QUIT:
                 print("Cerrando juego.")
@@ -51,7 +53,7 @@ def controller_play_game():
                 if event.key == pygame.K_SPACE and player.jump_count < 2:
                     player.jump()
                 elif event.key == pygame.K_ESCAPE:
-                    return controller_pause_menu()
+                    runing = controller_pause_menu()
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if len(player.proyectiles_shooted) < 3:
                     player.proyectiles_shooted.append(player.create_proyectile(player.proyectile_image_path, player.direction))
@@ -63,9 +65,9 @@ def controller_play_game():
         handle_movement(player, objects, enemies, offset_x)        
         draw(WINDOW, background, bg_image, player, objects, offset_x, enemies, EXIT_BUTTON)
         TIMER.update(WINDOW, "Time remaning " + format_time(time, (elapsed_time // 1000)))
+
         offset_x = scroll_screen(player, offset_x, scroll_area_width)
+
         draw_rectangle(tecla_f1, WINDOW, player, objects, enemies, offset_x)
-        coins = [obj for obj in objects if isinstance(obj, Coin)]
-        runing = controller_ending_menu(player.live_status(), enemies, coins, (time - (elapsed_time // 1000)))
         #print(f"X: {player.rect.x} - Y: {player.rect.y} - Is he dead? {player.dead}"
         pygame.display.update()

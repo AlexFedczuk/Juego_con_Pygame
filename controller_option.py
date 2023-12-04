@@ -1,13 +1,13 @@
 import pygame
 
-from constants import WINDOW, FONT_PATH, WIDTH
+from constants import *
 from colors import WHITE, BLACK, GREEN
 from funtions import get_font
 
 from class_button import Button_Text
 
 def controller_options_menu():
-    pygame.display.set_caption("Juego en desarrollo... - Menu de Opciones")
+    pygame.display.set_caption(NAME_GAME + " - Pause Menu")
     
     running = True
     while running:
@@ -15,11 +15,11 @@ def controller_options_menu():
 
             WINDOW.fill(WHITE)
 
-            OPTIONS_TEXT_FONT = get_font(FONT_PATH, 20).render("This is the OPTIONS screen.", True, BLACK)
+            OPTIONS_TEXT_FONT = get_font(FONT_PATH, NORMAL_SIZE_FONT).render("This is the OPTIONS screen.", True, BLACK)
             OPTIONS_RECT = OPTIONS_TEXT_FONT.get_rect(center=(WIDTH/2, 260))
             WINDOW.blit(OPTIONS_TEXT_FONT, OPTIONS_RECT)
 
-            OPTIONS_BACK_BUTTON = Button_Text(None, WIDTH/2, 460, "BACK", get_font(FONT_PATH, 30), BLACK, GREEN)
+            OPTIONS_BACK_BUTTON = Button_Text(None, WIDTH/2, HEIGHT/1.7, "BACK", get_font(FONT_PATH, NORMAL_SIZE_FONT), BLACK, GREEN)
 
             OPTIONS_BACK_BUTTON.change_color(options_mouse_position)
             OPTIONS_BACK_BUTTON.update(WINDOW)
