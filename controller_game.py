@@ -29,8 +29,8 @@ def controller_play_game():
 
     # Timer
     start_time = pygame.time.get_ticks()
-    time = 10
-    TIMER = Button_Dynamic_Text(pygame.transform.scale(pygame.image.load(PLAY_RECT_PATH), (321, 90)), 180, 100, "", get_font(FONT_PATH, 15), BLACK, BLACK)
+    time = TIME
+    TIMER = Button_Dynamic_Text(pygame.transform.scale(pygame.image.load(PLAY_RECT_PATH), (321, 90)), 180, 100, "", get_font(FONT_PATH, SMALL_SIZE_FONT), BLACK, BLACK)
 
     f1_key = False
     runing = True
