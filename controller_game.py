@@ -60,23 +60,12 @@ def controller_play_game():
             
             
         controller_loop(player, enemies, objects, TIMER)
-        handle_movement(player, objects, enemies, offset_x)
-        """pygame.draw.rect(WINDOW, (255, 255, 255), timer_rect)
-        timer_text = font.render(str(timer), True, (100, 255, 100))
-        text_rect = timer_text.get_rect(center=timer_rect.center)"""
-        
+        handle_movement(player, objects, enemies, offset_x)        
         draw(WINDOW, background, bg_image, player, objects, offset_x, enemies, EXIT_BUTTON)
-        #.blit(timer_text, text_rect)
-
-        offset_x = scroll_screen(player, offset_x, scroll_area_width)
-
-        draw_rectangle(tecla_f1, WINDOW, player, objects, enemies, offset_x)
         TIMER.update(WINDOW, "Time remaning " + format_time(time, (elapsed_time // 1000)))
-
-        coins = []
-        for object in objects:
-            if isinstance(object, Coin):
-                coins.append(object)
+        offset_x = scroll_screen(player, offset_x, scroll_area_width)
+        draw_rectangle(tecla_f1, WINDOW, player, objects, enemies, offset_x)
+        coins = [obj for obj in objects if isinstance(obj, Coin)]
         runing = controller_ending_menu(player.live_status(), enemies, coins, (time - (elapsed_time // 1000)))
         #print(f"X: {player.rect.x} - Y: {player.rect.y} - Is he dead? {player.dead}"
         pygame.display.update()

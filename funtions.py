@@ -40,7 +40,6 @@ def draw(window:pygame.Surface, background, bg_image, player:Player, objects:lis
         enemy.draw(window, offset_x)
 
     draw_player_proyectiles(window, offset_x, player)
-
     exit_button.update(window)
 
 def collide(entity:Player or Enemy, objects:list[Object], dx:int) -> Object:
