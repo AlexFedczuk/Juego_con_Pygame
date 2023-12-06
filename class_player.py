@@ -1,4 +1,5 @@
 import pygame
+from pygame import mixer
 
 from constants import *
 from class_proyectile import Proyectile
@@ -105,7 +106,9 @@ class Player(pygame.sprite.Sprite):
     def draw(self, win:pygame.Surface, offset_x:int):
         win.blit(self.sprite, (self.rect.x - offset_x, self.rect.y))
 
-    def create_proyectile(self, image_path:str, direction:str):
+    def create_proyectile(self, image_path:str, direction:str, proyectile_sound_path:str):
+        proyectile_sound = mixer.Sound(proyectile_sound_path)
+        proyectile_sound.play()
         return Proyectile(self.rect.x + 50, self.rect.y + 30, image_path, direction)
     
     def check_health(self):

@@ -10,6 +10,7 @@ ANIMATION_DELAY = 4
 ENEMY_HEALTH = 60
 ENEMY_VEL = 1
 ENEMY_VALUE = 10
+DEATH_SOUND_PATH = r'assets\Sounds\explosion.wav'
 
 # Velocidad del proyectile
 PROYECTILE_VELOCITY = 5
@@ -60,6 +61,10 @@ CLOSE_BUTTON_IMG_PATH = r"assets\Menu\Buttons\Close.png"
 
 # Temporizador
 TIME = 200
+
+# Musica y Sonidos
+MAIN_MENU_MUSIC_PATH = r'assets\Sounds\background.wav'
+SHOOTING_SOUND = r'assets\Sounds\laser.wav'
 
 # Otros
 BG_COLOR = (255, 255, 255)

@@ -314,7 +314,7 @@ def controller_loop(player:Player, enemies:list[Enemy], objects:list, timer:Butt
     if len(enemies) > 0:
         for enemy in enemies:
             enemy.loop(FPS)
-            if enemy.dead:
+            if enemy.check_health():
                 enemies.remove(enemy)
                 player.increase_score(ENEMY_VALUE)
 
@@ -357,7 +357,7 @@ def check_events(runing:bool, f1_key:bool, events_list:list[pygame.event.Event],
                     result_f1_key = not result_f1_key
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if len(player.proyectiles_shooted) < 3:
-                    player.proyectiles_shooted.append(player.create_proyectile(player.proyectile_image_path, player.direction))
+                    player.proyectiles_shooted.append(player.create_proyectile(player.proyectile_image_path, player.direction, SHOOTING_SOUND))
                 if exit_button.check_input(mouse_position):
                     result_runing = False            
     return (result_runing, result_f1_key)

@@ -1,4 +1,5 @@
 import pygame
+from pygame import mixer
 
 from constants import *
 from class_proyectile import Proyectile
@@ -22,6 +23,7 @@ class Enemy(pygame.sprite.Sprite):
         self.vel = ENEMY_VEL
         self.health = ENEMY_HEALTH
         self.dead = False
+        self.death_sound = DEATH_SOUND_PATH
 
     def move(self, dx, dy):
         self.rect.x += dx
@@ -106,4 +108,9 @@ class Enemy(pygame.sprite.Sprite):
     
     def check_health(self):
         if self.health < 1:
+            death_sound = mixer.Sound(self.death_sound)
+            death_sound.play()
             self.dead = True
+            return self.dead
+        else:
+            return False
