@@ -63,7 +63,7 @@ CLOSE_BUTTON_IMG_PATH = r"assets\Menu\Buttons\Close.png"
 TIME = 200
 
 # Musica y Sonidos
-MAIN_MENU_MUSIC_PATH = r'assets\Sounds\background.wav'
+MAIN_MENU_MUSIC_PATH = r'assets\Sounds\Of Blood and Burden - Halo.mp3'
 SHOOTING_SOUND = r'assets\Sounds\laser.wav'
 
 # Otros
