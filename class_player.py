@@ -116,6 +116,8 @@ class Player(pygame.sprite.Sprite):
             self.die()
 
     def increase_score(self, points:int):
+        proyectile_sound = mixer.Sound(COIN_COLLECTED_SOUND_PATH)
+        proyectile_sound.play()        
         self.score += points
 
     def check_altitude(self):

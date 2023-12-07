@@ -1,8 +1,9 @@
 import pygame
+from pygame import mixer
 from typing import Callable
 
 from class_object import Object
-from constants import ANIMATION_DELAY
+from constants import *
 
 class Fire(Object):
     def __init__(self, x:int, y:int, width:int, height:int, load_sprite_sheets:Callable, collidable:bool) -> None:
@@ -13,11 +14,14 @@ class Fire(Object):
         self.animation_count = 0
         self.animation_name = "on"
         self.collidable = collidable
+        self.fire_turn_off_sound = mixer.Sound(FIRE_TURN_OFF_SOUND_PATH)
+        
 
     def on(self):
         self.animation_name = "on"
 
     def off(self):
+        self.fire_turn_off_sound.play()
         self.animation_name = "off"
 
     def loop(self):
