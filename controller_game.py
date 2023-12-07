@@ -29,6 +29,7 @@ def controller_play_game():
     start_time = pygame.time.get_ticks()
     time = TIME
     TIMER = Button_Dynamic_Text(pygame.transform.scale(pygame.image.load(PLAY_RECT_PATH), (321, 90)), 180, 100, "", get_font(FONT_PATH, SMALL_SIZE_FONT), BLACK, BLACK)
+    SCORE = Button_Dynamic_Text(pygame.transform.scale(pygame.image.load(PLAY_RECT_PATH), (321, 90)), 520, 100, "", get_font(FONT_PATH, SMALL_SIZE_FONT), BLACK, BLACK)
 
     f1_key = False
     runing = True
@@ -47,10 +48,11 @@ def controller_play_game():
         runing = result[0]
         f1_key = result[1]
 
-        controller_loop(player, enemies, objects, TIMER)
+        controller_loop(player, enemies, objects)
         handle_movement(player, objects, enemies, offset_x)        
         draw(WINDOW, background, bg_image, player, objects, offset_x, enemies, EXIT_BUTTON)
         TIMER.update(WINDOW, "Time remaning " + format_time(time, (elapsed_time // 1000)))
+        SCORE.update(WINDOW, f"Current score {player.get_score()}")
 
         offset_x = scroll_screen(player, offset_x, scroll_area_width)
 

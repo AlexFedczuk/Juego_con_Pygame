@@ -1,4 +1,4 @@
-Dentro del gameplay mostrar: Puntuacion, vida.
+Dentro del gameplay mostrar: Puntuacion (Listo!), vida (Listo!).
 
 Pantalla de rankings.
 

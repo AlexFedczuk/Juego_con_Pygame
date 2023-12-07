@@ -307,7 +307,7 @@ def create_map():
 
     return objects
 
-def controller_loop(player:Player, enemies:list[Enemy], objects:list, timer:Button):
+def controller_loop(player:Player, enemies:list[Enemy], objects:list):
     if player != None:
         player.loop(FPS)
 
