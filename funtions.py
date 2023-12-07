@@ -15,6 +15,7 @@ from class_proyectile import Proyectile
 from class_enemy import Enemy
 from class_coin import Coin
 from class_button import Button
+from class_slider import Slider
 
 def get_background(name):
     image = pygame.image.load(join("assets", "Background", name))
@@ -391,3 +392,13 @@ def map_value(value, from_low, from_high, to_low, to_high):
     mapped_value = to_low + proportion * (to_high - to_low)
 
     return mapped_value
+
+def control_sound(flag:bool, volume:float):
+    if flag:
+        volume = 0
+        MAIN_MENU_MUSIC.set_volume(volume)   
+    else:
+        volume = map_value(volume, 0, 100, 0, 1)
+        MAIN_MENU_MUSIC.set_volume(volume)
+
+    return volume

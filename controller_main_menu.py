@@ -12,6 +12,8 @@ from class_button import Button_Text
 from Configurations.constants import CONTANTS
 
 def controller_main_menu():
+    mute_volume_flag = False
+    volumen_value = 50
     MAIN_MENU_MUSIC.play(-1)
 
     while True:
@@ -44,7 +46,9 @@ def controller_main_menu():
                 if PLAY_BUTTON.check_input(mouse_position):
                     controller_levels_menu()
                 if OPTIONS_BUTTON.check_input(mouse_position):
-                    controller_options_menu()
+                    volumen_values = controller_options_menu(mute_volume_flag, volumen_value)
+                    mute_volume_flag = volumen_values[0]
+                    volumen_value = volumen_values[1]
                 if QUIT_BUTTON.check_input(mouse_position):
                     print("Cerrando juego.")
                     pygame.quit()
