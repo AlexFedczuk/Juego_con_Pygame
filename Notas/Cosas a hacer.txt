@@ -6,4 +6,4 @@ Desarrollar niveles. (Pendiente.)
 
 Agregar efecto de sonidos, musica (Ya estan agregados!)
 
-Agregar funciones de settings. (En progreso...)
+Agregar funciones de settings. (Le agregue la funcion para reducir el volumen)
