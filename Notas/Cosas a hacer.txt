@@ -7,3 +7,5 @@ Desarrollar niveles. (En desarrollo...)
 Agregar efecto de sonidos, musica (Listo!)
 
 Agregar funciones de settings. (Listo!)
+
+Generador de enemigos (posiciones random). (Pendiente.)
