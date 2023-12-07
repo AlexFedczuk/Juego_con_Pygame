@@ -3,6 +3,7 @@ from pygame import mixer
 
 from constants import *
 from class_proyectile import Proyectile
+from class_health_bar import Health_Bar
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, load_sprite_sheets, proyectile_image_path:str) -> None:
@@ -24,6 +25,7 @@ class Player(pygame.sprite.Sprite):
         self.health = PLAYER_HEALTH
         self.dead = False
         self.score = 0
+        self.health_bar = Health_Bar(self.rect.x, self.rect.y, self.rect.width, 10, self.health)
 
     def move(self, dx, dy):
         self.rect.x += dx
@@ -67,6 +69,7 @@ class Player(pygame.sprite.Sprite):
         self.update_sprite()
         self.check_health()
         self.check_altitude()
+        self.health_bar.update_position(self.rect.x, self.rect.y)
 
     def landed(self):
         self.fall_count = 0
@@ -105,6 +108,7 @@ class Player(pygame.sprite.Sprite):
 
     def draw(self, win:pygame.Surface, offset_x:int):
         win.blit(self.sprite, (self.rect.x - offset_x, self.rect.y))
+        self.health_bar.draw(win, self.health, offset_x)
 
     def create_proyectile(self, image_path:str, direction:str, proyectile_sound_path:str):
         proyectile_sound = mixer.Sound(proyectile_sound_path)

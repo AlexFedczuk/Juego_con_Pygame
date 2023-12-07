@@ -2,7 +2,7 @@ import pygame
 
 # Player
 PLAYER_VEL = 5
-PLAYER_HEALTH = 100
+PLAYER_HEALTH = 500
 GRAVITY = 1
 ANIMATION_DELAY = 4
 

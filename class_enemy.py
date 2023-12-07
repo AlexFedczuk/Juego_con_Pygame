@@ -3,6 +3,7 @@ from pygame import mixer
 
 from constants import *
 from class_proyectile import Proyectile
+from class_health_bar import Health_Bar
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, load_sprite_sheets, proyectile_image_path:str) -> None:
@@ -24,6 +25,7 @@ class Enemy(pygame.sprite.Sprite):
         self.health = ENEMY_HEALTH
         self.dead = False
         self.death_sound = DEATH_SOUND_PATH
+        self.health_bar = Health_Bar(self.rect.x, self.rect.y, self.rect.width, self.rect.height, self.health)
 
     def move(self, dx, dy):
         self.rect.x += dx
