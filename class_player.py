@@ -25,7 +25,7 @@ class Player(pygame.sprite.Sprite):
         self.health = PLAYER_HEALTH
         self.dead = False
         self.score = 0
-        self.health_bar = Health_Bar(self.rect.x, self.rect.y, self.rect.width, 10, self.health)
+        self.health_bar = Health_Bar(self.rect.x, self.rect.y, self.rect.width, HEALTH_BAR_HEIGHT, self.health)
 
     def move(self, dx, dy):
         self.rect.x += dx
@@ -108,7 +108,7 @@ class Player(pygame.sprite.Sprite):
 
     def draw(self, win:pygame.Surface, offset_x:int):
         win.blit(self.sprite, (self.rect.x - offset_x, self.rect.y))
-        self.health_bar.draw(win, self.health, offset_x)
+        self.health_bar.draw(win, self.get_health(), offset_x)
 
     def create_proyectile(self, image_path:str, direction:str, proyectile_sound_path:str):
         proyectile_sound = mixer.Sound(proyectile_sound_path)
@@ -136,3 +136,6 @@ class Player(pygame.sprite.Sprite):
     
     def get_score(self) -> int:
         return self.score
+    
+    def get_health(self):
+        return self.health

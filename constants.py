@@ -69,6 +69,10 @@ PROYECTILE_COLLIDED_SOUND_PATH = r'assets\Sounds\proyectile_collided.wav'
 COIN_COLLECTED_SOUND_PATH = r'assets\Sounds\coin_sound.wav'
 DEATH_SOUND_PATH = r'assets\Sounds\enemy_death_sound.wav'
 
+# Barra de Vida
+HEALTH_BAR_HEIGHT = 10
+
 # Otros
 BG_COLOR = (255, 255, 255)
 COLOR = (255, 0, 0)
+

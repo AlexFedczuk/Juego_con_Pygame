@@ -25,7 +25,7 @@ class Enemy(pygame.sprite.Sprite):
         self.health = ENEMY_HEALTH
         self.dead = False
         self.death_sound = DEATH_SOUND_PATH
-        self.health_bar = Health_Bar(self.rect.x, self.rect.y, self.rect.width, self.rect.height, self.health)
+        self.health_bar = Health_Bar(self.rect.x, self.rect.y, self.rect.width, HEALTH_BAR_HEIGHT, self.health)
 
     def move(self, dx, dy):
         self.rect.x += dx
@@ -68,6 +68,7 @@ class Enemy(pygame.sprite.Sprite):
         self.fall_count += 1
         self.update_sprite()
         self.check_health()
+        self.health_bar.update_position(self.rect.x, self.rect.y)
 
     def landed(self):
         self.fall_count = 0
@@ -104,6 +105,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def draw(self, win:pygame.Surface, offset_x:int):
         win.blit(self.sprite, (self.rect.x - offset_x, self.rect.y))
+        self.health_bar.draw(win, self.get_health(), offset_x)
 
     def create_proyectile(self, image_path:str, direction:str):
         return Proyectile(self.rect.x + 50, self.rect.y + 30, image_path, direction)
@@ -116,3 +118,6 @@ class Enemy(pygame.sprite.Sprite):
             return self.dead
         else:
             return False
+        
+    def get_health(self):
+        return self.health
