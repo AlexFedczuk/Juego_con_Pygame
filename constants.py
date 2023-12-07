@@ -10,7 +10,6 @@ ANIMATION_DELAY = 4
 ENEMY_HEALTH = 60
 ENEMY_VEL = 1
 ENEMY_VALUE = 10
-DEATH_SOUND_PATH = r'assets\Sounds\explosion.wav'
 
 # Velocidad del proyectile
 PROYECTILE_VELOCITY = 5
@@ -68,6 +67,7 @@ SHOOTING_SOUND = r'assets\Sounds\ball_shooted.wav'
 FIRE_TURN_OFF_SOUND_PATH = r'assets\Sounds\fire_turn_off.wav'
 PROYECTILE_COLLIDED_SOUND_PATH = r'assets\Sounds\proyectile_collided.wav'
 COIN_COLLECTED_SOUND_PATH = r'assets\Sounds\coin_sound.wav'
+DEATH_SOUND_PATH = r'assets\Sounds\enemy_death_sound.wav'
 
 # Otros
 BG_COLOR = (255, 255, 255)

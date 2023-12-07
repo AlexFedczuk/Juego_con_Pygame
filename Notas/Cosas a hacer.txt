@@ -4,6 +4,6 @@ Pantalla de rankings
 
 Desarrollar niveles
 
-Agregar efecto de sonidos, musica
+Agregar efecto de sonidos, musica (Ya estan agregados!)
 
 Agregar funciones de settings.
