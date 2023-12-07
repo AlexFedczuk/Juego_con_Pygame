@@ -1,9 +1,9 @@
 Dentro del gameplay mostrar: Puntuacion (Listo!), vida (Listo!).
 
-Pantalla de rankings.
+Pantalla de rankings. (Pendiente.)
 
-Desarrollar niveles.
+Desarrollar niveles. (Pendiente.)
 
 Agregar efecto de sonidos, musica (Ya estan agregados!)
 
-Agregar funciones de settings.
+Agregar funciones de settings. (En progreso...)

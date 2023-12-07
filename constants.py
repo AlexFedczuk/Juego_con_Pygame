@@ -1,4 +1,7 @@
 import pygame
+from pygame import mixer
+
+mixer.init()
 
 # Player
 PLAYER_VEL = 5
@@ -62,7 +65,7 @@ CLOSE_BUTTON_IMG_PATH = r"assets\Menu\Buttons\Close.png"
 TIME = 200
 
 # Musica y Sonidos
-MAIN_MENU_MUSIC_PATH = r'assets\Sounds\main_menu_music.ogg'
+MAIN_MENU_MUSIC = pygame.mixer.Sound(r'assets\Sounds\main_menu_music.ogg')
 SHOOTING_SOUND = r'assets\Sounds\ball_shooted.wav'
 FIRE_TURN_OFF_SOUND_PATH = r'assets\Sounds\fire_turn_off.wav'
 PROYECTILE_COLLIDED_SOUND_PATH = r'assets\Sounds\proyectile_collided.wav'

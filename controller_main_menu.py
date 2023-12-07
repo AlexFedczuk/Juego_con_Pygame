@@ -1,6 +1,6 @@
 import pygame
-
 from pygame import mixer
+
 from constants import *
 from colors import LIGHT_BROWN, SUPER_LIGHT_GREEN, WHITE
 
@@ -12,9 +12,7 @@ from class_button import Button_Text
 from Configurations.constants import CONTANTS
 
 def controller_main_menu():
-    mixer.music.load(MAIN_MENU_MUSIC_PATH)
-    mixer.music.play(-1)
-    #CONTANTS = load_constants_from_json(r'Configurations\constants.json')
+    MAIN_MENU_MUSIC.play(-1)
 
     while True:
         pygame.display.set_caption(CONTANTS['Screen']['NAME_GAME'] + " - Menu principal")

@@ -384,3 +384,10 @@ def load_constants_from_json(file_path:str):
     except json.JSONDecodeError:
         print(f'Error: No se pudo decodificar el archivo {file_path} como JSON.')
         return None
+    
+def map_value(value, from_low, from_high, to_low, to_high):
+    value = max(min(value, from_high), from_low)
+    proportion = (value - from_low) / (from_high - from_low)
+    mapped_value = to_low + proportion * (to_high - to_low)
+
+    return mapped_value
