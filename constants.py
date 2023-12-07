@@ -71,6 +71,7 @@ FIRE_TURN_OFF_SOUND_PATH = r'assets\Sounds\fire_turn_off.wav'
 PROYECTILE_COLLIDED_SOUND_PATH = r'assets\Sounds\proyectile_collided.wav'
 COIN_COLLECTED_SOUND_PATH = r'assets\Sounds\coin_sound.wav'
 DEATH_SOUND_PATH = r'assets\Sounds\enemy_death_sound.wav'
+INITIAL_SOUND_VOLUMEN = 50
 
 # Barra de Vida
 HEALTH_BAR_HEIGHT = 10

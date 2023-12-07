@@ -13,7 +13,7 @@ from Configurations.constants import CONTANTS
 
 def controller_main_menu():
     mute_volume_flag = False
-    volumen_value = 50
+    volumen_value = INITIAL_SOUND_VOLUMEN
     MAIN_MENU_MUSIC.play(-1)
 
     while True:
