@@ -28,7 +28,7 @@ def get_background(name):
             pos = [i * width, j * height]
             tiles.append(pos)
 
-    return tiles, image
+    return [tiles, image]
 
 def draw(window:pygame.Surface, background, bg_image, player:Player, objects:list[pygame.Surface], offset_x:int, enemies:list[Enemy], exit_button:Button):
     for tile in background:
@@ -233,80 +233,6 @@ def draw_player_proyectiles(window:pygame.Surface, offset_x:int, player:Player):
 
 def get_font(font:str, size:int) -> pygame.font.Font: # Returns Press-Start-2P in the desired size
     return pygame.font.Font(font, size)
-
-def create_map():
-    objects = []
-
-    floor = [
-        Block(BLOCK_SIZE * -6, HEIGHT - BLOCK_SIZE * 0, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * -5, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * -4, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * -3, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * -2, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * -1, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * 0, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * 1, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * 2, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * 3, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * 4, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * 5, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * 6, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * 7, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * 8, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * 9, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * 10, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * 11, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False)    
-    ]
-    floating_platforms = [
-        # Plataforma del medio-arriba.
-        Block(BLOCK_SIZE * 2, HEIGHT - BLOCK_SIZE * 6, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * 3, HEIGHT - BLOCK_SIZE * 6, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * 4, HEIGHT - BLOCK_SIZE * 6, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        # Plataforma del medio-abajo.
-        Block(BLOCK_SIZE * 3, HEIGHT - BLOCK_SIZE * 4, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * 4, HEIGHT - BLOCK_SIZE * 4, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        # Plataforma de la derecha.
-        Block(BLOCK_SIZE * 7, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * 8, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * 9, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * 10, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        # Plataforma de la izquierda.
-        Block(BLOCK_SIZE * 0, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * -1, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * -2, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * -3, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-    ]   
-    blocks = [
-        # Obstaculo de la izquierda.
-        Block(BLOCK_SIZE * 0, HEIGHT - BLOCK_SIZE * 2, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "obstacle", True),
-        # Obstaculo de la derecha.
-        Block(BLOCK_SIZE * 6, HEIGHT - BLOCK_SIZE * 2, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "obstacle", True),
-    ]
-    traps = [
-        Fire(-355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True),
-        Fire(355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True),
-        Fire(1000, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True),
-        Fire(845, 256, 16, 32, load_sprite_sheets, True),
-        Fire(-125, 256, 16, 32, load_sprite_sheets, True)
-    ]
-    coins = [
-        Coin(-275, 256, 16, 16, load_sprite_sheets, True),
-        Coin(-465, 640, 16, 16, load_sprite_sheets, True),
-        Coin(-175, 640, 16, 16, load_sprite_sheets, True),
-        Coin(210, 640, 16, 16, load_sprite_sheets, True),
-        Coin(1065, 640, 16, 16, load_sprite_sheets, True),
-        Coin(970, 256, 16, 16, load_sprite_sheets, True),
-        Coin(305, 160, 16, 16, load_sprite_sheets, True),
-        Coin(355, 352, 16, 16, load_sprite_sheets, True)
-    ]
-
-    objects.extend(floor)
-    objects.extend(floating_platforms)
-    objects.extend(blocks)
-    objects.extend(traps)
-    objects.extend(coins)
-
-    return objects
 
 def controller_loop(player:Player, enemies:list[Enemy], objects:list):
     if player != None:

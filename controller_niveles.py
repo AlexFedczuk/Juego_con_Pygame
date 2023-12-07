@@ -36,11 +36,11 @@ def controller_levels_menu():
                 quit()
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if LEVEL_ONE.check_input(mouse_position):
-                    controller_play_game()
+                    controller_play_game(1)
                 elif LEVEL_TWO.check_input(mouse_position):
-                    controller_play_game()
+                    controller_play_game(2)
                 elif LEVEL_THREE.check_input(mouse_position):
-                    controller_play_game()
+                    controller_play_game(3)
                 elif LEVEL_THREE.check_input(mouse_position):
                     controller_play_game()
                 elif GO_BACK_BUTTON.check_input(mouse_position):

@@ -10,9 +10,12 @@ from controller_pause_screen import controller_pause_menu
 from controller_ending_menu import controller_ending_menu
 from colors import BLACK
 
-def controller_play_game():
-    clock = pygame.time.Clock()
-    background, bg_image = get_background("Blue.png")    
+from assets.level_one_map import create_map_level_1
+from assets.level_two_map import create_map_level_2
+from assets.level_three_map import create_map_level_3
+
+def controller_play_game(level:int):
+    clock = pygame.time.Clock() 
 
     offset_x = -200
     scroll_area_width = 200
@@ -22,7 +25,27 @@ def controller_play_game():
         Enemy(100, 0, 50, 50, load_sprite_sheets("Enemies", "NinjaFrog", 32, 32, True), MUD_PARTICLE_IMG_PATH),
         Enemy(250, 0, 50, 50, load_sprite_sheets("Enemies", "NinjaFrog", 32, 32, True), MUD_PARTICLE_IMG_PATH)
     ]
-    objects = create_map()
+
+    if level == 1:
+        maps_assets = create_map_level_1()
+        objects = maps_assets[0]
+        background_assets = maps_assets[1]
+        background = background_assets[0]
+        bg_image = background_assets[1]
+    elif level == 2:
+        maps_assets = create_map_level_2()
+        objects = maps_assets[0]
+        background_assets = maps_assets[1]
+        background = background_assets[0]
+        bg_image = background_assets[1]
+    elif level == 3:
+        maps_assets = create_map_level_3()
+        objects = maps_assets[0]
+        background_assets = maps_assets[1]
+        background = background_assets[0]
+        bg_image = background_assets[1]
+    else:
+        return False
     EXIT_BUTTON = Button(pygame.image.load(CLOSE_BUTTON_IMG_PATH), 10, 10)
 
     # Timer
