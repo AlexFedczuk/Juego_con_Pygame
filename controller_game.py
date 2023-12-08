@@ -54,7 +54,7 @@ def controller_play_game(level:int):
     f1_key = False
     runing = True
     while runing:
-        pygame.display.set_caption(NAME_GAME + " - Level 1")
+        pygame.display.set_caption(NAME_GAME + f" - Level {level}")
         
         clock.tick(FPS)
         elapsed_time = pygame.time.get_ticks() - start_time

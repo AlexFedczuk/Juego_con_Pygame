@@ -62,7 +62,7 @@ COINS_VALUE = 10
 CLOSE_BUTTON_IMG_PATH = r"assets\Menu\Buttons\Close.png"
 
 # Temporizador
-TIME = 200
+TIME = 5000
 
 # Musica y Sonidos
 MAIN_MENU_MUSIC = pygame.mixer.Sound(r'assets\Sounds\main_menu_music.ogg')
