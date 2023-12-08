@@ -110,8 +110,7 @@ class Player(pygame.sprite.Sprite):
         win.blit(self.sprite, (self.rect.x - offset_x, self.rect.y))
         self.health_bar.draw(win, self.get_health(), offset_x)
 
-    def create_proyectile(self, image_path:str, direction:str, proyectile_sound_path:str):
-        proyectile_sound = mixer.Sound(proyectile_sound_path)
+    def create_proyectile(self, image_path:str, direction:str, proyectile_sound:pygame.mixer.Sound):
         proyectile_sound.play()
         return Proyectile(self.rect.x + 50, self.rect.y + 30, image_path, direction)
     
@@ -119,9 +118,7 @@ class Player(pygame.sprite.Sprite):
         if self.health < 1:
             self.die()
 
-    def increase_score(self, points:int):
-        proyectile_sound = mixer.Sound(COIN_COLLECTED_SOUND_PATH)
-        proyectile_sound.play()        
+    def increase_score(self, points:int):       
         self.score += points
 
     def check_altitude(self):

@@ -6,7 +6,7 @@ from class_proyectile import Proyectile
 from class_health_bar import Health_Bar
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, x, y, width, height, load_sprite_sheets, proyectile_image_path:str) -> None:
+    def __init__(self, x, y, width, height, load_sprite_sheets, proyectile_image_path:str, death_sound:pygame.mixer.Sound) -> None:
         super().__init__()
         self.rect = pygame.Rect(x, y, width, height)
         self.x_vel = 0
@@ -24,7 +24,7 @@ class Enemy(pygame.sprite.Sprite):
         self.vel = ENEMY_VEL
         self.health = ENEMY_HEALTH
         self.dead = False
-        self.death_sound = DEATH_SOUND_PATH
+        self.death_sound = death_sound
         self.health_bar = Health_Bar(self.rect.x, self.rect.y, self.rect.width, HEALTH_BAR_HEIGHT, self.health)
 
     def move(self, dx, dy):
@@ -112,8 +112,7 @@ class Enemy(pygame.sprite.Sprite):
     
     def check_health(self):
         if self.health < 1:
-            death_sound = mixer.Sound(self.death_sound)
-            death_sound.play()
+            self.death_sound.play()
             self.dead = True
             return self.dead
         else:

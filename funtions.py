@@ -92,6 +92,7 @@ def collect_coin(player:Player, objects:list[Object]) -> None:
             if object.rect.colliderect(player.rect):
                 objects.remove(object)
                 player.increase_score(COINS_VALUE)
+                object.play_sound()
                 break
 
 def collide_entities(player:Player, enemies:list[Enemy]):

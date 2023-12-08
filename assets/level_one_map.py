@@ -53,21 +53,21 @@ def create_map_level_1():
         Block(BLOCK_SIZE * 6, HEIGHT - BLOCK_SIZE * 2, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "obstacle", True),
     ]
     traps = [
-        Fire(-355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True),
-        Fire(355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True),
-        Fire(1000, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True),
-        Fire(845, 256, 16, 32, load_sprite_sheets, True),
-        Fire(-125, 256, 16, 32, load_sprite_sheets, True)
+        Fire(-355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True, pygame.mixer.Sound(FIRE_TURN_OFF_SOUND_PATH)),
+        Fire(355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True, pygame.mixer.Sound(FIRE_TURN_OFF_SOUND_PATH)),
+        Fire(1000, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True, pygame.mixer.Sound(FIRE_TURN_OFF_SOUND_PATH)),
+        Fire(845, 256, 16, 32, load_sprite_sheets, True, pygame.mixer.Sound(FIRE_TURN_OFF_SOUND_PATH)),
+        Fire(-125, 256, 16, 32, load_sprite_sheets, True, pygame.mixer.Sound(FIRE_TURN_OFF_SOUND_PATH))
     ]
     coins = [
-        Coin(-275, 256, 16, 16, load_sprite_sheets, True),
-        Coin(-465, 640, 16, 16, load_sprite_sheets, True),
-        Coin(-175, 640, 16, 16, load_sprite_sheets, True),
-        Coin(210, 640, 16, 16, load_sprite_sheets, True),
-        Coin(1065, 640, 16, 16, load_sprite_sheets, True),
-        Coin(970, 256, 16, 16, load_sprite_sheets, True),
-        Coin(305, 160, 16, 16, load_sprite_sheets, True),
-        Coin(355, 352, 16, 16, load_sprite_sheets, True)
+        Coin(-275, 256, 16, 16, load_sprite_sheets, True, pygame.mixer.Sound(COIN_COLLECTED_SOUND_PATH)),
+        Coin(-465, 640, 16, 16, load_sprite_sheets, True, pygame.mixer.Sound(COIN_COLLECTED_SOUND_PATH)),
+        Coin(-175, 640, 16, 16, load_sprite_sheets, True, pygame.mixer.Sound(COIN_COLLECTED_SOUND_PATH)),
+        Coin(210, 640, 16, 16, load_sprite_sheets, True, pygame.mixer.Sound(COIN_COLLECTED_SOUND_PATH)),
+        Coin(1065, 640, 16, 16, load_sprite_sheets, True, pygame.mixer.Sound(COIN_COLLECTED_SOUND_PATH)),
+        Coin(970, 256, 16, 16, load_sprite_sheets, True, pygame.mixer.Sound(COIN_COLLECTED_SOUND_PATH)),
+        Coin(305, 160, 16, 16, load_sprite_sheets, True, pygame.mixer.Sound(COIN_COLLECTED_SOUND_PATH)),
+        Coin(355, 352, 16, 16, load_sprite_sheets, True, pygame.mixer.Sound(COIN_COLLECTED_SOUND_PATH))
     ]
 
     objects.extend(floor)

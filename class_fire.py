@@ -6,7 +6,7 @@ from class_object import Object
 from constants import *
 
 class Fire(Object):
-    def __init__(self, x:int, y:int, width:int, height:int, load_sprite_sheets:Callable, collidable:bool) -> None:
+    def __init__(self, x:int, y:int, width:int, height:int, load_sprite_sheets:Callable, collidable:bool, fire_turn_off_sound:pygame.mixer.Sound) -> None:
         super().__init__(x, y, width, height, "fire")
         self.fire = load_sprite_sheets("Traps", "Fire", 16, 32)
         self.image = self.fire["off"][0]
@@ -14,7 +14,7 @@ class Fire(Object):
         self.animation_count = 0
         self.animation_name = "on"
         self.collidable = collidable
-        self.fire_turn_off_sound = mixer.Sound(FIRE_TURN_OFF_SOUND_PATH)
+        self.fire_turn_off_sound = fire_turn_off_sound
         
 
     def on(self):

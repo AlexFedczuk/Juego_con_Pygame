@@ -5,7 +5,7 @@ from class_object import Object
 from constants import ANIMATION_DELAY
 
 class Coin(Object): # assets\Items\Coins\coin_rot_anim.png
-    def __init__(self, x:int, y:int, width:int, height:int, load_sprite_sheets:Callable, collectible:bool) -> None:
+    def __init__(self, x:int, y:int, width:int, height:int, load_sprite_sheets:Callable, collectible:bool, coin_colleted_sound:pygame.mixer.Sound) -> None:
         super().__init__(x, y, width, height, "fire")
         self.coin = load_sprite_sheets("Items", "Coins", 32, 32)
         self.image = self.coin["coin_rot_anim"][0]
@@ -13,6 +13,7 @@ class Coin(Object): # assets\Items\Coins\coin_rot_anim.png
         self.animation_count = 0
         self.animation_name = "coin_rot_anim"
         self.collectible = collectible
+        self.coin_colleted_sound = coin_colleted_sound
 
     def loop(self):
         sprites = self.coin[self.animation_name]
@@ -29,3 +30,6 @@ class Coin(Object): # assets\Items\Coins\coin_rot_anim.png
 
     def blit(self, surface:pygame.Surface, offset_x):
         surface.blit(self.image, (self.rect.x - offset_x, self.rect.y))
+
+    def play_sound(self):
+        self.coin_colleted_sound.play()
