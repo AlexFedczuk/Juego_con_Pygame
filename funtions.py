@@ -323,9 +323,18 @@ def map_value(value, from_low, from_high, to_low, to_high):
 def control_sound(flag:bool, volume:float):
     if flag:
         volume = 0
-        MAIN_MENU_MUSIC.set_volume(volume)   
+        MAIN_MENU_MUSIC.set_volume(volume)
+        SHOOTING_SOUND.set_volume(volume)
+        FIRE_TURN_OFF_SOUND.set_volume(volume)
+        PROYECTILE_COLLIDED_SOUND.set_volume(volume)
+        COIN_COLLECTED_SOUND.set_volume(volume)
+        DEATH_SOUND.set_volume(volume)   
     else:
         volume = map_value(volume, 0, 100, 0, 1)
         MAIN_MENU_MUSIC.set_volume(volume)
-
+        SHOOTING_SOUND.set_volume(volume)
+        FIRE_TURN_OFF_SOUND.set_volume(volume)
+        PROYECTILE_COLLIDED_SOUND.set_volume(volume)
+        COIN_COLLECTED_SOUND.set_volume(volume)
+        DEATH_SOUND.set_volume(volume)
     return volume

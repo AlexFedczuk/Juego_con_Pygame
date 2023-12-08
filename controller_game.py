@@ -22,8 +22,8 @@ def controller_play_game(level:int):
 
     player = Player(0, 0, 50, 50, load_sprite_sheets("Player", "VirtualGuy", 32, 32, True), ICE_PARTICLE_IMG_PATH)
     enemies = [
-        Enemy(100, 0, 50, 50, load_sprite_sheets("Enemies", "NinjaFrog", 32, 32, True), MUD_PARTICLE_IMG_PATH, pygame.mixer.Sound(DEATH_SOUND_PATH)),
-        Enemy(250, 0, 50, 50, load_sprite_sheets("Enemies", "NinjaFrog", 32, 32, True), MUD_PARTICLE_IMG_PATH, pygame.mixer.Sound(DEATH_SOUND_PATH))
+        Enemy(100, 0, 50, 50, load_sprite_sheets("Enemies", "NinjaFrog", 32, 32, True), MUD_PARTICLE_IMG_PATH, DEATH_SOUND),
+        Enemy(250, 0, 50, 50, load_sprite_sheets("Enemies", "NinjaFrog", 32, 32, True), MUD_PARTICLE_IMG_PATH, DEATH_SOUND)
     ]
 
     if level == 1:

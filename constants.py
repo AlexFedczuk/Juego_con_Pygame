@@ -67,10 +67,10 @@ TIME = 200
 # Musica y Sonidos
 MAIN_MENU_MUSIC = pygame.mixer.Sound(r'assets\Sounds\main_menu_music.ogg')
 SHOOTING_SOUND = pygame.mixer.Sound(r'assets\Sounds\ball_shooted.wav')
-FIRE_TURN_OFF_SOUND_PATH = pygame.mixer.Sound(r'assets\Sounds\fire_turn_off.wav')
-PROYECTILE_COLLIDED_SOUND_PATH = pygame.mixer.Sound(r'assets\Sounds\proyectile_collided.wav')
-COIN_COLLECTED_SOUND_PATH = pygame.mixer.Sound(r'assets\Sounds\coin_sound.wav')
-DEATH_SOUND_PATH = pygame.mixer.Sound(r'assets\Sounds\enemy_death_sound.wav')
+FIRE_TURN_OFF_SOUND = pygame.mixer.Sound(r'assets\Sounds\fire_turn_off.wav')
+PROYECTILE_COLLIDED_SOUND = pygame.mixer.Sound(r'assets\Sounds\proyectile_collided.wav')
+COIN_COLLECTED_SOUND = pygame.mixer.Sound(r'assets\Sounds\coin_sound.wav')
+DEATH_SOUND = pygame.mixer.Sound(r'assets\Sounds\enemy_death_sound.wav')
 INITIAL_SOUND_VOLUMEN = 10
 
 # Barra de Vida
