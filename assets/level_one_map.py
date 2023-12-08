@@ -2,7 +2,12 @@ from classe_block import Block
 from constants import *
 from funtions import *
 
-def create_map_level_1():
+def create_map_level_1():    
+    enemies = [
+        Enemy(100, 0, 50, 50, load_sprite_sheets("Enemies", "NinjaFrog", 32, 32, True), MUD_PARTICLE_IMG_PATH, DEATH_SOUND),
+        Enemy(250, 0, 50, 50, load_sprite_sheets("Enemies", "NinjaFrog", 32, 32, True), MUD_PARTICLE_IMG_PATH, DEATH_SOUND)
+    ]
+
     objects = []
 
     background_assets = get_background("Blue.png")
@@ -76,4 +81,4 @@ def create_map_level_1():
     objects.extend(traps)
     objects.extend(coins)
 
-    return [objects, background_assets]
+    return [objects, background_assets, enemies]

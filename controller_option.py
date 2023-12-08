@@ -11,7 +11,7 @@ from class_slider import Slider
 def controller_options_menu(mute_volume_flag:bool, volumen_value:float):
     pygame.display.set_caption(NAME_GAME + " - Pause Menu")
 
-    SLIDER = Slider(500, 500, 300, 30, 0.5, 0, 100)
+    SLIDER = Slider(500, 500, 300, 30, 0.1, 0, 100)
     
     running = True
     while running:

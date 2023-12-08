@@ -2,7 +2,12 @@ from classe_block import Block
 from constants import *
 from funtions import *
 
-def create_map_level_2():
+def create_map_level_2():    
+    enemies = [
+        Enemy(100, 0, 50, 50, load_sprite_sheets("Enemies", "NinjaFrog", 32, 32, True), MUD_PARTICLE_IMG_PATH, DEATH_SOUND),
+        Enemy(250, 0, 50, 50, load_sprite_sheets("Enemies", "NinjaFrog", 32, 32, True), MUD_PARTICLE_IMG_PATH, DEATH_SOUND)
+    ]
+
     objects = []
 
     background_assets = get_background("Yellow.png")
@@ -11,8 +16,6 @@ def create_map_level_2():
         Block(BLOCK_SIZE * -6, HEIGHT - BLOCK_SIZE * 0, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * -5, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * -4, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * -3, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * -2, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * -1, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * 0, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * 1, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
@@ -21,8 +24,6 @@ def create_map_level_2():
         Block(BLOCK_SIZE * 4, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * 5, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * 6, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * 7, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
-        Block(BLOCK_SIZE * 8, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * 9, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * 10, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * 11, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False)    
@@ -40,11 +41,21 @@ def create_map_level_2():
         Block(BLOCK_SIZE * 8, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         Block(BLOCK_SIZE * 9, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         Block(BLOCK_SIZE * 10, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        # Plataforma de la derecha lejos.
+        Block(BLOCK_SIZE * 12, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * 13, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * 14, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * 15, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         # Plataforma de la izquierda.
         Block(BLOCK_SIZE * 0, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         Block(BLOCK_SIZE * -1, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         Block(BLOCK_SIZE * -2, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         Block(BLOCK_SIZE * -3, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        # Plataforma de la izquierda lejos.
+        Block(BLOCK_SIZE * -5, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * -6, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * -7, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * -8, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
     ]   
     blocks = [
         # Obstaculo de la izquierda.
@@ -53,21 +64,29 @@ def create_map_level_2():
         Block(BLOCK_SIZE * 6, HEIGHT - BLOCK_SIZE * 2, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "obstacle", True),
     ]
     traps = [
-        Fire(-355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True),
-        Fire(355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True),
-        Fire(1000, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True),
-        Fire(845, 256, 16, 32, load_sprite_sheets, True),
-        Fire(-125, 256, 16, 32, load_sprite_sheets, True)
+        Fire(-355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND),
+        Fire(355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND),
+        Fire(1000, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND),
+        Fire(845, 256, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND),
+        Fire(-555, 256, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND),
+        Fire(-745, 256, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND),
+        Fire(1450, 256, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND),
+        Fire(1265, 256, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND),
+        Fire(-125, 256, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND)
     ]
     coins = [
-        Coin(-275, 256, 16, 16, load_sprite_sheets, True),
-        Coin(-465, 640, 16, 16, load_sprite_sheets, True),
-        Coin(-175, 640, 16, 16, load_sprite_sheets, True),
-        Coin(210, 640, 16, 16, load_sprite_sheets, True),
-        Coin(1065, 640, 16, 16, load_sprite_sheets, True),
-        Coin(970, 256, 16, 16, load_sprite_sheets, True),
-        Coin(305, 160, 16, 16, load_sprite_sheets, True),
-        Coin(355, 352, 16, 16, load_sprite_sheets, True)
+        Coin(-275, 256, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
+        Coin(-40, 256, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
+        Coin(-465, 640, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
+        Coin(-175, 640, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
+        Coin(210, 640, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
+        Coin(1065, 640, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
+        Coin(970, 256, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
+        Coin(305, 160, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
+        Coin(-660, 256, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
+        Coin(1360, 256, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
+        Coin(930, 256, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
+        Coin(355, 352, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND)
     ]
 
     objects.extend(floor)
@@ -76,4 +95,4 @@ def create_map_level_2():
     objects.extend(traps)
     objects.extend(coins)
 
-    return [objects, background_assets]
+    return [objects, background_assets, enemies]

@@ -4,7 +4,6 @@ from constants import *
 from funtions import *
 
 from class_player import Player
-from class_enemy import Enemy
 from class_button import Button, Button_Dynamic_Text
 from controller_pause_screen import controller_pause_menu
 from controller_ending_menu import controller_ending_menu
@@ -15,38 +14,36 @@ from assets.level_two_map import create_map_level_2
 from assets.level_three_map import create_map_level_3
 
 def controller_play_game(level:int):
-    clock = pygame.time.Clock() 
-
-    offset_x = -200
-    scroll_area_width = 200
-
-    player = Player(0, 0, 50, 50, load_sprite_sheets("Player", "VirtualGuy", 32, 32, True), ICE_PARTICLE_IMG_PATH)
-    enemies = [
-        Enemy(100, 0, 50, 50, load_sprite_sheets("Enemies", "NinjaFrog", 32, 32, True), MUD_PARTICLE_IMG_PATH, DEATH_SOUND),
-        Enemy(250, 0, 50, 50, load_sprite_sheets("Enemies", "NinjaFrog", 32, 32, True), MUD_PARTICLE_IMG_PATH, DEATH_SOUND)
-    ]
-
     if level == 1:
         maps_assets = create_map_level_1()
         objects = maps_assets[0]
         background_assets = maps_assets[1]
         background = background_assets[0]
         bg_image = background_assets[1]
+        enemies = maps_assets[2]
     elif level == 2:
         maps_assets = create_map_level_2()
         objects = maps_assets[0]
         background_assets = maps_assets[1]
         background = background_assets[0]
         bg_image = background_assets[1]
+        enemies = maps_assets[2]
     elif level == 3:
         maps_assets = create_map_level_3()
         objects = maps_assets[0]
         background_assets = maps_assets[1]
         background = background_assets[0]
         bg_image = background_assets[1]
+        enemies = maps_assets[2]
     else:
-        return False
+        return False    
+    clock = pygame.time.Clock() 
+
+    offset_x = -200
+    scroll_area_width = 200
     EXIT_BUTTON = Button(pygame.image.load(CLOSE_BUTTON_IMG_PATH), 10, 10)
+    
+    player = Player(0, 0, 50, 50, load_sprite_sheets("Player", "VirtualGuy", 32, 32, True), ICE_PARTICLE_IMG_PATH)  
 
     # Timer
     start_time = pygame.time.get_ticks()
@@ -80,4 +77,5 @@ def controller_play_game(level:int):
         offset_x = scroll_screen(player, offset_x, scroll_area_width)
 
         draw_rectangle(f1_key, WINDOW, player, objects, enemies, offset_x)
+        print(f"x = {player.rect.x} - y = {player.rect.y}")
         pygame.display.update()
