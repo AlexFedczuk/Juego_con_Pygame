@@ -1,6 +1,6 @@
 Dentro del gameplay mostrar: Puntuacion (Listo!), vida (Listo!).
 
-Pantalla de rankings. (Pendiente.)
+Pantalla de rankings. (En desarrollo...)
 
 Desarrollar niveles. (Listo!)
 
@@ -8,4 +8,4 @@ Agregar efecto de sonidos, musica (Listo!)
 
 Agregar funciones de settings. (Listo!)
 
-Generador de enemigos (posiciones random). (Pendiente.)
+Generador de enemigos (posiciones random). (Listo!)
