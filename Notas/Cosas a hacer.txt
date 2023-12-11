@@ -3,6 +3,7 @@ Dentro del gameplay mostrar: Puntuacion (Listo!), vida (Listo!).
 Pantalla de rankings:
 - Desarrollé una funcion para que capture el score del jugador y la guarde en la base de datos.
 - Tambíen la función hacepta por parametros un nombre de usuario.
+- El nombre del usuario es ingresado por la terminal, eso debería mejorarlo...
 - ...
 
 Desarrollar niveles. (Listo!)
