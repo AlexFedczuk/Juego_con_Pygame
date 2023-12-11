@@ -17,9 +17,9 @@ from class_coin import Coin
 from class_button import Button
 from class_slider import Slider
 
-from level_one_map import create_map_level_1
-from level_two_map import create_map_level_2
-from level_three_map import create_map_level_3
+from assets.level_one_map import create_map_level_1
+from assets.level_two_map import create_map_level_2
+from assets.level_three_map import create_map_level_3
 
 def get_background(name):
     image = pygame.image.load(join("assets", "Background", name))
