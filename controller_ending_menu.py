@@ -2,7 +2,7 @@ import pygame
 
 from constants import *
 from colors import *
-from funtions import get_font
+from funtions import get_font, add_value_to_table
 
 from class_button import Button_Text
 from class_player import Player
@@ -43,5 +43,6 @@ def ending_menu(window_title:str, menu_title:str, player:Player):
                 quit()
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if EXIT_BUTTON.check_input(mouse_position):
+                    add_value_to_table(player.get_score(), "Coco", 'game_data_base.db')
                     return False
         pygame.display.update()

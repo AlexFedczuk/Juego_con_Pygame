@@ -1,5 +1,6 @@
 import pygame
 import json
+import sqlite3
 from typing import Callable
 
 from os import listdir
@@ -337,3 +338,28 @@ def control_sound(flag:bool, volume:float):
         COIN_COLLECTED_SOUND.set_volume(volume)
         DEATH_SOUND.set_volume(volume)
     return volume
+
+def add_value_to_table(value:int, user_name:str, db_path:str):
+    try:
+        connection = sqlite3.connect(db_path)
+
+        cursor = connection.cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS scores_table (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_name TEXT,
+                value INTEGER
+            )
+        ''')
+        cursor.execute('''
+            INSERT INTO scores_table (
+                user_name, 
+                value
+            ) VALUES (?, ?)
+            ''', (user_name, value))
+
+        connection.commit()
+    except Exception as error:
+        print(f"An error occurred: {error}")
+    finally:
+        connection.close()
