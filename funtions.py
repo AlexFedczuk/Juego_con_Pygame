@@ -368,19 +368,6 @@ def add_value_to_table(value:int, user_name:str, db_path:str):
         connection.close()
 
 def pedir_un_nombre_regex(mensaje:str, mensaje_de_error:str) -> str:
-    """
-        Pide un numero nombre al usuario por la terminal.
-
-        Parametros:
-        mensaje:str
-            El mensaje para instruir al usuario.
-        mensaje_error:str
-            El mensaje para instruir al usuario en caso de un error.
-        
-        Returns:
-        tipo : int
-            Retorna una variable tipo string vacia si sale algo mal, retorna una cadena con un nombre en el cas oque este bien validado.
-    """
     retorno = ""
     patron = r"^[A-Za-z\s]+$"    
 
@@ -395,17 +382,6 @@ def pedir_un_nombre_regex(mensaje:str, mensaje_de_error:str) -> str:
     return retorno
 
 def formalizar_nombre_completo(nombre_completo:str) -> str:
-    """
-        Formaliza el nombre completo ingresado por parametros.
-
-        Parametros:
-        nombre_completo:str
-            El nombre a formalizar.
-        
-        Returns:
-        tipo : int
-            Retorna el nombre formalizado.
-    """
     nombre_completo = nombre_completo.lower()
     nombres = nombre_completo.split(" ")
     nombre_completo_aux = []
