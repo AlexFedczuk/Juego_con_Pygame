@@ -1,31 +1,30 @@
 from random import randint
 
 from constants import *
-from ..funtions import load_sprite_sheets, get_background, get_block
+from funtions import load_sprite_sheets, get_background, get_block
 
-from ..class_enemy import Enemy
-from ..classe_block import Block
-from ..class_fire import Fire
+from class_enemy import Enemy
+from classe_block import Block
+from class_fire import Fire
 from class_coin import Coin
 
-def create_map_level_2():
-    loaded_sprite_sheet = load_sprite_sheets("Enemies", "MaskDude", 32, 32, True)
+def create_map_level_1():
+    #loaded_sprite_sheet = load_sprite_sheets("Enemies", "NinjaFrog", 32, 32, True)
     enemies = [
-        Enemy(randint(180, 445), 170, 50, 50, loaded_sprite_sheet, MUD_PARTICLE_IMG_PATH, DEATH_SOUND),
-        Enemy(randint(95, 515), 544, 50, 50, loaded_sprite_sheet, MUD_PARTICLE_IMG_PATH, DEATH_SOUND),
-        #
-        Enemy(randint(-385, -55), 0, 50, 50, loaded_sprite_sheet, MUD_PARTICLE_IMG_PATH, DEATH_SOUND),
-        Enemy(randint(780, 1050), 0, 50, 50, loaded_sprite_sheet, MUD_PARTICLE_IMG_PATH, DEATH_SOUND)
+        Enemy(randint(180, 445), 170, 50, 50, load_sprite_sheets("Enemies", "NinjaFrog", 32, 32, True), MUD_PARTICLE_IMG_PATH, DEATH_SOUND),
+        Enemy(randint(95, 515), 544, 50, 50, load_sprite_sheets("Enemies", "NinjaFrog", 32, 32, True), MUD_PARTICLE_IMG_PATH, DEATH_SOUND)
     ]
 
     objects = []
 
-    background_assets = get_background("Yellow.png")
+    background_assets = get_background("Blue.png")
 
     floor = [
         Block(BLOCK_SIZE * -6, HEIGHT - BLOCK_SIZE * 0, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * -5, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * -4, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * -3, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * -2, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * -1, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * 0, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * 1, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
@@ -34,6 +33,8 @@ def create_map_level_2():
         Block(BLOCK_SIZE * 4, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * 5, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * 6, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * 7, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
+        Block(BLOCK_SIZE * 8, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * 9, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * 10, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False),
         Block(BLOCK_SIZE * 11, HEIGHT - BLOCK_SIZE * 1, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floor", False)    
@@ -44,31 +45,18 @@ def create_map_level_2():
         Block(BLOCK_SIZE * 3, HEIGHT - BLOCK_SIZE * 6, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         Block(BLOCK_SIZE * 4, HEIGHT - BLOCK_SIZE * 6, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         # Plataforma del medio-abajo.
-        Block(BLOCK_SIZE * 2, HEIGHT - BLOCK_SIZE * 4, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         Block(BLOCK_SIZE * 3, HEIGHT - BLOCK_SIZE * 4, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         Block(BLOCK_SIZE * 4, HEIGHT - BLOCK_SIZE * 4, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         # Plataforma de la derecha.
-        Block(BLOCK_SIZE * 7, HEIGHT - BLOCK_SIZE * 6, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "obstacle", True),
-        Block(BLOCK_SIZE * 8, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "obstacle", True),
+        Block(BLOCK_SIZE * 7, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
+        Block(BLOCK_SIZE * 8, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         Block(BLOCK_SIZE * 9, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         Block(BLOCK_SIZE * 10, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * 11, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "obstacle", True),
-        Block(BLOCK_SIZE * 12, HEIGHT - BLOCK_SIZE * 6, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "obstacle", True),
-        # Plataforma de la derecha lejos.
-        Block(BLOCK_SIZE * 14, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * 15, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * 16, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * 17, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         # Plataforma de la izquierda.
+        Block(BLOCK_SIZE * 0, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         Block(BLOCK_SIZE * -1, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         Block(BLOCK_SIZE * -2, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
         Block(BLOCK_SIZE * -3, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * -4, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        # Plataforma de la izquierda lejos.
-        Block(BLOCK_SIZE * -7, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * -8, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * -9, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
-        Block(BLOCK_SIZE * -10, HEIGHT - BLOCK_SIZE * 5, get_block, BLOCK_SIZE, X_EARTH_PLATFORM, "floating_platform", True),
     ]   
     blocks = [
         # Obstaculo de la izquierda.
@@ -81,13 +69,7 @@ def create_map_level_2():
         Fire(355, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND),
         Fire(1000, HEIGHT - BLOCK_SIZE - 64, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND),
         Fire(845, 256, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND),
-        Fire(-125, 256, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND),
-        # lvl 2
-        Fire(-965, 256, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND),
-        Fire(-745, 256, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND),
-        Fire(1700, 256, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND),
-        Fire(1490, 256, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND)
-
+        Fire(-125, 256, 16, 32, load_sprite_sheets, True, FIRE_TURN_OFF_SOUND)
     ]
     coins = [
         Coin(-275, 256, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
@@ -97,12 +79,7 @@ def create_map_level_2():
         Coin(1065, 640, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
         Coin(970, 256, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
         Coin(305, 160, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
-        Coin(355, 352, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
-        # lvl 2
-        Coin(1360, 256, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
-        Coin(1555, 256, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
-        Coin(-650, 256, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
-        Coin(-845, 256, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND),
+        Coin(355, 352, 16, 16, load_sprite_sheets, True, COIN_COLLECTED_SOUND)
     ]
 
     objects.extend(floor)

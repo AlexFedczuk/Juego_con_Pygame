@@ -8,6 +8,7 @@ from class_button import Button, Button_Dynamic_Text
 from controller_pause_screen import controller_pause_menu
 from controller_ending_menu import controller_ending_menu
 from colors import BLACK
+from funtios_create_map import create_map
 
 def controller_play_game(level:int):
     maps_assets = create_map(level)
@@ -59,5 +60,5 @@ def controller_play_game(level:int):
         offset_x = scroll_screen(player, offset_x, scroll_area_width)
 
         draw_rectangle(f1_key, WINDOW, player, objects, enemies, offset_x)
-        print(f"x = {player.rect.x} - y = {player.rect.y}")
+        #print(f"x = {player.rect.x} - y = {player.rect.y}")
         pygame.display.update()

@@ -1,11 +1,11 @@
 from random import randint
 
 from constants import *
-from ..funtions import load_sprite_sheets, get_background, get_block
+from funtions import load_sprite_sheets, get_background, get_block
 
-from ..class_enemy import Enemy
-from ..classe_block import Block
-from ..class_fire import Fire
+from class_enemy import Enemy
+from classe_block import Block
+from class_fire import Fire
 from class_coin import Coin
 
 def create_map_level_3():
