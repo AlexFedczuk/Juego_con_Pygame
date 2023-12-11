@@ -352,12 +352,14 @@ def add_value_to_table(value:int, user_name:str, db_path:str):
                 value INTEGER
             )
         ''')
-        cursor.execute('''
-            INSERT INTO scores_table (
-                user_name, 
-                value
-            ) VALUES (?, ?)
-            ''', (user_name, value))
+
+        cursor.execute('SELECT value FROM scores_table WHERE user_name = ?', (user_name,))
+        existing_value = cursor.fetchone()
+
+        if existing_value is not None and existing_value[0] < value:
+            cursor.execute('UPDATE scores_table SET value = ? WHERE user_name = ?', (value, user_name))
+        else:
+            cursor.execute('INSERT INTO scores_table (user_name, value) VALUES (?, ?)', (user_name, value))
 
         connection.commit()
     except Exception as error:
