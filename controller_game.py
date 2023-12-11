@@ -9,35 +9,17 @@ from controller_pause_screen import controller_pause_menu
 from controller_ending_menu import controller_ending_menu
 from colors import BLACK
 
-from assets.level_one_map import create_map_level_1
-from assets.level_two_map import create_map_level_2
-from assets.level_three_map import create_map_level_3
-
 def controller_play_game(level:int):
-    if level == 1:
-        maps_assets = create_map_level_1()
-        objects = maps_assets[0]
-        background_assets = maps_assets[1]
-        background = background_assets[0]
-        bg_image = background_assets[1]
-        enemies = maps_assets[2]
-    elif level == 2:
-        maps_assets = create_map_level_2()
-        objects = maps_assets[0]
-        background_assets = maps_assets[1]
-        background = background_assets[0]
-        bg_image = background_assets[1]
-        enemies = maps_assets[2]
-    elif level == 3:
-        maps_assets = create_map_level_3()
-        objects = maps_assets[0]
-        background_assets = maps_assets[1]
-        background = background_assets[0]
-        bg_image = background_assets[1]
-        enemies = maps_assets[2]
+    maps_assets = create_map(level)
+
+    if maps_assets == None:
+        return False
     else:
-        return False    
-    clock = pygame.time.Clock() 
+        objects = maps_assets[0]
+        background = maps_assets[1]
+        bg_image = maps_assets[2]
+        enemies = maps_assets[3]
+    clock = pygame.time.Clock()
 
     offset_x = -200
     scroll_area_width = 200

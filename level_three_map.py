@@ -1,4 +1,3 @@
-import random
 from random import randint
 
 from classe_block import Block
