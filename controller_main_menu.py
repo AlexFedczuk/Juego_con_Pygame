@@ -4,7 +4,7 @@ from pygame import mixer
 from constants import *
 from colors import LIGHT_BROWN, SUPER_LIGHT_GREEN, WHITE
 
-from funtions import get_font
+from funtions import get_font, pedir_un_nombre_regex
 from controller_option import controller_options_menu
 from controller_niveles import controller_levels_menu
 
@@ -15,6 +15,8 @@ def controller_main_menu():
     mute_volume_flag = False
     volumen_value = INITIAL_SOUND_VOLUMEN
     MAIN_MENU_MUSIC.play(-1)
+
+    user_name = pedir_un_nombre_regex("Ingrese su nombre de usuario: ", "ERROR! Nombre invalido.")
 
     while True:
         pygame.display.set_caption(CONTANTS['Screen']['NAME_GAME'] + " - Menu principal")
@@ -44,7 +46,7 @@ def controller_main_menu():
                 quit()
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if PLAY_BUTTON.check_input(mouse_position):
-                    controller_levels_menu()
+                    controller_levels_menu(user_name)
                 if OPTIONS_BUTTON.check_input(mouse_position):
                     volumen_values = controller_options_menu(mute_volume_flag, volumen_value)
                     mute_volume_flag = volumen_values[0]

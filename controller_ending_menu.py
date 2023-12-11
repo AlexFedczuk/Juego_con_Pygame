@@ -7,18 +7,18 @@ from funtions import get_font, add_value_to_table
 from class_button import Button_Text
 from class_player import Player
 
-def controller_ending_menu(player:Player, enemies_list:list, coins_list:list, remaining_seconds:int) -> bool:
+def controller_ending_menu(player:Player, enemies_list:list, coins_list:list, remaining_seconds:int, user_name:str) -> bool:
     if len(enemies_list) == 0 and len(coins_list) == 0:
         window_title = NAME_GAME + " - You win!"
         menu_title = "YOU WIN!"
-        return ending_menu(window_title, menu_title, player)
+        return ending_menu(window_title, menu_title, player, user_name)
     elif player.live_status() or remaining_seconds <= 0:
         window_title = NAME_GAME + " - You lost..."
         menu_title = "YOU LOST..."
-        return ending_menu(window_title, menu_title, player)
+        return ending_menu(window_title, menu_title, player, user_name)
     return True
 
-def ending_menu(window_title:str, menu_title:str, player:Player):
+def ending_menu(window_title:str, menu_title:str, player:Player, user_name:str):
     while True:
         pygame.display.set_caption(window_title)
         WINDOW.blit(PAUSE_BACK_GROUND_IMAGE, (WIDTH/5, 0))
@@ -43,6 +43,6 @@ def ending_menu(window_title:str, menu_title:str, player:Player):
                 quit()
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if EXIT_BUTTON.check_input(mouse_position):
-                    add_value_to_table(player.get_score(), "Coco", 'game_data_base.db')
+                    add_value_to_table(player.get_score(), user_name, 'game_data_base.db')
                     return False
         pygame.display.update()

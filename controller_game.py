@@ -10,7 +10,7 @@ from controller_ending_menu import controller_ending_menu
 from colors import BLACK
 from funtios_create_map import create_map
 
-def controller_play_game(level:int):
+def controller_play_game(level:int, user_name:str):
     maps_assets = create_map(level)
 
     if maps_assets == None:
@@ -45,7 +45,7 @@ def controller_play_game(level:int):
         mouse_position = pygame.mouse.get_pos()
 
         coins = [obj for obj in objects if isinstance(obj, Coin)]
-        runing = controller_ending_menu(player, enemies, coins, (time - (elapsed_time // 1000)))
+        runing = controller_ending_menu(player, enemies, coins, (time - (elapsed_time // 1000)), user_name)
 
         result = check_events(runing, f1_key, events_list, mouse_position, player, controller_pause_menu, EXIT_BUTTON)
         runing = result[0]

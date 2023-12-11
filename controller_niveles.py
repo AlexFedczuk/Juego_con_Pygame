@@ -7,7 +7,7 @@ from funtions import get_font
 from class_button import Button_Text
 from controller_game import controller_play_game
 
-def controller_levels_menu():
+def controller_levels_menu(user_name:str):
     pygame.display.set_caption(NAME_GAME + " - Levels Menu")
 
     running = True
@@ -36,13 +36,11 @@ def controller_levels_menu():
                 quit()
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if LEVEL_ONE.check_input(mouse_position):
-                    controller_play_game(1)
+                    controller_play_game(1, user_name)
                 elif LEVEL_TWO.check_input(mouse_position):
-                    controller_play_game(2)
+                    controller_play_game(2, user_name)
                 elif LEVEL_THREE.check_input(mouse_position):
-                    controller_play_game(3)
-                elif LEVEL_THREE.check_input(mouse_position):
-                    controller_play_game()
+                    controller_play_game(3, user_name)
                 elif GO_BACK_BUTTON.check_input(mouse_position):
                     running = False
         pygame.display.update()

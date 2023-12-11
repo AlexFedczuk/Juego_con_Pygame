@@ -1,6 +1,7 @@
 import pygame
 import json
 import sqlite3
+import re
 from typing import Callable
 
 from os import listdir
@@ -363,3 +364,52 @@ def add_value_to_table(value:int, user_name:str, db_path:str):
         print(f"An error occurred: {error}")
     finally:
         connection.close()
+
+def pedir_un_nombre_regex(mensaje:str, mensaje_de_error:str) -> str:
+    """
+        Pide un numero nombre al usuario por la terminal.
+
+        Parametros:
+        mensaje:str
+            El mensaje para instruir al usuario.
+        mensaje_error:str
+            El mensaje para instruir al usuario en caso de un error.
+        
+        Returns:
+        tipo : int
+            Retorna una variable tipo string vacia si sale algo mal, retorna una cadena con un nombre en el cas oque este bien validado.
+    """
+    retorno = ""
+    patron = r"^[A-Za-z\s]+$"    
+
+    while True:
+        nombre_ingresado = input(mensaje)
+
+        if re.match(patron, nombre_ingresado):
+            retorno = formalizar_nombre_completo(nombre_ingresado)
+            break
+        else:
+            print(mensaje_de_error)            
+    return retorno
+
+def formalizar_nombre_completo(nombre_completo:str) -> str:
+    """
+        Formaliza el nombre completo ingresado por parametros.
+
+        Parametros:
+        nombre_completo:str
+            El nombre a formalizar.
+        
+        Returns:
+        tipo : int
+            Retorna el nombre formalizado.
+    """
+    nombre_completo = nombre_completo.lower()
+    nombres = nombre_completo.split(" ")
+    nombre_completo_aux = []
+
+    for nombre_aux in nombres:
+        nombre_completo_aux.append(nombre_aux.capitalize())
+    nombre_formalizado = " ".join(nombre_completo_aux)
+
+    return nombre_formalizado
